@@ -44,11 +44,20 @@ typedef struct {
 	BOOL canSave;
 } PXPalette;
 
+PXColorBucket *PXColorBucket_alloc(void);
+PXColorBucket *PXColorBucket_init(PXColorBucket *self, NSColor *color, unsigned int index);
+void PXColorBucket_dealloc(PXColorBucket *self);
+void PXPalette_insertColorBucket(PXPalette *self, PXColorBucket *bucket);
+void PXPalette_removeBucketForColor(PXPalette *self, NSColor *color);
+void PXPalette_saveChanges(PXPalette *self);
+NSArray *CreateGrayList(void);
+
+
 unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex);
 unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex);
 BOOL PXPalette_isDocumentPalette(PXPalette *self);
 
-PXPalette *PXPalette_alloc();
+PXPalette *PXPalette_alloc(void);
 
 PXPalette *PXPalette_init(PXPalette *self);
 PXPalette *PXPalette_initWithoutBackgroundColor(PXPalette *self);
@@ -77,7 +86,7 @@ void PXPalette_setColorAtIndex(PXPalette *self, NSColor *color, unsigned int ind
 void PXPalette_moveColorAtIndexToIndex(PXPalette *self, unsigned int index1, unsigned int index2, BOOL adjustIndices);
 
 unsigned int PXPalette_indexOfColor(PXPalette *self, NSColor *color);
-inline NSColor *PXPalette_colorAtIndex(PXPalette *self, unsigned index);
+NSColor *PXPalette_colorAtIndex(PXPalette *self, unsigned index);
 unsigned int PXPalette_indexOfColorAddingIfNotPresent(PXPalette *self, NSColor *color);
 unsigned int PXPalette_indexOfColorClosestTo(PXPalette *self, NSColor *color);
 NSColor *PXPalette_colorClosestTo(PXPalette *self, NSColor *color);
@@ -87,6 +96,9 @@ void PXPalette_removeAlphaComponents(PXPalette *self);
 PXPalette *PXPalette_initWithCoder(PXPalette *self, NSCoder *coder);
 void PXPalette_encodeWithCoder(PXPalette *self, NSCoder *coder);
 NSDictionary *PXPalette_dictForArchiving(PXPalette *self);
+
+NSColor *_PXPalette_correctColor(NSColor *color);
+unsigned int _PXPalette_indexOfCorrectedColor(PXPalette *self, NSColor *colorToCheck);
 
 double PXPalette_hashEfficiency(PXPalette *self);
 

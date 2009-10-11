@@ -16,6 +16,8 @@
 	BOOL commandDown;
 }
 
+int CombineAxis(int Xaxis, int Yaxis, int width, int height);
+
 - (void)fillPointsFromPoint:(NSPoint)aPoint forCanvasController:(PXCanvasController *)controller;
 - (BOOL)checkSelectionOnCanvas:(PXCanvas *)canvas;
 - (void)fillPixelsInBOOLArray:(NSArray *)fillPoints withColor:(NSColor *)newColor withBoundsRect:(NSRect)bounds ofCanvas:(PXCanvas *)canvas;

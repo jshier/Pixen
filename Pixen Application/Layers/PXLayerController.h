@@ -35,9 +35,9 @@
 {
 	IBOutlet id view;
 	IBOutlet id tableView;
-	id canvas;
+	PXCanvas *canvas;
 	IBOutlet RBSplitSubview *subview;
-	id views;
+	NSMutableArray *views;
 	id tableViewController;
 	IBOutlet id removeButton;
 	id document;

@@ -45,7 +45,14 @@ typedef struct {
 	int width, height;
 } PXImage;
 
-PXImage *PXImage_alloc();
+PXTile* PXTileCreate(CGPoint loc, CGSize size, CGColorSpaceRef colorspace, unsigned char *data);
+void PXTileRelease(PXTile* t);
+void PXTileDraw(PXTile* t, CGRect source, CGRect dest);
+CGColorRef PXTileColorAtXY(PXTile *t, int xv, int yv);
+void PXTileSetAtXY(PXTile *t, int xv, int yv, CGColorRef color);
+unsigned int PXTileGetData(PXTile *t, unsigned char **data);
+
+PXImage *PXImage_alloc(void);
 
 PXImage *PXImage_init(PXImage *self);
 PXImage *PXImage_initWithSize(PXImage *self, NSSize size);
@@ -60,6 +67,10 @@ NSColor *PXImage_colorAtIndex(PXImage *self, int loc);
 NSColor *PXImage_colorAtXY(PXImage *self, int x, int y);
 void PXImage_setColorAtXY(PXImage *self, NSColor *color, int x, int y);
 void PXImage_setColorAtIndex(PXImage *self, NSColor *c, unsigned loc);
+
+PXTile *PXImage_tileAtXY(PXImage *self, int xv, int yv);
+void PXImage_swapTiles(PXImage *self, PXImage *other);
+void PXImage_drawRect(PXImage *self, NSRect rect, double opacity);
 
 void PXImage_flipHorizontally(PXImage *self);
 void PXImage_flipVertically(PXImage *self);

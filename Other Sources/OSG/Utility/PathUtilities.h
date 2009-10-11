@@ -28,12 +28,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-extern NSString *GetApplicationSupportDirectory();
-extern NSString *GetPixenSupportDirectory();
-extern NSString *GetPixenPaletteDirectory();
-extern NSString *GetPixenBackgroundsDirectory();
-extern NSString *GetBackgroundPresetsDirectory();
-extern NSString *GetBackgroundImagesDirectory();
-
-extern NSString *GetPixenPatternFile();
+extern NSString *GetApplicationSupportDirectory(void);
+extern NSString *GetPixenSupportDirectory(void);
+extern NSString *GetPixenPaletteDirectory(void);
+extern NSString *GetPixenBackgroundsDirectory(void);
+extern NSString *GetBackgroundPresetsDirectory(void);
+extern NSString *GetBackgroundImagesDirectory(void);
 extern NSString *GetPathForBackgroundNamed(NSString *name);
+extern NSString *GetPixenPatternFile(void);

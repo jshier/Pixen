@@ -44,6 +44,8 @@
 	float saveFactor;
 }
 
+BOOL isPowerOfTwo(int num);
+
 + (NSData *)dataRepresentationOfType:(NSString *)aType withCanvas:(PXCanvas *)canvas;
 - (void)loadFromPasteboard:(NSPasteboard *)board;
 
