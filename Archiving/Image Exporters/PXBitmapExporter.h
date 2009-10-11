@@ -14,6 +14,8 @@
 
 }
 
+Handle myCreateHandleDataRef(Handle dataHandle, Str255 fileName, OSType fileType, StringPtr mimeTypeString, Ptr initDataPtr, Size initDataByteCount);
+
 + BMPDataForImage:image;
 + PICTDataForImage:image;
 + indexedBitmapDataForCanvas:(PXCanvas *)canvas;

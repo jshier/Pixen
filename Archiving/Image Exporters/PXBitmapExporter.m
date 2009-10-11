@@ -359,7 +359,8 @@ typedef struct tagBITMAPINFOHEADER
 		// create a data reference handle for quicktime (see TN 1195 for myCreateHandleDataRef source)
 		Handle pngDataH = NULL;
 		PtrToHand([pngData bytes], &pngDataH, [pngData length]);
-		Handle dataRef = myCreateHandleDataRef(pngDataH, "\pdummy.png", kQTFileTypePNG, nil, nil, 0);
+        Str255 name = "\pdummy.png";
+		Handle dataRef = myCreateHandleDataRef(pngDataH, name, kQTFileTypePNG, nil, nil, 0);
 		
 		// create a Graphics Importer component that will read from the PNG data
 		ComponentInstance importComponent=0, exportComponent=0;
