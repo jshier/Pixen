@@ -129,7 +129,7 @@
 		NSArray *plist = [NSPropertyListSerialization propertyListFromData:plistData mutabilityOption:NSPropertyListImmutable format:NULL errorDescription:&error];
 		if(!plist)
 		{
-			NSLog(error);
+			NSLog(@"%@", error);
 			[error release];
 			return NO;
 		}
