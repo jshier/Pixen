@@ -491,7 +491,7 @@
 	int height = floorf([imageRep pixelsHigh]);
 	unsigned long long baseIndex;
 	NSAutoreleasePool *pool;
-	unsigned char a,r,g,b;
+	unsigned char a = 0,r = 0,g = 0,b = 0;
 	int bytesPerRow = [imageRep bytesPerRow];
 	int bytesPerPixel = [imageRep bitsPerPixel] / 8;
 	for (j = 0; j < height; j++)
