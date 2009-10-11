@@ -11,7 +11,7 @@
 
 static int PXFilmStripIntercelSpacing = 10;
 static int PXFilmStripVerticalPadding = 20;
-static NSSize PXFilmStripSpokeHoleSize = (NSSize){6, 9};
+static NSSize PXFilmStripSpokeHoleSize;
 static int PXFilmStripSpokeHoleSpacing = 8;
 static int PXFilmStripSpokeHoleEdgeTendency = 1; // By how much the spoke holes move towards the edge from being centered in the vertical padding
 static int PXFilmStripPropertiesOffset = 15; // how far the properties (index & duration) are up from the bottom of the strip
@@ -40,6 +40,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 		targetDraggingIndex = -1;
 		activeCelForField = -1;
 		gonnaBeDeleted = -1;
+        PXFilmStripSpokeHoleSize = NSMakeSize(6.0, 9.0);
 	}
     return self;
 }
