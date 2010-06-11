@@ -88,8 +88,8 @@ static PXInfoPanelController *singleInstance = nil;
 {
 	if (color)
 	{
-		if ([color colorSpaceName] != NSCalibratedRGBColorSpace)
-			color = [color colorUsingColorSpaceName:NSCalibratedRGBColorSpace]; 
+		if ([color colorSpaceName] != NSDeviceRGBColorSpace)
+			color = [color colorUsingColorSpaceName:NSDeviceRGBColorSpace]; 
 				
 		[red setStringValue:
 			[NSString stringWithFormat:@"%@: %d", NSLocalizedString(@"RED", @"Red"), (int)([color redComponent] * 255)]];

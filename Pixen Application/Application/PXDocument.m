@@ -61,6 +61,16 @@
 	return nil;
 }
 
+- (NSArray *)canvases
+{
+  return [NSArray arrayWithObject:[self canvas]];
+}
+
+- (BOOL)containsCanvas:(PXCanvas *)c
+{
+  return [[self canvases] containsObject:c];
+}
+
 - (void)close
 {
 	if ([[[self canvas] layers] count])

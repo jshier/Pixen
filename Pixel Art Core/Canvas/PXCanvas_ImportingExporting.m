@@ -7,6 +7,7 @@
 //
 
 #import "PXCanvas_ImportingExporting.h"
+#import "PXCanvas_Modifying.h"
 #import "PXCanvas_Layers.h"
 #import "PXBitmapExporter.h"
 #import "PXPSDHandler.h"
@@ -41,12 +42,11 @@
 	NSBitmapImageRep *rep;
 	NSRect frame = NSMakeRect(0, 0, [self size].width, [self size].height);
 	// We use a white background color for jpegs because of a bug in 10.3
-	id outputImage = ((storageType == NSJPEGFileType) ? [self exportImageWithBackgroundColor:[NSColor whiteColor]] : [self displayImage]);
+	NSImage *outputImage = ((storageType == NSJPEGFileType) ? [self exportImageWithBackgroundColor:[NSColor whiteColor]] : [self displayImage]);
+  
 	[outputImage lockFocus];
 	rep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:frame] autorelease];
 	[outputImage unlockFocus];
-	unsigned char *bitmapData = [rep bitmapData];
-	rep = [[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:&bitmapData pixelsWide:[self size].width pixelsHigh:[self size].height bitsPerSample:8 samplesPerPixel:[rep samplesPerPixel] hasAlpha:[rep hasAlpha] isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:[rep bytesPerRow] bitsPerPixel:[rep bitsPerPixel]] autorelease];
 	
 	// And now, we interrupt our regularly scheduled codegram for a hack: remove color profile info from the rep because we don't handle it on loading.
 	[rep setProperty:NSImageColorSyncProfileData withValue:nil];
@@ -79,11 +79,10 @@
 - (void)replaceActiveLayerWithImage:(NSImage *)anImage
 {
 	NSImageRep *firstRep = [[anImage representations] objectAtIndex:0];
-	//some PNGs have ... fractional sizes.  So I put in this ceilfing.
-	NSSize newSize = NSMakeSize([firstRep pixelsWide], [firstRep pixelsHigh]);
+	NSSize newSize = NSMakeSize((int)[firstRep pixelsWide], (int)[firstRep pixelsHigh]);
 	for (id current in layers)
 	{
-		[current setSize:newSize withOrigin:NSZeroPoint backgroundColor:[NSColor clearColor]];
+		[current setSize:newSize withOrigin:NSZeroPoint backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
 	}
 	free(selectionMask);
 	selectionMask = calloc(newSize.width * newSize.height, sizeof(BOOL));
@@ -94,14 +93,14 @@
 		[[layers lastObject] setCanvas:self];
 		[self activateLayer:[layers lastObject]];
 	}
-	[activeLayer applyImage:anImage];
+  [self applyImage:anImage toLayer:activeLayer];
 	[self updatePreviewSize];
 	[self layersChanged];
 }
 
 - initWithImage:(NSImage *)anImage type:(NSString *)type
 {
-	[self initWithoutBackgroundColor];
+	[self init];
 	[self replaceActiveLayerWithImage:anImage];
 	return self;
 }
@@ -120,7 +119,7 @@
 	{
 		id layer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Imported Layer", @"Imported Layer") size:[current size]] autorelease];
 		[self addLayer:layer];
-		[layer applyImage:current];
+		[self applyImage:current toLayer:layer];
 	}
 	[[self undoManager] removeAllActions];
 	return self;
@@ -130,11 +129,16 @@
 {
 	NSImage *imageCopy = [[NSImage alloc] initWithSize:[self size]];
 	[imageCopy lockFocus];
-	NSEnumerator *layerEnumerator = [layers reverseObjectEnumerator];
+	NSEnumerator *layerEnumerator = [layers objectEnumerator];
+  [[NSColor clearColor] set];
+  NSRectFill(NSMakeRect(0, 0, [self size].width, [self size].height));
 	PXLayer *layer;
 	while ((layer = [layerEnumerator nextObject]))
 	{
-		[[layer displayImage] compositeToPoint:canvasRect.origin fromRect:canvasRect operation:NSCompositeDestinationOver fraction:[layer opacity] / 100.0f];
+    if([layer visible] && [layer opacity] > 0)
+    {
+      [[layer displayImage] compositeToPoint:canvasRect.origin fromRect:canvasRect operation:NSCompositeSourceOver fraction:[layer opacity] / 100.0f];
+    }
 	}
 	[imageCopy unlockFocus];
 	return [imageCopy autorelease];	
@@ -144,24 +148,24 @@
 {
 	NSImage *imageCopy = [[NSImage alloc] initWithSize:[self size]];
 	[imageCopy lockFocus];
-	NSEnumerator *layerEnumerator = [layers reverseObjectEnumerator];
-	PXLayer *layer;
-	while ((layer = [layerEnumerator nextObject]))
-	{
-		if([layer visible])
-		{
-			[[layer exportImage] compositeToPoint:canvasRect.origin fromRect:canvasRect operation:NSCompositeDestinationOver fraction:[layer opacity] / 100.0f];
-		}
-	}
-	// We fill the color (if necessary) after because of the backwards order in which we're doing this
+    // We fill the color (if necessary) after because of the backwards order in which we're doing this
 	if (color)
 	{
 		[color set];
-		NSRectFillUsingOperation(canvasRect, NSCompositeDestinationOver);
+		NSRectFillUsingOperation(canvasRect, NSCompositeSourceOver);
+	}
+	NSEnumerator *layerEnumerator = [layers objectEnumerator];
+	PXLayer *layer;
+	while ((layer = [layerEnumerator nextObject]))
+	{
+    if([layer visible] && [layer opacity] > 0)
+		{
+			[[layer exportImage] compositeToPoint:canvasRect.origin fromRect:canvasRect operation:NSCompositeSourceOver fraction:[layer opacity] / 100.0f];
+		}
 	}
 	[imageCopy unlockFocus];
 	//this probably won't do any good... but there aren't any reps before the above execute.  Replace with ImageIO!
-	[[[imageCopy representations] objectAtIndex:0] setColorSpaceName:NSCalibratedRGBColorSpace];
+	[[[imageCopy representations] objectAtIndex:0] setColorSpaceName:NSDeviceRGBColorSpace];
 	return [imageCopy autorelease];	
 }
 

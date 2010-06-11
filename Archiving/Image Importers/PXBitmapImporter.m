@@ -61,7 +61,7 @@ const int PXBMPColorCountPosition = 46;
 		unsigned char green = bitmapData[base + 1];
 		unsigned char blue = bitmapData[base + 0];
 		
-		[colorArray addObject:[NSColor colorWithCalibratedRed:red / 255.0 green:green / 255.0 blue:blue / 255.0 alpha:1]];
+		[colorArray addObject:[NSColor colorWithDeviceRed:red / 255.0 green:green / 255.0 blue:blue / 255.0 alpha:1]];
 	}
 	return colorArray;
 }

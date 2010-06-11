@@ -66,7 +66,7 @@
 	[self beginUndoGrouping]; {
 //FIXME: fix this line once we have canvas-level undo for PXCanvas_Modifying
 		[self setLayers:[[layers deepMutableCopy] autorelease] fromLayers:layers];
-		PXLayer *newLayer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Promoted Selection", @"Promoted Selection") size:[self size] fillWithColor:[NSColor clearColor]] autorelease];
+		PXLayer *newLayer = [[[PXLayer alloc] initWithName:NSLocalizedString(@"Promoted Selection", @"Promoted Selection") size:[self size] fillWithColor:[[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]] autorelease];
 		int i, j;
 		NSPoint point;
 		[newLayer setCanvas:self];
@@ -78,7 +78,7 @@
 				if ([self pointIsSelected:NSMakePoint(i, j)])
 				{
 					point = NSMakePoint(i, j);
-					[newLayer setColor:[self colorAtPoint:point] atPoint:point];
+					[self setColor:[self colorAtPoint:point] atPoint:point onLayer:newLayer];
 					[[um prepareWithInvocationTarget:self] setColor:[self colorAtPoint:point] atPoint:point];
 					[self setColor:[self eraseColor] atPoint:point];
 				}
@@ -256,8 +256,9 @@
 		{
 			NSPoint point = NSMakePoint(i, j);
 			if (![self pointIsSelected:point]) { continue; }
-			[tempLayer setColor:[[self activeLayer] colorAtPoint:point]
-						atPoint:point];
+			[self setColor:[[self activeLayer] colorAtPoint:point]
+						atPoint:point
+             onLayer:tempLayer];
 		}
 	}
 	return [NSKeyedArchiver archivedDataWithRootObject:tempLayer];
@@ -495,7 +496,7 @@
 				NSPoint point = NSMakePoint(i, j);
 				if ([self pointIsSelected:point])
 				{
-					[newLayer setColor:color atPoint:point];
+					[self setColor:color atPoint:point onLayer:newLayer];
 				}
 			}
 		}
@@ -509,7 +510,7 @@
 {
 	if (![self hasSelection]) { return; }
 	[self beginUndoGrouping]; {
-		[self setSize:selectedRect.size withOrigin:NSMakePoint(NSMinX(selectedRect) * -1, NSMinY(selectedRect) * -1) backgroundColor:[NSColor clearColor]];
+		[self setSize:selectedRect.size withOrigin:NSMakePoint(NSMinX(selectedRect) * -1, NSMinY(selectedRect) * -1) backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
 		[self deselect];
 	} [self endUndoGrouping:NSLocalizedString(@"Crop", @"Crop")];
 }

@@ -60,6 +60,8 @@
 #import "PXAnimation.h"
 #import "PXPaletteImporter.h"
 
+#import "PXCanvas_ImportingExporting.h"
+
 #import <Foundation/NSFileManager.h>
 #import <AppKit/NSAlert.h>
 
@@ -101,6 +103,7 @@
 }
 NSString *appSupportSubdirName = @"Pixen";
 NSString *backgroundsSubdirName = @"Backgrounds";
+NSString *backgroundPresetSubdirName = @"Presets";
 NSString *presetsSubdirName = @"Presets";
 NSString *palettesSubdirName = @"Palettes";
 
@@ -117,7 +120,7 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	
 	// ./Pixen/Backgrounds/Presets 
-	[self _createApplicationSupportSubdirectory:appSupportSubdirName
+	[self _createApplicationSupportSubdirectory:backgroundPresetSubdirName
 									inDirectory:[path stringByAppendingPathComponent:backgroundsSubdirName]]; 
 	
 	// ./Pixen/Palettes
@@ -487,49 +490,25 @@ NSString *palettesSubdirName = @"Palettes";
 	int returnCode = [openPanel runModalForTypes:types];
 	if (returnCode == NSFileHandlingPanelCancelButton) { return; }
 
-	PXAnimationDocument *animationDocument = [[PXAnimationDocument alloc] init];
+	PXAnimationDocument *animationDocument = (PXAnimationDocument *)[self makeUntitledDocumentOfType:PixenAnimationFileType error:NULL];
+  
 	[[animationDocument animation] removeCel:[[animationDocument animation] objectInCelsAtIndex:0]];
 	
-	// First we load all the specified images into an array.
 	NSMutableArray *images = [[[NSMutableArray alloc] initWithCapacity:[[openPanel filenames] count]] autorelease];
     for (NSString *currentFile in [openPanel filenames])
 	{
-		[images addObject:[[[NSImage alloc] initWithContentsOfFile:currentFile] autorelease]];
+    [images addObject:[PXCanvas canvasWithContentsOfFile:currentFile]];
 	}
 	
-	// But they might not all be the same size. Find the max size.
-	NSSize biggestSize = NSZeroSize;
-	for (NSImage *currentImage in images)
-	{
-		NSSize currentSize = [currentImage size];
-		biggestSize = NSMakeSize(MAX(currentSize.width, biggestSize.width), MAX(currentSize.height, biggestSize.height));
-	}
-	
-	// Now we can stick them into the document.
-	int loadedImages = 0;
-	for (NSImage *currentImage in images)
-	{
-		NSImage *celImage = currentImage;
-		NSSize imageSize = [currentImage size];
-		if (!NSEqualSizes(imageSize, biggestSize))
-		{
-			NSRect celImageRect = (NSRect){NSZeroPoint, biggestSize};
-			celImage = [[[NSImage alloc] initWithSize:biggestSize] autorelease];
-			[celImage lockFocus];
-			[[NSColor clearColor] set];
-			NSRectFill(celImageRect);
-			[currentImage compositeToPoint:NSMakePoint((biggestSize.width - imageSize.width) / 2, (biggestSize.height - imageSize.height) / 2) operation:NSCompositeCopy];
-			NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithFocusedViewRect:celImageRect];
-			[celImage unlockFocus];
-			[celImage removeRepresentation:[[celImage representations] objectAtIndex:0]];
-			[celImage addRepresentation:bitmap];			
-		}
-		[[[PXCel alloc] initWithImage:celImage animation:[animationDocument animation] atIndex:loadedImages] autorelease];
-		loadedImages++;
-	}
-	
+  float defaultDuration = 1.0f;
+	for(PXCanvas *current in images)
+  {
+    [[animationDocument animation] addCel:[[[PXCel alloc] initWithCanvas:current duration:defaultDuration] autorelease]];
+  }	
+  [self addDocument:animationDocument];
 	[animationDocument makeWindowControllers];
 	[animationDocument showWindows];
+  [animationDocument updateChangeCount:NSChangeReadOtherContents];
 }
 
 @end

@@ -464,9 +464,9 @@
 	oldColor = [[aTool colorForCanvas:canvas] retain];
 	if([event isTabletPointerEvent] && [self caresAboutPressure])
 	{
-		id color = [oldColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+		id color = [oldColor colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 		float pressure = [event scaledTabletPressure];
-		[aTool setColor:[NSColor colorWithCalibratedRed:[color redComponent] green:[color greenComponent] blue:[color blueComponent] alpha:pressure * [color alphaComponent]]];
+		[aTool setColor:[NSColor colorWithDeviceRed:[color redComponent] green:[color greenComponent] blue:[color blueComponent] alpha:pressure * [color alphaComponent]]];
 	}
 	initialPoint = [event locationInWindow];
 	[aTool mouseDownAt:[view convertFromWindowToCanvasPoint:initialPoint] fromCanvasController:self];	
@@ -481,9 +481,9 @@
 		return; 
 	if([event isTabletPointerEvent] && [self caresAboutPressure])
 	{
-		id color = [oldColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+		id color = [oldColor colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 		float pressure = [event scaledTabletPressure];
-		[aTool setColor:[NSColor colorWithCalibratedRed:[color redComponent] green:[color greenComponent] blue:[color blueComponent] alpha:pressure * [color alphaComponent]]];
+		[aTool setColor:[NSColor colorWithDeviceRed:[color redComponent] green:[color greenComponent] blue:[color blueComponent] alpha:pressure * [color alphaComponent]]];
 	}	
 	NSPoint endPoint = [event locationInWindow];
 	[aTool mouseDraggedFrom:[view convertFromWindowToCanvasPoint:initialPoint] 

@@ -13,7 +13,6 @@ const int viewMargin = 1;
 - (id)initWithFrame:(NSRect)frameRect
 {
 	if ((self = [super initWithFrame:frameRect]) != nil) {
-		paletteIndices = [[NSMutableArray alloc] initWithCapacity:32000];
 		colorCell = [[PXColorPickerColorWellCell alloc] init];
 		palette = NULL;
 		[self setEnabled:YES];
@@ -27,7 +26,6 @@ const int viewMargin = 1;
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[colorCell release];
-	[paletteIndices release];
 	[super dealloc];
 }
 
@@ -39,20 +37,6 @@ const int viewMargin = 1;
 - (void)setEnabled:(BOOL)en
 {
 	enabled = en;
-}
-
-- (void)reloadData
-{
-	[paletteIndices removeAllObjects];
-	if(!palette)
-	{
-		return;
-	}
-	int i;
-	for(i = 0; i < PXPalette_colorCount(palette); i++)
-	{
-		[paletteIndices addObject:[NSNumber numberWithInt:i]];
-	}
 }
 
 - (void)resizeWithOldSuperviewSize:(NSSize)size
@@ -73,6 +57,7 @@ const int viewMargin = 1;
 	width = width+additional;
 	
 	[self setFrameSize:NSMakeSize(NSWidth([[self superview] bounds]), MAX(rows * height + viewMargin*2, NSHeight([[self superview] bounds])))];
+	[self setNeedsDisplay:YES];
 }
 
 - (PXPalette *)palette
@@ -88,7 +73,6 @@ const int viewMargin = 1;
 - (void)paletteChanged:note
 {
 	[self retile];
-	[self reloadData];
 	[self setNeedsDisplay:YES];
 }
 
@@ -107,7 +91,6 @@ const int viewMargin = 1;
 	PXPalette_release(palette);
 	palette = pal;		
 	[self retile];
-	[self reloadData];
 	[self setNeedsDisplay:YES];
 }
 
@@ -128,7 +111,7 @@ const int viewMargin = 1;
 	@try {
 		// Draw the appropriate cells.
 		int i, j;
-		NSColor **colors = palette->colors;
+		PXPaletteColorPair *colors = palette->colors;
 		[colorCell setControlSize:controlSize];
 		for (j = firstRow; j <= lastRow; j++)
 		{
@@ -136,12 +119,12 @@ const int viewMargin = 1;
 			{
 				int index = j * columns + i;
 				if (index >= (PXPalette_colorCount(palette))) { break; }
-				int paletteIndex = [[paletteIndices objectAtIndex:index] intValue];
+				int paletteIndex = index;
 				[colorCell setIndex:paletteIndex];
-				NSColor *color = [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0];
+				NSColor *color = [NSColor colorWithDeviceRed:0 green:0 blue:0 alpha:0];
 				if(paletteIndex != -1)
 				{
-					color = colors[paletteIndex];
+					color = colors[paletteIndex].color;
 					[colorCell setHighlighted:NO];
 				}
 				[colorCell setColor:color];
@@ -149,13 +132,12 @@ const int viewMargin = 1;
 			}
 		}
 	} @catch(NSException *e) {
-		[self reloadData];
 		[self retile];
 		[self setNeedsDisplay:YES];
 	}
 	if(!enabled)
 	{
-		[[NSColor colorWithCalibratedWhite:1 alpha:.2] set];
+		[[NSColor colorWithDeviceWhite:1 alpha:.2] set];
 		NSRectFillUsingOperation([self visibleRect], NSCompositeSourceOver);
 	}
 }
@@ -189,7 +171,7 @@ const int viewMargin = 1;
 			NSRect frame = NSMakeRect(viewMargin*2 + i*width, viewMargin*2 + j*height, width - viewMargin*2, height - viewMargin*2);
 			if(NSPointInRect(point, frame))
 			{
-				return [[paletteIndices objectAtIndex:index] intValue];
+				return index;
 			}			
 		}
 	}	

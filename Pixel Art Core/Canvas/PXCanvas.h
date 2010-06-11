@@ -57,9 +57,15 @@ typedef BOOL * PXSelectionMask;
 	PXGrid *grid;
 	BOOL wraps;
 	NSSize previewSize;
+  
+  BOOL frequencyPaletteDirty;
+  NSCountedSet *minusColors;
+  NSCountedSet *plusColors;
 }
 
-- (id)initWithoutBackgroundColor;
+- (void)refreshWholePalette;
+- (void)refreshPaletteDecreaseColorCount:(NSColor *)down increaseColorCount:(NSColor *)up;
+
 - (void)setUndoManager:(NSUndoManager *)manager;
 - (NSUndoManager *)undoManager;
 

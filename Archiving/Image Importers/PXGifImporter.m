@@ -102,7 +102,7 @@
 						double green = colorMap->Colors[line[j]].Green / 255.0f;
 						double blue = colorMap->Colors[line[j]].Blue / 255.0f;
 						double alpha = (line[j] == transparentIndex) ? 0 : 1;
-						id color = [NSColor colorWithCalibratedRed:red green:green blue:blue alpha:alpha];
+						id color = [NSColor colorWithDeviceRed:red green:green blue:blue alpha:alpha];
 						[color set];
 						NSRectFill(NSMakeRect(j, i, 1, 1));
 					}

@@ -311,6 +311,7 @@ static PXPanelManager *sharedManager = nil;
 
 - (IBAction)showSpriteSheetExporter: (id)sender
 {
+  [[PXSpriteSheetExporter sharedSpriteSheetExporter] recacheDocumentRepresentations];
 	[self show:[self spriteSheetExporterPanel]];
 }
 

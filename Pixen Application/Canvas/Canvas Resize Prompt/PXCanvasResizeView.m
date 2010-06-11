@@ -36,7 +36,7 @@
 {
 	cachedImage = [[NSImage imageNamed:@"greybox"] retain];
 	scaleTransform = [[NSAffineTransform alloc] init];
-	[self setBackgroundColor:[NSColor colorWithCalibratedRed:1 green:1 blue:1 alpha:0]];
+	[self setBackgroundColor:[NSColor colorWithDeviceRed:1 green:1 blue:1 alpha:0]];
 }
 
 - (void)dealloc
@@ -144,7 +144,7 @@
 	cachedImage = [[NSImage alloc] initWithSize:[image size]];
 	
 	[cachedImage lockFocus];
-//	[[NSColor colorWithCalibratedRed:1 green:1 blue:1 alpha:1] set];
+//	[[NSColor colorWithDeviceRed:1 green:1 blue:1 alpha:1] set];
 //	NSRectFill(NSMakeRect(0,0,[image size].width,[image size].height));
 	[image compositeToPoint:NSMakePoint(0, 0) operation:NSCompositeSourceOver];
 	[cachedImage unlockFocus];

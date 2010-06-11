@@ -142,7 +142,7 @@ PXImage *PXImage_init(PXImage *self)
 	self->height = 0;
 	self->tileCount = 0;
 	self->tiles = calloc(1, sizeof(PXTile *));
-	self->colorspace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
+	self->colorspace = CGColorSpaceCreateDeviceRGB();
 	return self;
 }
 
@@ -293,7 +293,7 @@ NSColor *PXImage_colorAtIndex(PXImage *self, int loc)
 
 NSColor *PXImage_backgroundColor(PXImage *self)
 {
-	return [NSColor clearColor];
+	return [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 }
 
 NSColor *PXImage_colorAtXY(PXImage *self, int x, int y)
@@ -303,7 +303,7 @@ NSColor *PXImage_colorAtXY(PXImage *self, int x, int y)
 	{
 		return PXImage_backgroundColor(self);
 	}
-	NSColor *color = [NSColor colorWithColorSpace:[NSColorSpace genericRGBColorSpace] components:CGColorGetComponents(c) count:CGColorGetNumberOfComponents(c)];
+	NSColor *color = [NSColor colorWithColorSpace:[NSColorSpace deviceRGBColorSpace] components:CGColorGetComponents(c) count:CGColorGetNumberOfComponents(c)];
 	CGColorRelease(c);
 	return color;
 }
@@ -319,7 +319,7 @@ void PXImage_setColorAtXY(PXImage *self, NSColor *color, int xv, int yv)
 {
 	PXTile *t = PXImage_tileAtXY(self, xv, yv);
 	float components[4];
-	[[color colorUsingColorSpaceName:NSCalibratedRGBColorSpace] getComponents:components];
+	[[color colorUsingColorSpaceName:NSDeviceRGBColorSpace] getComponents:components];
 	CGColorRef c = CGColorCreate(self->colorspace, components);
 	PXTileSetAtXY(t, xv, yv, c);
 	CGColorRelease(c);
@@ -535,8 +535,8 @@ void PXImage_drawInRectFromRectWithOperationFraction(PXImage *self, NSRect dst, 
 
 NSColor * PXImage_blendColors(PXImage * self, NSColor * bottomColor, NSColor * topColor)
 {
-	bottomColor = [bottomColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-	topColor = [topColor colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	bottomColor = [bottomColor colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+	topColor = [topColor colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 	float compositeRedComponent;
 	float compositeGreenComponent;
 	float compositeBlueComponent;
@@ -552,14 +552,14 @@ NSColor * PXImage_blendColors(PXImage * self, NSColor * bottomColor, NSColor * t
 	compositeAlphaComponent = topAlphaComponent + bottomAlphaComponent - (topAlphaComponent * bottomAlphaComponent);
 	if(compositeAlphaComponent == 0)
 	{
-		return [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:0];
+		return [NSColor colorWithDeviceRed:0 green:0 blue:0 alpha:0];
 	}
 	else
 	{	
 		compositeRedComponent = bottomRedComponent + ((topRedComponent - bottomRedComponent) * (topAlphaComponent / compositeAlphaComponent));
 		compositeBlueComponent = bottomBlueComponent + ((topBlueComponent - bottomBlueComponent) * (topAlphaComponent / compositeAlphaComponent));
 		compositeGreenComponent = bottomGreenComponent + ((topGreenComponent - bottomGreenComponent) * (topAlphaComponent / compositeAlphaComponent));
-		return [NSColor colorWithCalibratedRed:compositeRedComponent green:compositeGreenComponent blue:compositeBlueComponent alpha:compositeAlphaComponent];
+		return [NSColor colorWithDeviceRed:compositeRedComponent green:compositeGreenComponent blue:compositeBlueComponent alpha:compositeAlphaComponent];
 	}	
 }
 
@@ -613,7 +613,7 @@ NSImage *PXImage_bitmapImage(PXImage *self)
 														  samplesPerPixel:4 
 																 hasAlpha:YES 
 																 isPlanar:NO 
-														   colorSpaceName:NSCalibratedRGBColorSpace 
+														   colorSpaceName:NSDeviceRGBColorSpace 
 															  bytesPerRow:self->width * 4 
 															 bitsPerPixel:32] autorelease];
 		[nsimage removeRepresentation:rep];

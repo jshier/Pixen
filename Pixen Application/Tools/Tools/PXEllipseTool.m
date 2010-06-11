@@ -174,7 +174,7 @@
 	NSPoint startPoint, endPoint;
 	NSColor * oldColor = color;
 	
-	if (![propertiesView shouldUseMainColorForFill]) 
+	if (![(PXEllipseToolPropertiesView *)propertiesView shouldUseMainColorForFill]) 
     { 
 		color = fillColor;
     }
@@ -242,16 +242,16 @@
 	NSRect ellipseBound = [self getEllipseBoundFromdrawFromPoint:(NSPoint)origin 
 														 toPoint:aPoint];
 	
-	if ([propertiesView shouldFill]) {
+	if ([(PXEllipseToolPropertiesView *)propertiesView shouldFill]) {
 		[self plotFilledEllipseInscribedInRect:ellipseBound
-								 withLineWidth:[propertiesView borderWidth]
-								 withFillColor:([propertiesView shouldUseMainColorForFill]) ? [self colorForCanvas:canvas] : [propertiesView fillColor] 
+								 withLineWidth:[(PXEllipseToolPropertiesView *)propertiesView borderWidth]
+								 withFillColor:([(PXEllipseToolPropertiesView *)propertiesView shouldUseMainColorForFill]) ? [self colorForCanvas:canvas] : [(PXEllipseToolPropertiesView *)propertiesView fillColor] 
 									  inCanvas:canvas];
 		
 	} else {
 		
 		[self plotUnfilledEllipseInscribedInRect:ellipseBound
-								   withLineWidth:[propertiesView borderWidth] 
+								   withLineWidth:[(PXEllipseToolPropertiesView *)propertiesView borderWidth] 
 										inCanvas:canvas];
 	}
 }
@@ -264,7 +264,7 @@
 	NSRect ellipseBound = [self getEllipseBoundFromdrawFromPoint:(NSPoint)origin
 														 toPoint:finalPoint];
     [self plotUnfilledEllipseInscribedInRect:ellipseBound
-							   withLineWidth:[propertiesView borderWidth]
+							   withLineWidth:[(PXEllipseToolPropertiesView *)propertiesView borderWidth]
 									inCanvas:canvas];
 }
 

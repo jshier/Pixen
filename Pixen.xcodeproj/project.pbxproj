@@ -13,6 +13,8 @@
 		314E725F10820C2200DAE4B3 /* Test.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 314E725B10820C2200DAE4B3 /* Test.xcconfig */; };
 		31E907B5105757C700ADB171 /* CTGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = 31E907B1105757C700ADB171 /* CTGradient.h */; };
 		31E907B6105757C700ADB171 /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E907B2105757C700ADB171 /* CTGradient.m */; };
+		31E907B7105757C700ADB171 /* CTGradientView.h in Headers */ = {isa = PBXBuildFile; fileRef = 31E907B3105757C700ADB171 /* CTGradientView.h */; };
+		31E907B8105757C700ADB171 /* CTGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E907B4105757C700ADB171 /* CTGradientView.m */; };
 		610865F706B988F400733B2D /* PXInfoPanel.nib in Resources */ = {isa = PBXBuildFile; fileRef = 610865F506B988F400733B2D /* PXInfoPanel.nib */; };
 		610F37DE0899A5DE00567E90 /* PixenHelp in Resources */ = {isa = PBXBuildFile; fileRef = 610F37D30899A5DD00567E90 /* PixenHelp */; };
 		6117816108ABA7F30098DCC4 /* PXAnimationView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6117815F08ABA7F30098DCC4 /* PXAnimationView.h */; };
@@ -41,6 +43,8 @@
 		BFFC21B906DED6F8008EC4CC /* PXGradientBuilder.nib in Resources */ = {isa = PBXBuildFile; fileRef = BFFC21B706DED6F8008EC4CC /* PXGradientBuilder.nib */; };
 		EA041A190CE8F72F0095DAA9 /* PXBackgroundConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = EA041A170CE8F72F0095DAA9 /* PXBackgroundConfig.h */; };
 		EA041A1A0CE8F72F0095DAA9 /* PXBackgroundConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = EA041A180CE8F72F0095DAA9 /* PXBackgroundConfig.m */; };
+		EA2EA41B10DB37E50065090C /* NSString+Comparison.h in Headers */ = {isa = PBXBuildFile; fileRef = EA2EA41910DB37E50065090C /* NSString+Comparison.h */; };
+		EA2EA41C10DB37E50065090C /* NSString+Comparison.m in Sources */ = {isa = PBXBuildFile; fileRef = EA2EA41A10DB37E50065090C /* NSString+Comparison.m */; };
 		EA31F8700CE7BD8B00EC481B /* PXApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F8620CE7BD8B00EC481B /* PXApplication.h */; };
 		EA31F8710CE7BD8B00EC481B /* PXApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F8630CE7BD8B00EC481B /* PXApplication.m */; };
 		EA31F8720CE7BD8B00EC481B /* PXDocumentController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F8640CE7BD8B00EC481B /* PXDocumentController.h */; };
@@ -539,6 +543,8 @@
 		314E725B10820C2200DAE4B3 /* Test.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Test.xcconfig; sourceTree = "<group>"; };
 		31E907B1105757C700ADB171 /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
 		31E907B2105757C700ADB171 /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGradient.m; sourceTree = "<group>"; };
+		31E907B3105757C700ADB171 /* CTGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGradientView.h; sourceTree = "<group>"; };
+		31E907B4105757C700ADB171 /* CTGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGradientView.m; sourceTree = "<group>"; };
 		6103626B060A07B700D5450C /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXGridSettingsPrompter.nib; sourceTree = "<group>"; };
 		610865F606B988F400733B2D /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXInfoPanel.nib; sourceTree = "<group>"; };
 		610F37D40899A5DD00567E90 /* English */ = {isa = PBXFileReference; lastKnownFileType = folder; name = English; path = English.lproj/PixenHelp; sourceTree = "<group>"; };
@@ -587,6 +593,8 @@
 		BFFC221A06DEDE63008EC4CC /* French */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = French; path = French.lproj/PXGradientBuilder.nib; sourceTree = "<group>"; };
 		EA041A170CE8F72F0095DAA9 /* PXBackgroundConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXBackgroundConfig.h; sourceTree = "<group>"; };
 		EA041A180CE8F72F0095DAA9 /* PXBackgroundConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXBackgroundConfig.m; sourceTree = "<group>"; };
+		EA2EA41910DB37E50065090C /* NSString+Comparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Comparison.h"; sourceTree = "<group>"; };
+		EA2EA41A10DB37E50065090C /* NSString+Comparison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Comparison.m"; sourceTree = "<group>"; };
 		EA31F8620CE7BD8B00EC481B /* PXApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXApplication.h; sourceTree = "<group>"; };
 		EA31F8630CE7BD8B00EC481B /* PXApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXApplication.m; sourceTree = "<group>"; };
 		EA31F8640CE7BD8B00EC481B /* PXDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXDocumentController.h; sourceTree = "<group>"; };
@@ -1166,6 +1174,8 @@
 			children = (
 				31E907B1105757C700ADB171 /* CTGradient.h */,
 				31E907B2105757C700ADB171 /* CTGradient.m */,
+				31E907B3105757C700ADB171 /* CTGradientView.h */,
+				31E907B4105757C700ADB171 /* CTGradientView.m */,
 			);
 			path = CTGradient;
 			sourceTree = "<group>";
@@ -1863,6 +1873,8 @@
 				61A22A850D2303EE00430CCD /* OSRectAdditions.m */,
 				EA31FC7D0CE7D7C200EC481B /* PathUtilities.h */,
 				EA31FC7E0CE7D7C200EC481B /* PathUtilities.m */,
+				EA2EA41910DB37E50065090C /* NSString+Comparison.h */,
+				EA2EA41A10DB37E50065090C /* NSString+Comparison.m */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -2316,6 +2328,8 @@
 				61A22A860D2303EE00430CCD /* OSRectAdditions.h in Headers */,
 				61A22B920D2323B500430CCD /* OSPlasticButtonCell.h in Headers */,
 				31E907B5105757C700ADB171 /* CTGradient.h in Headers */,
+				31E907B7105757C700ADB171 /* CTGradientView.h in Headers */,
+				EA2EA41B10DB37E50065090C /* NSString+Comparison.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2690,6 +2704,8 @@
 				61A22A870D2303EE00430CCD /* OSRectAdditions.m in Sources */,
 				61A22B930D2323B500430CCD /* OSPlasticButtonCell.m in Sources */,
 				31E907B6105757C700ADB171 /* CTGradient.m in Sources */,
+				31E907B8105757C700ADB171 /* CTGradientView.m in Sources */,
+				EA2EA41C10DB37E50065090C /* NSString+Comparison.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3210,11 +3226,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 314E725A10820C2200DAE4B3 /* Release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_MODEL_TUNING = G5;
+				GCC_MODEL_TUNING = "";
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_VERSION = 4.2;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;

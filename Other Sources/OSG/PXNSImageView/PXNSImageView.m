@@ -33,7 +33,7 @@
 	shadow = [[NSShadow alloc] init];
 	[shadow setShadowBlurRadius:4];
 	[shadow setShadowOffset:NSMakeSize(0, -2)];
-	[shadow setShadowColor:[NSColor colorWithCalibratedWhite:0.2 alpha:1]];	
+	[shadow setShadowColor:[NSColor colorWithDeviceWhite:0.2 alpha:1]];	
 }
 
 - initWithFrame:(NSRect)rect

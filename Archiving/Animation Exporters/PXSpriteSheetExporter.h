@@ -23,4 +23,6 @@
 - (NSArray *)documentRepresentations;
 - (IBAction)updatePreview:sender;
 
+- (void)recacheDocumentRepresentations;
+
 @end

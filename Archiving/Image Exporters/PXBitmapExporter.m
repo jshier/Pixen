@@ -103,7 +103,7 @@
 	CWDisposeColorWorld(colorWorld);
 	CMCloseProfile(sourceProfile);
 
-	NSBitmapImageRep *resultingBitmap = [[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:(unsigned char **)destination pixelsWide:size.width pixelsHigh:size.height bitsPerSample:8 samplesPerPixel:samplesPerPixel hasAlpha:[self hasAlpha] isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:size.width * samplesPerPixel bitsPerPixel:8 * samplesPerPixel] autorelease];
+	NSBitmapImageRep *resultingBitmap = [[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:(unsigned char **)destination pixelsWide:size.width pixelsHigh:size.height bitsPerSample:8 samplesPerPixel:samplesPerPixel hasAlpha:[self hasAlpha] isPlanar:NO colorSpaceName:NSDeviceRGBColorSpace bytesPerRow:size.width * samplesPerPixel bitsPerPixel:8 * samplesPerPixel] autorelease];
 	return resultingBitmap;
 }
 
@@ -294,7 +294,7 @@ typedef struct tagBITMAPINFOHEADER
 		for (i = 0; i < [canvas size].width; i++)
 		{
 			int base = j * [bitmapRep bytesPerRow] + (hasAlpha ? i*4 : i*3);
-			NSColor *color = [NSColor colorWithCalibratedRed:bitmapData[base]/255.0 green:bitmapData[base + 1]/255.0 blue:bitmapData[base + 2]/255.0 alpha:(hasAlpha ? bitmapData[base + 3]/255.0 : 1)];
+			NSColor *color = [NSColor colorWithDeviceRed:bitmapData[base]/255.0 green:bitmapData[base + 1]/255.0 blue:bitmapData[base + 2]/255.0 alpha:(hasAlpha ? bitmapData[base + 3]/255.0 : 1)];
 			unsigned char index = PXPalette_indexOfColor(pal, color);
 			[data appendBytes:&index length:1];
 			bytesWritten++;
@@ -329,7 +329,7 @@ typedef struct tagBITMAPINFOHEADER
 		{
 			NSPoint point = NSMakePoint(i, j);
 			NSLog(@"Before (%dx%d): %@", i, j, NSReadPixel(point));
-			[[NSReadPixel(point) colorUsingColorSpaceName:NSCalibratedRGBColorSpace] set];
+			[[NSReadPixel(point) colorUsingColorSpaceName:NSDeviceRGBColorSpace] set];
 			NSLog(@"After (%dx%d): %@", i, j, NSReadPixel(point));
 			NSRectFill((NSRect){point, {1, 1}});
 		}

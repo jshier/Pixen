@@ -11,24 +11,31 @@
 
 @implementation NSColor(PXPaletteAdditions)
 
+  //we have to use this to keep the hash in the 0..65535 range
 - (unsigned int)paletteHash
 {
-	unsigned int r = [self redComponent]*255;
-	unsigned int g = [self greenComponent]*255;
-	unsigned int b = [self blueComponent]*255;
-	unsigned int a = [self alphaComponent]*255;
+  CGFloat comps[4];
+  [self getComponents:comps];
+	unsigned int r = comps[0]*255;
+	unsigned int g = comps[1]*255;
+	unsigned int b = comps[2]*255;
+	unsigned int a = comps[3]*255;
 	return (r * g) ^ (b * a);
 }
 
 - (float)distanceTo:(NSColor *)other
 {
-	NSColor *here = [self colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-	NSColor *there = [other colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-	
-	float r = [here redComponent] - [there redComponent];
-	float g = [here greenComponent] - [there greenComponent];
-	float b = [here blueComponent] - [there blueComponent];
-	float a = [here alphaComponent] - [there alphaComponent];
+	NSColor *here = [self colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+	NSColor *there = [other colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+  CGFloat hereC[4], thereC[4];
+  [here getComponents:hereC];
+  [there getComponents:thereC];
+  
+  float r = hereC[0]-thereC[0];
+  float g = hereC[1]-thereC[1];
+  float b = hereC[2]-thereC[2];
+  float a = hereC[3]-thereC[3];
+
 	return fabsf(r) + fabsf(g) + fabsf(b) + fabsf(a);
 }
 

@@ -14,6 +14,8 @@
 }
 - (PXCanvasWindowController *)windowController;
 - (PXCanvas *)canvas;
+- (NSArray *)canvases;
+- (BOOL)containsCanvas:(PXCanvas *)c;
 - (void)close;
 - (void)setFileName:(NSString *)fileName;
 - (void)initWindowController;

@@ -72,8 +72,9 @@
 		for (x=0; x<size.width; x++) {
 			for (y=0; y<size.height; y++) {
 				currentPoint = NSMakePoint((int)(x/xScale),(int)(y/yScale));
-				[layer setColor:[layerCopy colorAtPoint:currentPoint]
-						atPoint:NSMakePoint(x, y)];
+				[canvas setColor:[layerCopy colorAtPoint:currentPoint]
+                 atPoint:NSMakePoint(x, y) 
+                 onLayer:layer];
 			}
 		}
 	}

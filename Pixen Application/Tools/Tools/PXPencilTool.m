@@ -61,7 +61,7 @@
 		return nil;
 	
 	propertiesView = [[PXPencilToolPropertiesView alloc] init];
-	[propertiesView setToolName:[self name]];
+	[(PXPencilToolPropertiesView *)propertiesView setToolName:[self name]];
 	shiftDown = NO;
 	changedRect = NSZeroRect;
 	return self;
@@ -111,7 +111,7 @@
 	else// if (![oldColor isEqualTo:newColor])
 	{
 		[aCanvas bufferUndoAtPoint:aPoint fromColor:oldColor toColor:newColor];
-		[aLayer setColor:newColor atPoint:aPoint];
+		[aCanvas setColor:newColor atPoint:aPoint onLayer:aLayer];
 
 		if (!NSEqualRects(changedRect, NSZeroRect)) {
 			changedRect = NSUnionRect(changedRect, NSMakeRect(aPoint.x, aPoint.y, 1, 1));
@@ -132,14 +132,14 @@
 		return;
 	}
 	
-	if ([propertiesView drawingPoints] != nil) {
-		NSArray *points = [propertiesView drawingPoints];
+	if ([(PXPencilToolPropertiesView *)propertiesView drawingPoints] != nil) {
+		NSArray *points = [(PXPencilToolPropertiesView *)propertiesView drawingPoints];
 		unsigned int i;
 		
 		for (i=0; i<[points count]; i++) {
 			NSPoint point = NSPointFromString([points objectAtIndex:i]);
-			point.x += ceilf(aPoint.x - ([propertiesView patternSize].width / 2));
-			point.y += ceilf(aPoint.y - ([propertiesView patternSize].height / 2));
+			point.x += ceilf(aPoint.x - ([(PXPencilToolPropertiesView *)propertiesView patternSize].width / 2));
+			point.y += ceilf(aPoint.y - ([(PXPencilToolPropertiesView *)propertiesView patternSize].height / 2));
 			
 			[self drawWithOldColor:[aCanvas colorAtPoint:point] 
 						  newColor:[self colorForCanvas:aCanvas] 
@@ -151,7 +151,7 @@
 		return;
 	}
 	
-	int diameter = [propertiesView lineThickness];
+	int diameter = [(PXPencilToolPropertiesView *)propertiesView lineThickness];
 	int radius = diameter/2;
 	NSRect rect = NSMakeRect(aPoint.x-radius, aPoint.y-radius, diameter, diameter);
 	int x,y;
@@ -291,7 +291,7 @@ fromCanvasController:(PXCanvasController *) controller
 - (void)setPattern:(PXPattern *)pattern
 {
 	if (![self supportsPatterns]) { return; }
-	[propertiesView setPattern:pattern];
+	[(PXPencilToolPropertiesView *)propertiesView setPattern:pattern];
 }
 
 @end

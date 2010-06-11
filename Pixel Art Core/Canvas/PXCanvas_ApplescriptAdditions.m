@@ -25,7 +25,7 @@
 {
     NSDictionary *arguments = [command evaluatedArguments];
     id colorArray = [arguments objectForKey:@"toColor"];
-    NSColor *color = [NSColor colorWithCalibratedRed:[[colorArray objectAtIndex:0] floatValue]/65535 green:[[colorArray objectAtIndex:1] floatValue]/65535 blue:[[colorArray objectAtIndex:2] floatValue]/65535 alpha:1.0f];
+    NSColor *color = [NSColor colorWithDeviceRed:[[colorArray objectAtIndex:0] floatValue]/65535 green:[[colorArray objectAtIndex:1] floatValue]/65535 blue:[[colorArray objectAtIndex:2] floatValue]/65535 alpha:1.0f];
     NSPoint changedPoint = NSMakePoint([[arguments objectForKey:@"atX"] intValue], [[arguments objectForKey:@"atY"] intValue]);
     [self setColor:color atPoint:changedPoint];
     [self changedInRect:NSMakeRect(changedPoint.x, changedPoint.y, 1, 1)];

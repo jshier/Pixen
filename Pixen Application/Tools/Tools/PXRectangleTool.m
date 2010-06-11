@@ -79,7 +79,7 @@ fromCanvasController:(PXCanvasController *) controller
 			 inCanvas:(PXCanvas *)canvas
 		   shouldFill:(BOOL)shouldFill
 {
-	int borderWidth = [propertiesView borderWidth];
+	int borderWidth = [(PXRectangleToolPropertiesView *)propertiesView borderWidth];
 	float leftMost = (origin.x < aPoint.x) ? origin.x : aPoint.x;
 	float rightMost = (origin.x < aPoint.x) ? aPoint.x: origin.x;
 	float topMost = (origin.y < aPoint.y) ? aPoint.y: origin.y;
@@ -96,9 +96,9 @@ fromCanvasController:(PXCanvasController *) controller
     {
 		// careful about backwards-drawn rectangles...
 		NSColor * oldColor = [self colorForCanvas:canvas];
-		if (![propertiesView shouldUseMainColorForFill]) 
+		if (![(PXRectangleToolPropertiesView *)propertiesView shouldUseMainColorForFill]) 
 		{ 
-			color = [propertiesView fillColor];
+			color = [(PXRectangleToolPropertiesView *)propertiesView fillColor];
 		}
 		[self drawRect:NSMakeRect(leftMost + borderWidth,
 								  bottomMost + borderWidth,
@@ -117,7 +117,7 @@ fromCanvasController:(PXCanvasController *) controller
 				   toPoint:(NSPoint)aPoint
 				  inCanvas:(PXCanvas *)canvas
 {
-	[self drawFromPoint:origin toPoint:aPoint inCanvas:canvas shouldFill:[propertiesView shouldFill]];
+	[self drawFromPoint:origin toPoint:aPoint inCanvas:canvas shouldFill:[(PXRectangleToolPropertiesView *)propertiesView shouldFill]];
 }
 
 - (void)drawFromPoint:(NSPoint)origin 

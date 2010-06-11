@@ -2,8 +2,11 @@ build
  
 *.pbxuser
 *.perspectivev3
+*.perspective
 *.mode1v3
 *.mode2v3
+._*
+.svn/
 !default.pbxuser
 !default.perspectivev3
 !default.mode1v3

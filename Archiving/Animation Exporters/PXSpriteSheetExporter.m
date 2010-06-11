@@ -82,17 +82,16 @@ PXSpriteSheetExporter *sharedSpriteSheetExporter = nil;
 
 - (NSImage *)spriteSheetImage
 {
-	int maxWidth = 1024;
-	int interAnimationMargin = 5;
-	int interCelMargin = 2;
-	int padding = 10;
+	int interAnimationMargin = 0;
+	int interCelMargin = 0;
+	int padding = 0;
 	NSMutableArray *animationSheets = [NSMutableArray array];
 	NSSize sheetSize = NSMakeSize(padding*2, padding*2);
 	for (NSDictionary *docRep in documentRepresentations)
     {
 		PXAnimation *animation = [[docRep objectForKey:@"document"] animation];
 		if ([[docRep objectForKey:@"included"] boolValue]) {
-			NSImage *spriteSheetRow = [animation spriteSheetWithinWidth:maxWidth celMargin:interCelMargin];
+			NSImage *spriteSheetRow = [animation spriteSheetWithCelMargin:interCelMargin];
 			if ([spriteSheetRow size].width > sheetSize.width) {
 				sheetSize.width = [spriteSheetRow size].width;
 			}
@@ -101,20 +100,20 @@ PXSpriteSheetExporter *sharedSpriteSheetExporter = nil;
 		}
 	}
 	if (NSEqualSizes(sheetSize, NSMakeSize(padding*2, padding*2))) {
-		return [NSImage imageNamed:@"Pixen"];
+		return nil;
 	}
 	sheetSize.height -= interAnimationMargin;
 	
 	NSImage *spriteSheet = [[[NSImage alloc] initWithSize:sheetSize] autorelease];
 	[spriteSheet lockFocus];
-	[[NSColor whiteColor] set];
+	[[NSColor clearColor] set];
 	NSRectFill(NSMakeRect(0,0,sheetSize.width,sheetSize.height));
-	NSPoint currentPoint = NSMakePoint(padding, sheetSize.height - padding);
+	NSPoint currentPoint = NSMakePoint(padding, 0);
 	for (NSImage *row in animationSheets)
-    {
-		currentPoint.y -= [row size].height;
+  {
 		[row compositeToPoint:currentPoint operation:NSCompositeSourceOver];
-		currentPoint.y -= interAnimationMargin;
+    currentPoint.y += [row size].height;
+		currentPoint.y += interAnimationMargin;
 	}
 	[spriteSheet unlockFocus];
 	return spriteSheet;
@@ -122,7 +121,15 @@ PXSpriteSheetExporter *sharedSpriteSheetExporter = nil;
 
 - (IBAction)updatePreview:sender
 {
-	[sheetImageView setImage:[self spriteSheetImage]];
+  NSImage *img = [self spriteSheetImage];
+  if(img)
+  {
+    [sheetImageView setImage:[self spriteSheetImage]];
+  }
+  else
+  {
+    [sheetImageView setImage:[NSImage imageNamed:@"Pixen"]];
+  }
 }
 
 - (void)windowDidLoad
@@ -155,8 +162,11 @@ PXSpriteSheetExporter *sharedSpriteSheetExporter = nil;
 - (IBAction)export:sender
 {
 	NSSavePanel *savePanel = [NSSavePanel savePanel];
+  [savePanel setExtensionHidden:false];
+  [savePanel setCanSelectHiddenExtension:false];
+	[savePanel setTitle:@"Save Spritesheet"];
 	[savePanel setRequiredFileType:@"png"];
-	[savePanel beginSheetForDirectory:nil file:nil modalForWindow:[self window] modalDelegate:self didEndSelector:@selector(savePanelDidEnd:returnCode:contextInfo:) contextInfo:nil];
+	[savePanel beginSheetForDirectory:nil file:@"Spritesheet.png" modalForWindow:[self window] modalDelegate:self didEndSelector:@selector(savePanelDidEnd:returnCode:contextInfo:) contextInfo:nil];
 }
 
 @end

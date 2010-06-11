@@ -109,6 +109,7 @@
 	layers = newLayers;
 	[self activateLayer:[newLayers objectAtIndex:oldActiveIndex]];
 	
+  [self refreshWholePalette];
 	[self layersChanged];
 }
 
@@ -153,6 +154,7 @@
 		}
 		[self layersChanged];
 		[self changed];
+    [self refreshWholePalette];
 	} [self endUndoGrouping:act];
 }
 
@@ -170,6 +172,7 @@
 															  userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
 																  [NSNumber numberWithInt:[layers count] - 1], PXCanvasOldLayersCountKey, nil]];
 		}
+    [self refreshWholePalette];
 		[self changed];
 	} [self endUndoGrouping:NSLocalizedString(@"Insert Layer", @"Insert Layer")];
 }
@@ -211,6 +214,7 @@
 			[self activateLayer:[layers objectAtIndex:newIndex]];
 		}
 		[self changed];
+    [self refreshWholePalette];
 	} [self endUndoGrouping:NSLocalizedString(@"Remove Layer", @"Remove Layer")];	
 }
 

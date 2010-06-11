@@ -1,29 +1,29 @@
-//  PXEyedropperTool.m
-//  Pixen
-//
-// Copyright (c) 2003,2004,2005 Open Sword Group
+  //  PXEyedropperTool.m
+  //  Pixen
+  //
+  // Copyright (c) 2003,2004,2005 Open Sword Group
 
-// Permission is hereby granted, free of charge, to any person obtaining a copy 
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights 
-// to use,copy, modify, merge, publish, distribute, sublicense, and/or sell 
-// copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
+  // Permission is hereby granted, free of charge, to any person obtaining a copy 
+  // of this software and associated documentation files (the "Software"), to deal
+  // in the Software without restriction, including without limitation the rights 
+  // to use,copy, modify, merge, publish, distribute, sublicense, and/or sell 
+  // copies of the Software, and to permit persons to whom the Software is
+  //  furnished to do so, subject to the following conditions:
 
-// The above copyright notice and this permission notice shall be included in
-//  all copies or substantial portions of the Software.
+  // The above copyright notice and this permission notice shall be included in
+  //  all copies or substantial portions of the Software.
 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
-// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
-// BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
-// CONTRACT, TORT OR OTHERWISE, ARISING FROM,  OUT OF OR IN CONNECTION WITH
-// THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+  // IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+  // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+  // CONTRACT, TORT OR OTHERWISE, ARISING FROM,  OUT OF OR IN CONNECTION WITH
+  // THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-//  Created by Joe Osborn on Mon Oct 13 2003.
-//  Copyright (c) 2003 Open Sword Group. All rights reserved.
-//
+  //  Created by Joe Osborn on Mon Oct 13 2003.
+  //  Copyright (c) 2003 Open Sword Group. All rights reserved.
+  //
 
 #import "PXEyedropperTool.h"
 #import "PXCanvas.h"
@@ -55,37 +55,30 @@
 
 - propertiesView
 {
-	// immense HACK ohgodimsorry
+    // immense HACK ohgodimsorry
 	if ([[PXToolPaletteController sharedToolPaletteController] leftTool] == self)
-		[propertiesView setButtonType:PXLeftButtonTool];
+		[(PXEyedropperToolPropertiesView *) propertiesView setButtonType:PXLeftButtonTool];
 	else
-		[propertiesView setButtonType:PXRightButtonTool];
+		[(PXEyedropperToolPropertiesView *)propertiesView setButtonType:PXRightButtonTool];
 	return propertiesView;	
 }
 
 -(NSColor *) compositeColorAtPoint:(NSPoint)aPoint
-						fromCanvas:(PXCanvas *)canvas
+                        fromCanvas:(PXCanvas *)canvas
 {
 	if (![canvas containsPoint:aPoint]) 
-    { 
+  { 
 		return nil; 
-    }
+  }
 	else 
-    {
-		if ([propertiesView colorSource] == PXActiveLayerColorSource)
+  {
+		if ([(PXEyedropperToolPropertiesView *)propertiesView colorSource] == PXActiveLayerColorSource)
 		{
 			return [[canvas activeLayer] colorAtPoint:aPoint];
 		}
 		else
 		{
-			NSArray * layers = [canvas layers];
-			NSColor * currentColor = [[layers objectAtIndex:0] colorAtPoint:aPoint];
-			int x;
-			for (x = 1; x < [layers count]; x++)
-			{
-				currentColor = PXImage_blendColors(nil, currentColor, [[layers objectAtIndex:x] colorAtPoint:aPoint]);
-			}
-			return currentColor;
+      return [canvas surfaceColorAtPoint:aPoint];
 		}
 	}
 }	
@@ -95,13 +88,13 @@
 {
 	if(![[controller canvas] containsPoint:aPoint]) { return; }
 	id usedSwitcher;
-	if ([propertiesView targetToolButton] == PXLeftButtonTool)
+	if ([(PXEyedropperToolPropertiesView *)propertiesView targetToolButton] == PXLeftButtonTool)
 		usedSwitcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
 	else
 		usedSwitcher = [[PXToolPaletteController sharedToolPaletteController] rightSwitcher];
 	
 	[usedSwitcher setColor:[self compositeColorAtPoint:aPoint 
-										fromCanvas:[controller canvas]]];
+                                          fromCanvas:[controller canvas]]];
 }
 
 
@@ -112,8 +105,8 @@ fromCanvasController:(PXCanvasController *) controller
 }
 
 - (void)mouseDraggedFrom:(NSPoint)initialPoint 
-					  to:(NSPoint)finalPoint
-	fromCanvasController:(PXCanvasController *)controller
+                      to:(NSPoint)finalPoint
+    fromCanvasController:(PXCanvasController *)controller
 {
 	[self eyedropAtPoint:finalPoint fromCanvasController:controller];
 }

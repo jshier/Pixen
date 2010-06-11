@@ -251,14 +251,14 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 - (void)drawCloseButtonAtIndex:(unsigned int)index highlighted:(BOOL)highlighted pressed:(BOOL)pressed
 {
 	NSRect bounds = [self closeButtonRectForCelIndex:index];
-	NSColor *circleColor = [NSColor colorWithCalibratedWhite:.86 alpha:1];
-	NSColor *xColor = [NSColor colorWithCalibratedWhite:.5 alpha:1];
+	NSColor *circleColor = [NSColor colorWithDeviceWhite:.86 alpha:1];
+	NSColor *xColor = [NSColor colorWithDeviceWhite:.5 alpha:1];
 	if (pressed) {
-		circleColor = [NSColor colorWithCalibratedWhite:.48 alpha:1];
-		xColor = [NSColor colorWithCalibratedWhite:.14 alpha:1];
+		circleColor = [NSColor colorWithDeviceWhite:.48 alpha:1];
+		xColor = [NSColor colorWithDeviceWhite:.14 alpha:1];
 	} else if (highlighted) {
-		circleColor = [NSColor colorWithCalibratedWhite:.86 alpha:1];
-		xColor = [NSColor colorWithCalibratedWhite:.24 alpha:1];
+		circleColor = [NSColor colorWithDeviceWhite:.86 alpha:1];
+		xColor = [NSColor colorWithDeviceWhite:.24 alpha:1];
 	}
 	[circleColor set];
 	[[NSBezierPath bezierPathWithOvalInRect:bounds] fill];
@@ -276,7 +276,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 		fontSize = floorf(fontSize * .85);
 	
 	NSMutableAttributedString *badgeString = [[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d", index + 1]
-																	   attributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSColor colorWithCalibratedWhite:0 alpha:0.75], NSForegroundColorAttributeName, [NSFont systemFontOfSize:fontSize], NSFontAttributeName, nil]] autorelease];
+																	   attributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSColor colorWithDeviceWhite:0 alpha:0.75], NSForegroundColorAttributeName, [NSFont systemFontOfSize:fontSize], NSFontAttributeName, nil]] autorelease];
 	
 	// Exceuse me for my mdrfkr hardcoded numbers.
 	NSSize badgeSize = [badgeString size];

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
@@ -155,20 +155,6 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>eps</string>
-			</array>
-			<key>CFBundleTypeName</key>
-			<string>Encapsulated PostScript (EPS)</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>LSTypeIsPackage</key>
-			<false/>
-			<key>NSDocumentClass</key>
-			<string>PXCanvasDocument</string>
-		</dict>
-		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
 				<string>pxpalette</string>
 			</array>
 			<key>CFBundleTypeName</key>
@@ -271,11 +257,11 @@
 	<string>Pixen</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>3.0</string>
 	<key>CFBundleSignature</key>
 	<string>PiXn</string>
 	<key>CFBundleVersion</key>
-	<string>3.0</string>
-	<key>CFBundleShortVersionString</key>
 	<string>3.0</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>10.3</string>
@@ -285,9 +271,9 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>PXApplication</string>
-	<key>SUFeedURL</key>
-	<string>http://opensword.org/pixen/PixenChangelog.xml</string>
 	<key>SUCheckAtStartup</key>
 	<true/>
+	<key>SUFeedURL</key>
+	<string>http://opensword.org/pixen/PixenChangelog.xml</string>
 </dict>
 </plist>

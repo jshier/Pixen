@@ -74,7 +74,9 @@
 			if (![canvas pointIsSelected:point])
 				continue;
 			
-			[moveLayer setColor:[canvas colorAtPoint:point] atPoint:NSMakePoint(i - selectedRect.origin.x, j - selectedRect.origin.y)];
+			[canvas setColor:[canvas colorAtPoint:point] 
+               atPoint:NSMakePoint(i - selectedRect.origin.x, j - selectedRect.origin.y)
+               onLayer:moveLayer];
 			[canvas setColor:clear atPoint:point];
 		}
 	}

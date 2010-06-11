@@ -71,7 +71,7 @@ typedef struct
 	int i;
 	for (i = 0; i < colorCount; i++)
 	{
-		NSColor *color = [palette->colors[i] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+		NSColor *color = [palette->colors[i].color colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 		char colorData[4];
 		colorData[0] = (int)([color redComponent] * 255);
 		colorData[1] = (int)([color greenComponent] * 255);

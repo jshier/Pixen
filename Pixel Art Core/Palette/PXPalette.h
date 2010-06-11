@@ -32,9 +32,16 @@ typedef struct _PXColorBucket {
 	struct _PXColorBucket *next;
 } PXColorBucket;
 
+typedef struct _PXPaletteColorPair {
+  NSColor *color;
+  NSInteger frequency;
+} PXPaletteColorPair;
+
 typedef struct {
 	unsigned int retainCount;
-	NSColor **colors;
+	
+  PXPaletteColorPair *colors;
+  
 	unsigned int colorCount;
 	unsigned int size;
 	PXColorBucket **reverseHashTable;
@@ -72,18 +79,19 @@ NSString *PXPalette_name(PXPalette *self);
 void PXPalette_setName(PXPalette *self, NSString *name);
 
 void PXPalette_resize(PXPalette *self, unsigned int newSize);
+void PXPalette_addColorPair(PXPalette *self, PXPaletteColorPair pair);
 void PXPalette_addColor(PXPalette *self, NSColor *color);
 void PXPalette_addBackgroundColor(PXPalette *self);
 void PXPalette_addColorWithoutDuplicating(PXPalette *self, NSColor *color);
 void PXPalette_removeColorAtIndex(PXPalette *self, unsigned int index);
-void PXPalette_insertColorAtIndex(PXPalette *self, NSColor *color, unsigned index, BOOL adjust);
+void PXPalette_insertColorAtIndex(PXPalette *self, NSColor *color, unsigned index);
 PXColorBucket *PXPalette_bucketForColor(PXPalette *self, NSColor *color);
 
 void PXPalette_swapColorsAtIndex(PXPalette* self, unsigned int colorIndex1, unsigned int colorIndex2);
 void PXPalette_swapColors(PXPalette* self, NSColor *color1, NSColor *color2);
 void PXPalette_cycleColors(PXPalette *self);
 void PXPalette_setColorAtIndex(PXPalette *self, NSColor *color, unsigned int index);
-void PXPalette_moveColorAtIndexToIndex(PXPalette *self, unsigned int index1, unsigned int index2, BOOL adjustIndices);
+void PXPalette_moveColorAtIndexToIndex(PXPalette *self, unsigned int index1, unsigned int index2);
 
 unsigned int PXPalette_indexOfColor(PXPalette *self, NSColor *color);
 NSColor *PXPalette_colorAtIndex(PXPalette *self, unsigned index);
@@ -104,3 +112,6 @@ double PXPalette_hashEfficiency(PXPalette *self);
 
 int PXPalette_colorCount(PXPalette *self);
 NSArray *PXPalette_colors(PXPalette *self);
+
+void PXPalette_decrementColorCount(PXPalette *self, NSColor *color, int amt);
+void PXPalette_incrementColorCount(PXPalette *self, NSColor *color, int amt);

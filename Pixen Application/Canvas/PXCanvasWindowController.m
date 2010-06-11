@@ -242,10 +242,6 @@
 
 - (void)keyDown:event
 {
-	if([[event characters] characterAtIndex:0] == 'p')
-	{
-		[paletteController updateFrequencies];
-	}
 	if([paletteController isPaletteIndexKey:event])
 	{
 		[paletteController keyDown:event];

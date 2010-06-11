@@ -49,6 +49,7 @@
 
 - (IBAction)modifyPattern:(id)sender;
 - (IBAction)clearPattern:(id)sender;
+- (void)setPattern:(PXPattern *)pattern;
 - (IBAction)lineThicknessChanged:(id)sender;
 
 - (void)setToolName:name;

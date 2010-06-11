@@ -13,7 +13,7 @@
 
 - (void)awakeFromNib
 {
-	horizontalGradient = [[CTGradient gradientWithBeginningColor:[NSColor blackColor] endingColor:[NSColor colorWithCalibratedRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1]] retain];
+	horizontalGradient = [[CTGradient gradientWithBeginningColor:[NSColor blackColor] endingColor:[NSColor colorWithDeviceRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1]] retain];
 }
 
 - (void)dealloc
@@ -32,7 +32,7 @@
 	[horizontalGradient fillRect:NSMakeRect(rightMiddle, NSMinY(visibleRect), NSWidth(visibleRect) - rightMiddle, NSHeight(visibleRect)) angle:180];
 	
 	
-	[[NSColor colorWithCalibratedRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1] set];
+	[[NSColor colorWithDeviceRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1] set];
 	NSRectFill(NSMakeRect(leftMiddle, NSMinY(visibleRect), rightMiddle - leftMiddle, NSHeight(visibleRect)));
 	
 	

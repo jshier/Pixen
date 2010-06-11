@@ -18,7 +18,7 @@
 	[image lockFocus];
 	
 	// first we find a valid transparent color
-	id transparentColor = [NSColor colorWithCalibratedRed:0 green:0 blue:0 alpha:1];
+	id transparentColor = [NSColor colorWithDeviceRed:0 green:0 blue:0 alpha:1];
 	BOOL found = YES;
 	while (found) // I know this is ugly. It works.
 	{
@@ -28,20 +28,20 @@
 		{
 			for (j = 0; j < size.height; j++)
 			{
-				id converted = [NSReadPixel(NSMakePoint(i, j)) colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+				id converted = [NSReadPixel(NSMakePoint(i, j)) colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 				if ((unsigned char)([converted redComponent] * 255) == (unsigned char)([transparentColor redComponent] * 255) && (unsigned char)([converted greenComponent] * 255) == (unsigned char)([transparentColor greenComponent] * 255) && (unsigned char)([converted blueComponent] * 255) == (unsigned char)([transparentColor blueComponent] * 255))
 				{
 					if ([transparentColor redComponent] < 1)
 					{
-						transparentColor = [NSColor colorWithCalibratedRed:[transparentColor redComponent]+0.1 green:[transparentColor greenComponent] blue:[transparentColor blueComponent] alpha:1];
+						transparentColor = [NSColor colorWithDeviceRed:[transparentColor redComponent]+0.1 green:[transparentColor greenComponent] blue:[transparentColor blueComponent] alpha:1];
 					}
 					else if ([transparentColor greenComponent] < 1)
 					{
-						transparentColor = [NSColor colorWithCalibratedRed:[transparentColor redComponent] green:[transparentColor greenComponent]+0.1 blue:[transparentColor blueComponent] alpha:1];
+						transparentColor = [NSColor colorWithDeviceRed:[transparentColor redComponent] green:[transparentColor greenComponent]+0.1 blue:[transparentColor blueComponent] alpha:1];
 					}
 					else if ([transparentColor blueComponent] < 1)
 					{
-						transparentColor = [NSColor colorWithCalibratedRed:[transparentColor redComponent] green:[transparentColor greenComponent] blue:[transparentColor blueComponent]+0.1 alpha:1];
+						transparentColor = [NSColor colorWithDeviceRed:[transparentColor redComponent] green:[transparentColor greenComponent] blue:[transparentColor blueComponent]+0.1 alpha:1];
 					}
 					found = YES;
 				}
@@ -60,7 +60,7 @@
 	{
 		for (i = 0; i < size.width; i++, count++)
 		{
-			NSColor * color = [NSReadPixel(NSMakePoint(i, j)) colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+			NSColor * color = [NSReadPixel(NSMakePoint(i, j)) colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 			if ([color alphaComponent] < 0.5) { color = transparentColor; }
 			
 			redBuffer[count] = (GifByteType)([color redComponent] * 255);

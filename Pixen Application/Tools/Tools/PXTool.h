@@ -30,15 +30,15 @@
 #import <AppKit/AppKit.h>
 
 #import "PXCanvasController.h"
-@class PXToolSwitcher, PXPattern, PXCanvas;
+@class PXToolSwitcher, PXToolPropertiesView, PXPattern, PXCanvas;
 @interface PXTool : NSObject 
 {
 	BOOL isClicking;
 	NSBezierPath *path;
 	NSBezierPath *wrappedPath;
-	id switcher;
-	id propertiesView;
-	id color;
+	PXToolSwitcher *switcher;
+	PXToolPropertiesView *propertiesView;
+	NSColor *color;
 }
 
 - (NSString *)name;

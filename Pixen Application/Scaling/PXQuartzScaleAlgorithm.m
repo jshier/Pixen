@@ -66,7 +66,7 @@
 		[layer setOpacity:oldOpacity];
 			
 		[layer setSize:size];
-		[layer applyImage:newLayerImage];
+		[canvas applyImage:newLayerImage toLayer:layer];
 	}
 	[canvas layersChanged];
 	[canvas changed];

@@ -54,6 +54,11 @@
 	return [cels count];
 }
 
+- (NSArray *)canvases
+{
+  return [cels valueForKey:@"canvas"];
+}
+
 - (NSSize)size
 {
 	return [[cels lastObject] size];
@@ -69,7 +74,7 @@
 
 - (void)setSize:(NSSize)aSize
 {
-	[self setSize:aSize withOrigin:NSZeroPoint backgroundColor:[NSColor clearColor]];
+	[self setSize:aSize withOrigin:NSZeroPoint backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
 }
 
 - (void)_willChangeSize:(BOOL)undo
@@ -131,7 +136,21 @@
 	[undoManager beginUndoGrouping];
 	[[undoManager prepareWithInvocationTarget:self] removeCel:cel];
 	[cel setUndoManager:undoManager];
+  NSSize oldSize = [self size];
 	[cels insertObject:cel atIndex:index];
+  if(!NSEqualSizes([cel size], oldSize))
+  {
+    NSSize resultSize = oldSize;
+    if([cel size].width > resultSize.width) 
+    {
+      resultSize.width = [cel size].width;
+    }
+    if([cel size].height > resultSize.height) 
+    {
+      resultSize.height = [cel size].height;
+    }
+    [self setSize:resultSize];
+  }
 	[undoManager setActionName:NSLocalizedString(@"Add Cel", @"Add Cel")];
 	[undoManager endUndoGrouping];
 	[self didChangeValueForKey:@"countOfCels"];
@@ -206,21 +225,23 @@
 	[self removeObjectFromCelsAtIndex:[cels indexOfObject:cel]];
 }
 
-- (NSImage *)spriteSheetWithinWidth:(int)width celMargin:(int)margin
+- (NSImage *)spriteSheetWithCelMargin:(int)margin
 {
 	int fullWidth = [self countOfCels]*[self size].width + ([self countOfCels] - 1)*margin;
-	int cellsHigh = (fullWidth/width + 1);
+  int width = fullWidth; //could change this if multirow sheets were desirable.  they're not.
+	int cellsHigh = (int)(ceilf((float)fullWidth/(float)width));
 	NSSize imageSize = NSMakeSize(MIN(fullWidth, width), cellsHigh*[self size].height + (cellsHigh - 1)*margin);
 	NSImage *spriteSheet = [[[NSImage alloc] initWithSize:imageSize] autorelease];
 	NSPoint compositePoint = NSMakePoint(0, imageSize.height - [self size].height);
 	int i;
 	[spriteSheet lockFocus];
 	for (i=0; i<[self countOfCels]; i++) {
-		[[[self objectInCelsAtIndex:i] displayImage] compositeToPoint:compositePoint operation:NSCompositeCopy];
-		compositePoint.x += [self size].width + margin;
-		if (compositePoint.x + [self size].width > imageSize.width) {
+    PXCel *cel = [self objectInCelsAtIndex:i];
+		[[cel displayImage] compositeToPoint:compositePoint operation:NSCompositeSourceOver];
+		compositePoint.x += [cel size].width + margin;
+		if (compositePoint.x + [cel size].width > imageSize.width) {
 			compositePoint.x = 0;
-			compositePoint.y -= [self size].height + margin;
+			compositePoint.y += [cel size].height + margin;
 		}
 	}
 	[spriteSheet unlockFocus];

@@ -15,6 +15,7 @@
 }
 - initWithImage:(NSImage *)image animation:(PXAnimation *)animation atIndex:(int)index;
 - initWithImage:(NSImage *)image animation:(PXAnimation *)animation;
+- initWithCanvas:(PXCanvas *)initCanvas duration:(NSTimeInterval)initDuration;
 - (PXCanvas *)canvas;
 - (void)setCanvas:(PXCanvas *)canv;
 - (NSSize)size;

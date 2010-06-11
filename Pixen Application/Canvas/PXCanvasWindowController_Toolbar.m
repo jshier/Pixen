@@ -43,7 +43,7 @@ NSString *PXScale = @"PXScale";
 NSString *PXResize = @"PXResize";
 NSString *PXFeedback = @"PXFeedback";
 NSString *PXZoom = @"PXZoom";
-NSString *PXDocumentPalette = @"PXDocumentPalette";
+  //NSString *PXDocumentPalette = @"PXDocumentPalette";
 
 - (void)prepareToolbar
 {
@@ -123,13 +123,13 @@ NSString *PXDocumentPalette = @"PXDocumentPalette";
 		[item setAction:@selector(resizeCanvas:)];
 		[item setImage:[NSImage imageNamed:@"resize"]];
 	}
-	else if ([itemIdentifier isEqualToString:PXDocumentPalette])
-	{
-		[item setLabel:NSLocalizedString(@"DOCUMENT_PALETTE_LABEL", @"Document Palette Label")];
-		[item setToolTip:NSLocalizedString(@"DOCUMENT_PALETTE_TOOLTIP", @"Document Palette Tooltip")];
-		[item setAction:@selector(popDocumentPalette:)];
-		[item setImage:[NSImage imageNamed:@"colorpalette"]];
-	}
+//	else if ([itemIdentifier isEqualToString:PXDocumentPalette])
+//	{
+//		[item setLabel:NSLocalizedString(@"DOCUMENT_PALETTE_LABEL", @"Document Palette Label")];
+//		[item setToolTip:NSLocalizedString(@"DOCUMENT_PALETTE_TOOLTIP", @"Document Palette Tooltip")];
+//		[item setAction:@selector(popDocumentPalette:)];
+//		[item setImage:[NSImage imageNamed:@"colorpalette"]];
+//	}
 	else if ([itemIdentifier isEqualToString:PXFeedback])
 	{
 		[item setLabel:NSLocalizedString(@"FEEDBACK_LABEL", @"Feedback Label")];
@@ -161,7 +161,7 @@ NSString *PXDocumentPalette = @"PXDocumentPalette";
 		PXZoomFit, PXZoom100,
 		PXResize, PXScale,
 		PXFeedback, PXGridConfigurator,
-		PXDocumentPalette,
+          //		PXDocumentPalette,
 		NSToolbarCustomizeToolbarItemIdentifier, 
 		NSToolbarSpaceItemIdentifier,
 		NSToolbarSeparatorItemIdentifier,
@@ -172,7 +172,7 @@ NSString *PXDocumentPalette = @"PXDocumentPalette";
 - (NSArray *) toolbarDefaultItemIdentifiers:(NSToolbar *) toolbar
 {
 	return [NSArray arrayWithObjects:PXBackgroundConfigurator, PXGridConfigurator, 
-		NSToolbarSeparatorItemIdentifier, PXLayerDrawer, PXPreview, PXDocumentPalette,
+		NSToolbarSeparatorItemIdentifier, PXLayerDrawer, PXPreview, /*PXDocumentPalette,*/
 		NSToolbarFlexibleSpaceItemIdentifier, PXFeedback,
 		PXZoom,
 		nil];

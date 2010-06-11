@@ -1,35 +1,35 @@
-//
-//  PXCanvasDocument.m
-//  Pixen
-//
-// Copyright (c) 2003,2004, 2005 Open Sword Group
+  //
+  //  PXCanvasDocument.m
+  //  Pixen
+  //
+  // Copyright (c) 2003,2004, 2005 Open Sword Group
 
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation// files (the "Software"),
-// to deal in the Software without restriction, including without limitation
-// the rights to use, copy, modify, merge, publish, distribute, sublicense, 
-// and/or sell copies of the Software, and to permit persons
-// to whom the Software is furnished to do so, subject to the following 
-//conditions:
+  // Permission is hereby granted, free of charge, to any person obtaining a
+  // copy of this software and associated documentation// files (the "Software"),
+  // to deal in the Software without restriction, including without limitation
+  // the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+  // and/or sell copies of the Software, and to permit persons
+  // to whom the Software is furnished to do so, subject to the following 
+  //conditions:
 
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
+  // The above copyright notice and this permission notice shall be included
+  // in all copies or substantial portions of the Software.
 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
-//OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
-// IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
-// BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
-//IN THE SOFTWARE.
-//
-//  PXCanvasDocument.m
-//  Pixen
+  // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS 
+  //OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
+  // IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+  // BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
+  // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+  // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+  //IN THE SOFTWARE.
+  //
+  //  PXCanvasDocument.m
+  //  Pixen
 
-//  Created by Joe Osborn on Thu Sep 11 2003.
-//  Copyright (c) 2003 Open Sword Group. All rights reserved.
-//
+  //  Created by Joe Osborn on Thu Sep 11 2003.
+  //  Copyright (c) 2003 Open Sword Group. All rights reserved.
+  //
 
 #import "PXCanvasDocument.h"
 #import "PXCanvasWindowController.h"
@@ -50,6 +50,7 @@
 #import "PXLayer.h"
 #import "PXBitmapImporter.h"
 #import <AppKit/NSAlert.h>
+#import "PXCanvasWindowController_IBActions.h"
 
 
 @implementation PXCanvasDocument
@@ -63,7 +64,7 @@
 	[canvas setUndoManager:[self undoManager]];
 	[[self undoManager] removeAllActions];
 	[self updateChangeCount:NSChangeCleared]; 
-    return self;
+  return self;
 }
 
 - (void)setCanvas:(PXCanvas *)aCanvas
@@ -78,8 +79,8 @@
 {
 	[windowController releaseCanvas];
 	[canvas release];
-//	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super dealloc];
+    //	[[NSNotificationCenter defaultCenter] removeObserver:self];
+  [super dealloc];
 }
 
 - (PXCanvasController *)canvasController
@@ -89,12 +90,12 @@
 
 - (void)initWindowController
 {
-    windowController = [[PXCanvasWindowController alloc] initWithWindowNibName:@"PXCanvasDocument"];
+  windowController = [[PXCanvasWindowController alloc] initWithWindowNibName:@"PXCanvasDocument"];
 }
 
 - (void)setWindowControllerData
 {
-    [windowController setCanvas:canvas];
+  [windowController setCanvas:canvas];
 }
 
 BOOL isPowerOfTwo(int num)
@@ -109,15 +110,15 @@ BOOL isPowerOfTwo(int num)
 	{
 		return;
 	}
-	// this kind of stuff should probably be factored out to some kind of archiving object
+    // this kind of stuff should probably be factored out to some kind of archiving object
 	if ([[self fileTypeFromLastRunSavePanel] isEqualToString:JPEGFileType])
 	{
 		saveFactor = 100;
 		[super saveToFile:fileName
-			saveOperation:saveOperation
-				 delegate:delegate
+        saveOperation:saveOperation
+             delegate:delegate
 		  didSaveSelector:didSaveSelector
-			  contextInfo:contextInfo];
+          contextInfo:contextInfo];
 	}
 	else
 	{
@@ -128,16 +129,16 @@ BOOL isPowerOfTwo(int num)
 + (NSData *)dataRepresentationOfType:(NSString *)aType withCanvas:(PXCanvas *)canvas
 {
 	if([aType isEqualToString:PixenImageFileType])
-    {
+  {
 		return [NSKeyedArchiver archivedDataWithRootObject:canvas];
-    }
+  }
 	
 	if ([aType isEqualToString:JPEGFileType])
 	{
 		return [canvas imageDataWithType:NSJPEGFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:1.0]
-																							   forKey:NSImageCompressionFactor]];
+                                                                                           forKey:NSImageCompressionFactor]];
 	}
-
+  
 	if ([aType isEqualToString:ICOFileType])
 	{
 		PXIconExporter *iconExporter = [[[PXIconExporter alloc] init] autorelease];
@@ -145,17 +146,17 @@ BOOL isPowerOfTwo(int num)
 	}
 	
 	if([aType isEqualToString:PNGFileType])
-    {
+  {
 		return [canvas imageDataWithType:NSPNGFileType properties:nil];
-    }
+  }
 	
 	if([aType isEqualToString:TIFFFileType])
-    {
+  {
 		return [canvas imageDataWithType:NSTIFFFileType properties:nil];
-    }
+  }
 	
 	if([aType isEqualToString:GIFFileType])
-    {	
+  {	
 		id exportCanvas = canvas;
 		exportCanvas = [canvas copy];
 		[exportCanvas reduceColorsTo:256 withTransparency:YES matteColor:[NSColor whiteColor]];
@@ -163,23 +164,16 @@ BOOL isPowerOfTwo(int num)
 		[exporter writeCanvas:exportCanvas withDuration:0 transparentColor:nil];
 		[exporter finalizeExport];
 		return [exporter data];
-		//return [PXGifExporter gifDataForImage:[canvas exportImage]];
-    }
+      //return [PXGifExporter gifDataForImage:[canvas exportImage]];
+  }
 	if([aType isEqualToString:BMPFileType])
-    {
+  {
 		return [canvas imageDataWithType:NSBMPFileType properties:nil];
-    }
+  }
 	if([aType isEqualToString:PICTFileType])
-    {
+  {
 		return [canvas PICTData];
-    }
-	if([aType isEqualToString:EPSFileType])
-    {
-		NSSize canvasSize = [canvas size];
-		NSImageView *imageView = [[[NSImageView alloc] initWithFrame:NSMakeRect(0, 0, canvasSize.width, canvasSize.height)] autorelease];
-		[imageView setImage:[canvas displayImage]];
-		return [imageView dataWithEPSInsideRect:NSMakeRect(0, 0, canvasSize.width, canvasSize.height)];
-    }
+  }
 	
 	return nil;
 }
@@ -189,8 +183,8 @@ BOOL isPowerOfTwo(int num)
 	if ([type isEqualToString:JPEGFileType])
 	{
 		return [canvas imageDataWithType:NSJPEGFileType 
-							  properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:saveFactor]
-																	 forKey:NSImageCompressionFactor]];
+                          properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:saveFactor]
+                                                                 forKey:NSImageCompressionFactor]];
 	}
 	return [[self class] dataRepresentationOfType:type withCanvas:canvas];
 }
@@ -198,11 +192,11 @@ BOOL isPowerOfTwo(int num)
 - (void)loadFromPasteboard:(NSPasteboard *)board
 {	
 	if([[board types] containsObject:PXLayerPboardType])
-    {
+  {
 		PXLayer *layer = [NSKeyedUnarchiver unarchiveObjectWithData:[board dataForType:PXLayerPboardType]];
 		[canvas setSize:[layer size]];
 		[canvas pasteFromPasteboard:board type:PXLayerPboardType];
-    }
+  }
 	else 
 	{
 		NSEnumerator *enumerator = [[NSImage imagePasteboardTypes] objectEnumerator];
@@ -223,7 +217,7 @@ BOOL isPowerOfTwo(int num)
 	{
 		[canvas setUndoManager:[self undoManager]];
 		[self makeWindowControllers];
-		// remove the auto-created main layer
+      // remove the auto-created main layer
 		if ([[canvas layers] count] > 1)
 			[canvas removeLayerAtIndex:0];
 	}
@@ -231,33 +225,38 @@ BOOL isPowerOfTwo(int num)
 	[self updateChangeCount:NSChangeCleared]; 
 }
 
+- (void)delete:sender
+{
+  [windowController delete:sender];
+}
+
 - (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)aType
 {
 	if([aType isEqualToString:PixenImageFileType])
-    {
+  {
 		[canvas release];
 		canvas = [[NSKeyedUnarchiver unarchiveObjectWithData:data] retain];
-    }
+  }
 	else if ([aType isEqualTo:BMPFileType])
 	{
 		[canvas release];
-		canvas = [[PXCanvas alloc] initWithoutBackgroundColor];
+		canvas = [[PXCanvas alloc] init];
 		[canvas replaceActiveLayerWithImage:[[[NSImage alloc] initWithData:data] autorelease]];
 	}
 	else
-    {
+  {
 		NSImage *image = [[[NSImage alloc] initWithData:data] autorelease];
 		[canvas release];
 		canvas = [[PXCanvas alloc] initWithImage:image type:aType];
-    }
+  }
 	if(canvas)
-    {
+  {
 		[canvas setUndoManager:[self undoManager]];
 		[windowController setCanvas:canvas];
 		[[self undoManager] removeAllActions];
 		[self updateChangeCount:NSChangeCleared]; 
 		return YES;
-    }
+  }
 	return NO;
 }
 
@@ -274,18 +273,18 @@ BOOL isPowerOfTwo(int num)
 	[printableView setBoundsOrigin:[transform transformPoint:[printableView frame].origin]];
 	[printableView setBoundsSize:[transform transformSize:[printableView frame].size]];
 	
-    NSPrintOperation *op;
+  NSPrintOperation *op;
 	op = [NSPrintOperation printOperationWithView:printableView 
-										printInfo:[self printInfo]];
-    [op setShowPanels:showPanels];
+                                      printInfo:[self printInfo]];
+  [op setShowPanels:showPanels];
 	
 #ifdef __COCOA__
 	[self runModalPrintOperation:op 
-						delegate:nil 
-				  didRunSelector:NULL 
-					 contextInfo:NULL];
+                      delegate:nil 
+                didRunSelector:NULL 
+                   contextInfo:NULL];
 #else
-//FIXME: GNUstep TODO
+    //FIXME: GNUstep TODO
 #endif
 }
 

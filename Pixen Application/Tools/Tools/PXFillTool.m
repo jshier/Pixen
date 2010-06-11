@@ -70,7 +70,7 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 - (BOOL)commandKeyDown 
 {
 	[propertiesView willChangeValueForKey:@"contiguous"];
-	[propertiesView setValue:[NSNumber numberWithBool:![propertiesView contiguous]] forKey:@"contiguous"];
+	[propertiesView setValue:[NSNumber numberWithBool:![(PXFillToolPropertiesView *)propertiesView contiguous]] forKey:@"contiguous"];
 	[propertiesView didChangeValueForKey:@"contiguous"];
 	return NO; 
 }
@@ -78,7 +78,7 @@ int CombineAxis(int Xaxis, int Yaxis, int width, int height)
 - (BOOL)commandKeyUp 
 { 
 	[propertiesView willChangeValueForKey:@"contiguous"];
-	[propertiesView setValue:[NSNumber numberWithBool:![propertiesView contiguous]] forKey:@"contiguous"];
+	[propertiesView setValue:[NSNumber numberWithBool:![(PXFillToolPropertiesView *)propertiesView contiguous]] forKey:@"contiguous"];
 	[propertiesView didChangeValueForKey:@"contiguous"];
 	return NO; 
 }
@@ -110,7 +110,7 @@ fromCanvasController:(PXCanvasController*)controller
 	NSColor * fillColor = [self colorForCanvas:[controller canvas]];
 	int canvasWidth = [canvas size].width;
 	int canvasHeight = [canvas size].height;
-	float tolerance = [propertiesView tolerance] / 255.0f;
+	float tolerance = [(PXFillToolPropertiesView *)propertiesView tolerance] / 255.0f;
 	BOOL * points = (BOOL *)malloc((canvasWidth + 1) * (canvasHeight + 1) * sizeof(BOOL));
 	memset(points, NO, (canvasWidth + 1) * (canvasHeight + 1));
 	NSMutableArray * consideredPoints = [[NSMutableArray alloc] initWithCapacity:(canvasWidth * canvasHeight)];
@@ -137,7 +137,7 @@ fromCanvasController:(PXCanvasController*)controller
 	int lowerBound = aPoint.y;
 	NSPoint checkingPoint;
 	PXLayer * activeLayer = [canvas activeLayer];
-	if ([propertiesView contiguous])
+	if ([(PXFillToolPropertiesView *)propertiesView contiguous])
 	{
 		while([consideredPoints count] != 0)
 		{

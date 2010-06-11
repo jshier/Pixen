@@ -109,10 +109,10 @@
 						E3 = E;
 					}
 					
-					[layer setColor:E0 atPoint:NSMakePoint(x*2, y*2)];
-					[layer setColor:E1 atPoint:NSMakePoint(x*2 + 1, y*2)];
-					[layer setColor:E2 atPoint:NSMakePoint(x*2, y*2 + 1)];
-					[layer setColor:E3 atPoint:NSMakePoint(x*2 + 1, y*2 + 1)];
+					[canvas setColor:E0 atPoint:NSMakePoint(x*2, y*2) onLayer:layer];
+					[canvas setColor:E1 atPoint:NSMakePoint(x*2 + 1, y*2) onLayer:layer];
+					[canvas setColor:E2 atPoint:NSMakePoint(x*2, y*2 + 1) onLayer:layer];
+					[canvas setColor:E3 atPoint:NSMakePoint(x*2 + 1, y*2 + 1) onLayer:layer];
 				}
 			}
 			[pool release];

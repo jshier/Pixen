@@ -13,6 +13,7 @@
 #import "PXAnimatedGifExporter.h"
 #import "PXCanvas_ImportingExporting.h"
 #import "OSProgressPopup.h"
+#import "PXCanvasWindowController_IBActions.h"
 
 @implementation PXAnimationDocument
 
@@ -44,6 +45,16 @@
 - canvas
 {
 	return [[animation objectInCelsAtIndex:0] canvas];
+}
+
+- (NSArray *)canvases
+{
+  return [animation canvases];
+}
+
+- (void)delete:sender
+{
+  [windowController delete:sender];
 }
 
 - (void)initWindowController

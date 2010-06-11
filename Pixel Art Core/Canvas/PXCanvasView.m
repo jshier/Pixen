@@ -57,7 +57,7 @@
 
 void PXDebugRect(NSRect r, float alpha)
 {
-	[[NSColor colorWithCalibratedRed:(rand() % 255) / 255.0 green:(rand() % 255) / 255.0 blue:(rand() % 255) / 255.0 alpha:alpha] set];
+	[[NSColor colorWithDeviceRed:(rand() % 255) / 255.0 green:(rand() % 255) / 255.0 blue:(rand() % 255) / 255.0 alpha:alpha] set];
 	NSRectFillUsingOperation(r, NSCompositeSourceOver);
 }
 

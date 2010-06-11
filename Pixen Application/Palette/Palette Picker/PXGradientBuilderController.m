@@ -61,8 +61,8 @@
 	float r, g, b, a, deltaR, deltaG, deltaB, deltaA;
 	int colorCount = [colorsField intValue];
 
-	NSColor *startColor = [[startColorWell color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
-	NSColor *endColor = [[endColorWell color] colorUsingColorSpaceName:NSCalibratedRGBColorSpace];
+	NSColor *startColor = [[startColorWell color] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
+	NSColor *endColor = [[endColorWell color] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 	
 	r = [startColor redComponent];
 	g = [startColor greenComponent];
@@ -74,7 +74,7 @@
 	deltaA = ([endColor alphaComponent] - a) / colorCount;
 	
 	for (i=0; i<colorCount; i++) {
-		[colors addObject:[NSColor colorWithCalibratedRed:r green:g blue:b alpha:a]];
+		[colors addObject:[NSColor colorWithDeviceRed:r green:g blue:b alpha:a]];
 		r += deltaR;
 		g += deltaG;
 		b += deltaB;

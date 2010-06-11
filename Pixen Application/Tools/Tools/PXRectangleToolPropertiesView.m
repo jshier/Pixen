@@ -38,7 +38,7 @@
 	[super initWithFrame:frame];
 	shouldUseMainColorForFill = YES;
 	borderWidth = 1;
-	fillColor = [[NSColor blackColor] retain];
+	fillColor = [[[NSColor blackColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace] retain];
 	return self;
 }
 

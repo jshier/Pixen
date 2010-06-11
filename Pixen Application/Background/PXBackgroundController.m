@@ -215,21 +215,20 @@ typedef enum _PXStackType
 
 - (void)deleteSheetDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:contextInfo
 {
-#ifdef __COCOA__
 	if (returnCode == NSAlertFirstButtonReturn)
 	{
 		int tag;
 		[[NSWorkspace sharedWorkspace] performFileOperation:NSWorkspaceRecycleOperation
-													 source:GetBackgroundPresetsDirectory()
-												destination:nil 
-													  files:[NSArray arrayWithObject:[[contextInfo objectForKey:PXBackgroundPathKey] lastPathComponent]] tag:&tag];
+                                                 source:GetBackgroundPresetsDirectory()
+                                            destination:nil 
+                                                  files:[NSArray arrayWithObject:[[contextInfo objectForKey:PXBackgroundPathKey] lastPathComponent]] 
+                                                    tag:&tag];
 		NSPoint poofPoint = NSPointFromString([contextInfo objectForKey:PXPoofLocationKey]);
 		if (!NSEqualPoints(poofPoint, NSZeroPoint))
 			NSShowAnimationEffect(NSAnimationEffectPoof, poofPoint, NSZeroSize, nil, NULL, nil);
 		[self reloadData];
 	}
 	[contextInfo release];
-#endif
 }
 
 - (void)tryToDeleteBackgroundAtPath:(NSString *)backgroundPath displayingPoofAtPoint:(NSPoint)point
@@ -252,7 +251,10 @@ typedef enum _PXStackType
 
 - (void)saveBackground:(PXBackground *)background atPath:(NSString *)path
 {
-	[NSKeyedArchiver archiveRootObject:background toFile:path];
+	if(![NSKeyedArchiver archiveRootObject:background toFile:path])
+  {
+    [NSException raise:@"PXBackgroundSaveFailure" format:@"couldn't save background %@ to %@", background, path];
+  }
 }
 
 - (void)overwriteSheetDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:contextInfo

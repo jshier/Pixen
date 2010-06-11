@@ -8,10 +8,19 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PXCanvas.h"
-@class PXCanvas, PXPalettePanelPaletteView;
+@class PXCanvas, PXDocument, PXPalettePanelPaletteView;
+
+typedef enum {
+  PXPaletteModeRecent,
+  PXPaletteModeFrequency,
+  PXPaletteModeColorList
+} PXPaletteMode;
+
 @interface PXPaletteController : NSObject
 {
-	PXCanvas *canvas;
+  PXPaletteMode mode;
+	PXDocument *document;
+  int recentLimit;
 	PXPalette *frequencyPalette, *recentPalette, *listPalette;
 	IBOutlet PXPalettePanelPaletteView *paletteView;
 	IBOutlet NSView *view;
@@ -20,11 +29,12 @@
 - view;
 - (BOOL)isPaletteIndexKey:(NSEvent *)event;
 - (void)keyDown:(NSEvent *)event;
-- (void)updateFrequencies;
 
 - (IBAction)useMostRecentColors:sender;
 - (IBAction)useMostFrequentColors:sender;
 - (IBAction)useColorListColors:sender;
 
+- (void)refreshPalette:(NSNotification *)note;
+- (void)updatePalette:(NSNotification *)note;
 
 @end

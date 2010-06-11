@@ -75,6 +75,7 @@ static int EGifBufferedOutput(GifFileType * GifFile, GifByteType * Buf,
  * Returns GifFileType pointer dynamically allocated which serves as the gif
  * info record. _GifError is cleared if succesfull.
  *****************************************************************************/
+#include <errno.h>
 GifFileType *
 EGifOpenFileName(const char *FileName,
                  int TestExistance) {
@@ -96,6 +97,7 @@ EGifOpenFileName(const char *FileName,
                           , S_IREAD | S_IWRITE);
 
     if (FileHandle == -1) {
+      printf("gif open errno: %d\n", errno);
         _GifError = E_GIF_ERR_OPEN_FAILED;
         return NULL;
     }

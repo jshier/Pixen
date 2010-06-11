@@ -1,10 +1,10 @@
-//
-//  PXCanvas_CopyPaste.m
-//  Pixen
-//
-//  Created by Joe Osborn on 2005.07.31.
-//  Copyright 2005 Open Sword Group. All rights reserved.
-//
+  //
+  //  PXCanvas_CopyPaste.m
+  //  Pixen
+  //
+  //  Created by Joe Osborn on 2005.07.31.
+  //  Copyright 2005 Open Sword Group. All rights reserved.
+  //
 
 #import "PXCanvas_CopyPaste.h"
 #import "PXCanvas_Selection.h"
@@ -16,12 +16,12 @@
 - (int)runPasteTooBigAlert:(NSString *)pastedThing size:(NSSize)aSize
 {
 	return [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"The pasted %@ is too big!", @"The pasted %@ is too big!"), pastedThing]
-							defaultButton:NSLocalizedString(@"Resize Canvas to Fit", @"Resize Canvas to Fit")
-						  alternateButton:NSLocalizedString(@"Cancel Paste", @"Cancel Paste")
-							  otherButton:NSLocalizedString(@"Paste Anyway", @"Paste Anyway")
-				informativeTextWithFormat:NSLocalizedString(@"The pasted %@ is %dx%d, while the canvas is only %dx%d.", @"The pasted %@ is %dx%d, while the canvas is only %dx%d."), pastedThing,
-		(int)(aSize.width), (int)(aSize.height),
-		(int)([self size].width), (int)([self size].height)] runModal];
+                          defaultButton:NSLocalizedString(@"Resize Canvas to Fit", @"Resize Canvas to Fit")
+                        alternateButton:NSLocalizedString(@"Cancel Paste", @"Cancel Paste")
+                            otherButton:NSLocalizedString(@"Paste Anyway", @"Paste Anyway")
+              informativeTextWithFormat:NSLocalizedString(@"The pasted %@ is %dx%d, while the canvas is only %dx%d.", @"The pasted %@ is %dx%d, while the canvas is only %dx%d."), pastedThing,
+           (int)(aSize.width), (int)(aSize.height),
+           (int)([self size].width), (int)([self size].height)] runModal];
 }
 
 - (BOOL)canContinuePasteOf:(NSString *)pastedThing size:(NSSize)aSize
@@ -67,16 +67,16 @@
 	[self layersChanged];
 }
 
-- (void)pasteFromPasteboard:(NSPasteboard *) board type:type
+- (PXLayer *)layerForPastingFromPasteboard:(NSPasteboard *)board type:type
 {
-	PXLayer *layer = nil;
+  PXLayer *layer = nil;
 	if([type isEqualToString:PXLayerPboardType]) {
 		layer = [NSKeyedUnarchiver unarchiveObjectWithData:[board dataForType:type]];
 		[layer setSize:[self size]];
 	}
 	else if([type isEqualToString:PXNSImagePboardType]) {
 		id image = [[[NSImage alloc] initWithPasteboard:board] autorelease];
-		if(![self canContinuePasteOf:NSLocalizedString(@"image", @"image") size:[image size]]) { return; }
+		if(![self canContinuePasteOf:NSLocalizedString(@"image", @"image") size:[image size]]) { return nil; }
 		NSPoint origin;
 		if (![board stringForType:PXSelectionOriginPboardType])
 		{	
@@ -89,7 +89,28 @@
 			origin.y = MIN([self size].height - [image size].height, pOrigin.y);
 		}
 		layer = [PXLayer layerWithName:NSLocalizedString(@"Pasted Layer", @"Pasted Layer") image:image origin:origin size:[self size]];
-	}
+ 	}
+  return layer;
+}
+
+  //really, this should keep around an invisible paste-layer until the selection is removed, or something...
+  //this way, it will lead to data garbling when people move their selections around.  save it for the rewrite!
+
+- (void)pasteFromPasteboard:(NSPasteboard *) board type:type intoLayer:(PXLayer *)layer
+{
+  PXLayer *newLayer = [self layerForPastingFromPasteboard:board type:type];
+  int idx = [layers indexOfObject:layer];
+  [self beginUndoGrouping]; {
+      //FIXME wasteful copy
+		[self setLayers:[[layers deepMutableCopy] autorelease] fromLayers:layers];
+		[self deselect];
+    [[layers objectAtIndex:idx] compositeUnder:newLayer flattenOpacity:YES];
+	} [self endUndoGrouping];		
+}
+
+- (void)pasteFromPasteboard:(NSPasteboard *) board type:type
+{
+	PXLayer *layer = [self layerForPastingFromPasteboard:board type:type];
 	[self pasteLayer:layer];
 	[self layersChanged];
 }
@@ -102,17 +123,17 @@
 		[board addTypes:[NSArray arrayWithObject:PXLayerPboardType] owner:self];
 	}
 	if(! [[board types] containsObject:NSTIFFPboardType]) 
-    { 
+  { 
 		[board addTypes:[NSArray arrayWithObject:NSTIFFPboardType] owner:self]; 
-    }	
+  }	
 	
 	NSImage *layerImage = [layer exportImage];
 	[layerImage lockFocus];
 	NSBitmapImageRep *bitmapRep = [[[NSBitmapImageRep alloc] initWithFocusedViewRect:NSMakeRect(0, 0, [layerImage size].width, [layerImage size].height)] autorelease];
 	[layerImage unlockFocus];
 	NSDictionary *dataDict = [NSDictionary dictionaryWithObjectsAndKeys:layerImage, PXLayerImageKey,
-		[NSNumber numberWithFloat:[layer opacity]], PXLayerOpacityKey,
-		[layer name], PXLayerNameKey, nil];
+                            [NSNumber numberWithFloat:[layer opacity]], PXLayerOpacityKey,
+                            [layer name], PXLayerNameKey, nil];
 	[board setData:[NSKeyedArchiver archivedDataWithRootObject:dataDict] forType:PXLayerPboardType];
 	[board setData:[bitmapRep representationUsingType:NSTIFFFileType properties:nil] forType:NSTIFFPboardType];	
 }
@@ -122,14 +143,14 @@
 	id board = [NSPasteboard generalPasteboard];
 	[board declareTypes:[NSArray arrayWithObjects:NSTIFFPboardType, PXSelectionOriginPboardType, nil] owner:self];	
 	if(! [[board types] containsObject:NSTIFFPboardType]) 
-    { 
+  { 
 		[board addTypes:[NSArray arrayWithObject:NSTIFFPboardType] owner:self]; 
-    }
+  }
 	if (![[board types] containsObject:PXSelectionOriginPboardType])
 		[board addTypes:[NSArray arrayWithObject:PXSelectionOriginPboardType] owner: self];
 	
 	[board setData:[self selectionDataWithType:NSTIFFFileType properties:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:merge] forKey:PXMergeLayersKey]]
-		   forType:NSTIFFPboardType];
+         forType:NSTIFFPboardType];
 	[board setString:NSStringFromPoint([self selectedRect].origin) forType:PXSelectionOriginPboardType];
 }
 
@@ -180,6 +201,12 @@
 {
 	[self beginUndoGrouping]; {
 		[self pasteFromPasteboard:[NSPasteboard generalPasteboard] type:PXNSImagePboardType];
+	} [self endUndoGrouping:NSLocalizedString(@"Paste Selection", @"Paste Selection")];
+}
+- (void)pasteIntoLayer:(PXLayer *)layer
+{
+	[self beginUndoGrouping]; {
+		[self pasteFromPasteboard:[NSPasteboard generalPasteboard] type:PXNSImagePboardType intoLayer:layer];
 	} [self endUndoGrouping:NSLocalizedString(@"Paste Selection", @"Paste Selection")];
 }
 

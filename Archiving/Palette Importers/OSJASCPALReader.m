@@ -33,7 +33,7 @@
 
 - (PXPalette *)paletteWithData:(NSData *)data
 {
-	NSScanner *scanner = [NSScanner scannerWithString:[NSString stringWithCString:[data bytes] length:[data length]]];
+	NSScanner *scanner = [NSScanner scannerWithString:[NSString stringWithCharacters:[data bytes] length:[data length]]];
 	if (![scanner scanString:@"JASC-PAL\n0100\n" intoString:nil])
 	{
 		[NSException raise:@"OSFileError" format:@"This JASC-PAL has an invalid header or unsupported version (this object supports only 0100)"];

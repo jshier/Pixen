@@ -54,6 +54,7 @@ didFinishWithSize:(NSSize)aSize
 - (IBAction)copy:sender;
 - (IBAction)copyMerged:sender;
 - (IBAction)paste:sender;
+- (IBAction)pasteIntoActiveLayer:sender;
 - (IBAction)delete:sender;
 
 - (IBAction)cutLayer:sender;

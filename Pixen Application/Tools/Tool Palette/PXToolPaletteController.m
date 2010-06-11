@@ -187,7 +187,7 @@ static PXToolPaletteController *singleInstance = nil;
 {
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	[[NSColorPanel sharedColorPanel] setShowsAlpha:YES];
-	[[NSColorPanel sharedColorPanel] setColor:[NSColor blackColor]];
+	[[NSColorPanel sharedColorPanel] setColor:[[NSColor blackColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
 	//[(NSPanel *)[self window] setBecomesKeyOnlyIfNeeded:YES];
 	
 	[leftSwitcher useToolTagged:PXPencilToolTag];

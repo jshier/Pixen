@@ -417,7 +417,7 @@
 {
 	[selectedElement setHighlighted:NO];
 	selectedElement = nil;
-	for (id current in views)
+	for (id current in [NSArray arrayWithArray:views])
 	{
 		[current removeFromSuperview];
 		[views removeObject:current];

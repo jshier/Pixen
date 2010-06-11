@@ -144,7 +144,7 @@
 		// If the change involved the number of cels getting bigger, this means a new cel was added; we should activate it.
 		if ([[change objectForKey:NSKeyValueChangeOldKey] intValue] < [animation countOfCels])
 		{
-			[self activateCel:[self celAtIndex:MIN([filmStrip selectedIndex]+1, [animation countOfCels])]];
+			[self activateCel:[self celAtIndex:MIN([filmStrip selectedIndex]+1, [animation countOfCels]-1)]];
 		}
 		// It's gone down, so select the next one down.
 		else if([[change objectForKey:NSKeyValueChangeOldKey] intValue] > [animation countOfCels])
@@ -239,18 +239,18 @@
 		return YES;
 	} else if ([type isEqualToString:NSFilenamesPboardType]) {
 		NSArray *filenames = [pboard propertyListForType:NSFilenamesPboardType];
-		NSEnumerator *filenameEnumerator = [filenames objectEnumerator];
-		NSString *filename;
 		BOOL loadedSomething = NO;
-		while ((filename = [filenameEnumerator nextObject]) != nil) {
+		for (NSString *filename in [filenames sortedArrayUsingSelector:@selector(compareNumeric:)])
+    {
 			NSImage *image = [[[NSImage alloc] initWithContentsOfFile:filename] autorelease];
 			if (image != nil) {
 				PXCel *cel = [[[PXCel alloc] initWithImage:image animation:animation atIndex:targetDraggingIndex] autorelease];
-				if (!loadedSomething) {
+				if (!loadedSomething) 
+        {
 					loadedSomething = (cel != nil);
 				}
+        targetDraggingIndex++;
 			}
-			targetDraggingIndex++;
 		}
 		return loadedSomething;
 	}
@@ -478,7 +478,7 @@ didFinishWithSize:(NSSize)aSize
 {
 	NSRect selectedRect = [canvas selectedRect];
 	[[[self document] undoManager] beginUndoGrouping];
-	[animation setSize:selectedRect.size withOrigin:NSMakePoint(NSMinX(selectedRect) * -1, NSMinY(selectedRect) * -1) backgroundColor:[NSColor clearColor]];
+	[animation setSize:selectedRect.size withOrigin:NSMakePoint(NSMinX(selectedRect) * -1, NSMinY(selectedRect) * -1) backgroundColor:[[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]];
 	[canvas deselect];
 	[[[self document] undoManager] endUndoGrouping];
 }

@@ -124,6 +124,8 @@
 		item = [[[NSMenuItem alloc] init] autorelease];
 		[item setTitle:NSLocalizedString(@"Delete", @"Delete")];
 		[item setAction:@selector(delete:)];
+    [item setKeyEquivalent:[NSString stringWithCharacters:(const unichar[]){NSDeleteCharacter} length:1]];
+    [item setKeyEquivalentModifierMask:0];
 		[item setTarget:self];
 		[menu addItem:item];
 		

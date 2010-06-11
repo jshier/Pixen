@@ -59,7 +59,13 @@
 - (void)setColor:(NSColor *)color atPoint:(NSPoint)aPoint
 {
 	if(![self containsPoint:aPoint]) { return; }
-	[activeLayer setColor:color atPoint:[self correct:aPoint]];
+	[self setColor:color atPoint:[self correct:aPoint] onLayer:activeLayer];
+}
+
+- (void)setColor:(NSColor *)aColor atPoint:(NSPoint)aPoint onLayer:(PXLayer *)l
+{
+  [self refreshPaletteDecreaseColorCount:[l colorAtPoint:aPoint] increaseColorCount:aColor];
+  [l setColor:aColor atPoint:aPoint];
 }
 
 - (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds onLayer:(PXLayer *)layer
@@ -70,10 +76,12 @@
 		int val = [current intValue];
 		int x = val % (int)[self size].width;
 		int y = [self size].height - ((val - x)/[self size].width) - 1;
-		[self bufferUndoAtPoint:NSMakePoint(x, y) fromColor:[layer colorAtIndex:val] toColor:color];
-		[layer setColor:color atIndex:val];
+    NSColor *oldColor = [layer colorAtIndex:val];
+    NSPoint pt = NSMakePoint(x, y);
+		[self bufferUndoAtPoint:pt fromColor:oldColor toColor:color];
+		[self setColor:color atPoint:pt onLayer:layer];
 	}
-	[self changedInRect:bounds]; 		
+	[self changedInRect:bounds];
 }
 
 - (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds
@@ -81,36 +89,45 @@
 	[self setColor:color atIndices:indices updateIn:bounds onLayer:activeLayer];
 }
 
+- (NSColor *) mergedColorAtPoint:(NSPoint)aPoint
+{
+  NSColor * currentColor = [NSColor clearColor];
+  for(PXLayer *layer in layers)
+  {
+    if([layer visible] && [layer opacity] > 0)
+    {
+      NSColor *layerColor = [layer colorAtPoint:aPoint];
+      layerColor = [layerColor colorWithAlphaComponent:([layer opacity]/100.0f) * [layerColor alphaComponent]];
+      currentColor = PXImage_blendColors(nil, currentColor, layerColor);
+    }
+  }
+  return [currentColor colorUsingColorSpaceName:NSDeviceRGBColorSpace];  
+}
+
+
+- (NSColor *) surfaceColorAtPoint:(NSPoint)aPoint
+{
+  for(PXLayer *layer in [layers reverseObjectEnumerator])
+  {
+    if([layer visible] && [layer opacity] > 0)
+    {
+      NSColor *layerColor = [layer colorAtPoint:aPoint];
+      if([layerColor alphaComponent] > 0)
+      {
+        return layerColor;
+      }
+    }
+  }
+  return [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];  
+}
+
+
 - (NSColor*) colorAtPoint:(NSPoint)aPoint
 {
 	if( ! [self containsPoint:aPoint] ) 
 		return nil; 
 	
 	return [activeLayer colorAtPoint:aPoint];
-}
-
-- (void)setColor:(NSColor *) aColor atPoints:(NSArray *)points
-{
-	if([self hasSelection])
-	{
-		NSEnumerator *enumerator = [points objectEnumerator];
-		NSString *current;
-		
-		while ( ( current = [enumerator nextObject] ) ) 
-		{
-			NSPoint aPoint = NSPointFromString(current);
-			if (!selectionMask[(int)(aPoint.x + (aPoint.y * [self size].width))]) 
-			{
-				return; 
-			}
-		}
-	}
-	int i;
-	NSPoint point;
-	for (i=0; i<[points count]; i++) {
-		point = [self correct:[[points objectAtIndex:i] pointValue]];
-		PXImage_setColorAtXY([activeLayer image], aColor, (int)(point.x), (int)(point.y));		
-	}
 }
 
 
@@ -225,7 +242,7 @@
 				if (bitmapData[base + 3] == 0 && transparency) { continue; }
 				if (bitmapData[base + 3] < 255 && matteColor)
 				{
-					NSColor *sourceColor = [NSColor colorWithCalibratedRed:bitmapData[base + 0] / 255.0f green:bitmapData[base + 1] / 255.0f blue:bitmapData[base + 2] / 255.0f alpha:1];
+					NSColor *sourceColor = [NSColor colorWithDeviceRed:bitmapData[base + 0] / 255.0f green:bitmapData[base + 1] / 255.0f blue:bitmapData[base + 2] / 255.0f alpha:1];
 					NSColor *resultColor = [matteColor blendedColorWithFraction:(bitmapData[base + 3] / 255.0f) ofColor:sourceColor];
 					red[quantizedPixels] = [resultColor redComponent] * 255;
 					green[quantizedPixels] = [resultColor greenComponent] * 255;
@@ -252,10 +269,10 @@
 	PXPalette *palette = PXPalette_init(PXPalette_alloc());
 	for (i = 0; i < size; i++)
 	{
-		PXPalette_addColor(palette, [NSColor colorWithCalibratedRed:map[i].Red / 255.0f green:map[i].Green / 255.0f blue:map[i].Blue / 255.0f alpha:1]);
+		PXPalette_addColor(palette, [NSColor colorWithDeviceRed:map[i].Red / 255.0f green:map[i].Green / 255.0f blue:map[i].Blue / 255.0f alpha:1]);
 	}
 	if (transparency)
-		PXPalette_addColorWithoutDuplicating(palette, [NSColor clearColor]);
+		PXPalette_addColorWithoutDuplicating(palette, [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace]);
 	
 	for (id current in canvases)
 	{
@@ -263,6 +280,7 @@
 		{
 			[currentLayer adaptToPalette:palette withTransparency:transparency matteColor:matteColor];
 		}
+    [current refreshWholePalette];
 		[current changed];
 	}
 	free(red); free(green); free(blue); free(output); free(map);
@@ -316,9 +334,9 @@
 		pt = [[pts objectAtIndex:i] pointValue];
 		NSColor *c = [colors objectAtIndex:i];
 		if([c isEqual:[NSNull null]]) {
-			c = [NSColor clearColor];
+			c = [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 		}
-		[layer setColor:c atPoint:pt];
+		[self setColor:c atPoint:pt onLayer:layer];
 		changedRect = NSUnionRect(changedRect, NSMakeRect(pt.x, pt.y, 1, 1));
 	}
 	[self changedInRect:changedRect];
@@ -329,5 +347,11 @@
 	[drawnPoints addObject:[NSValue valueWithPoint:pt]];
 	[oldColors addObject:((oldColor == nil) ? (id)[NSNull null] : (id)oldColor)];
 	[newColors addObject:(newColor == nil) ? (id)[NSNull null] : (id)newColor];
+}
+
+- (void)applyImage:(NSImage *)img toLayer:(PXLayer *)layer
+{
+  [layer applyImage:img];
+  [self refreshWholePalette];
 }
 @end

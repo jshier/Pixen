@@ -84,7 +84,7 @@
 	NSRect rectBounds = NSIntersectionRect(NSInsetRect([self bounds], 5, 5), functionalRect);
 	[shadow setShadowBlurRadius:5];
 	[shadow setShadowOffset:NSMakeSize(0, -2)];
-	[shadow setShadowColor:[NSColor colorWithCalibratedWhite:0.2 alpha:1]];
+	[shadow setShadowColor:[NSColor colorWithDeviceWhite:0.2 alpha:1]];
 	[[NSColor blackColor] setStroke];
 	[[NSColor whiteColor] setFill];
 	NSBezierPath *path = [NSBezierPath bezierPathWithRect:rectBounds];
