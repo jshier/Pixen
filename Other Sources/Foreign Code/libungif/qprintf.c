@@ -24,35 +24,19 @@
 
 #include "gif_lib.h"
 
-#ifdef __MSDOS__
-int GifQuietPrint = FALSE;
-#else
 int GifQuietPrint = TRUE;
-#endif /* __MSDOS__ */
 
 /*****************************************************************************
  * Same as fprintf to stderr but with optional print.
  *****************************************************************************/
 //#ifdef HAVE_STDARG_H
-void
+inline static void
 GifQprintf(char *Format, ...) {
     char Line[128];
     va_list ArgPtr;
 
     va_start(ArgPtr, Format);
-/*#else
-#  ifdef HAVE_VARARGS_H
-void
-GifQprintf(va_alist)
-           va_dcl
-{
-    char *Format, Line[128];
-    va_list ArgPtr;
 
-    va_start(ArgPtr);
-    Format = va_arg(ArgPtr, char *);
-#  endif*/
-//#endif /* HAVE_STDARG_H */
     if (GifQuietPrint)
         return;
 
