@@ -733,7 +733,11 @@ static void resolveHSV(float *color1, float *color2);
 	  #if MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_4
 		CGColorSpaceRef colorspace = CGColorSpaceCreateWithName(kCGColorSpaceGenericRGB);
 	  #else
+<<<<<<< HEAD
 		CGColorSpaceRef colorspace = CGColorSpaceCreateCalibratedRGB();
+=======
+		CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+>>>>>>> parent of 9b622d2... Eliminate parts of CTGradient we don't use. Elimite CTGradientView entirely.
 	  #endif
   	  CGShadingRef myCGShading = CGShadingCreateRadial(colorspace, startPoint, startRadius, endPoint, endRadius, gradientFunction, true, true);
 
@@ -782,7 +786,11 @@ static void resolveHSV(float *color1, float *color2);
   blendingMode = mode;
   
   //Choose what blending function to use
+<<<<<<< HEAD
   void *evaluationFunction=NULL;
+=======
+  void *evaluationFunction;
+>>>>>>> parent of 9b622d2... Eliminate parts of CTGradient we don't use. Elimite CTGradientView entirely.
   switch(blendingMode)
 	{
 	case CTLinearBlendingMode:
@@ -1199,7 +1207,11 @@ void inverseChromaticEvaluation(void *info, const float *in, float *out)
 
 void transformRGB_HSV(float *components) //H,S,B -> R,G,B
 	{
+<<<<<<< HEAD
 	float H=0, S=0, V=0;
+=======
+	float H, S, V;
+>>>>>>> parent of 9b622d2... Eliminate parts of CTGradient we don't use. Elimite CTGradientView entirely.
 	float R = components[0],
 		  G = components[1],
 		  B = components[2];
@@ -1229,7 +1241,11 @@ void transformRGB_HSV(float *components) //H,S,B -> R,G,B
 
 void transformHSV_RGB(float *components) //H,S,B -> R,G,B
 	{
+<<<<<<< HEAD
 	float R=0, G=0, B=0;
+=======
+	float R, G, B;
+>>>>>>> parent of 9b622d2... Eliminate parts of CTGradient we don't use. Elimite CTGradientView entirely.
 	float H = fmodf(components[0],359),	//map to [0,360)
 		  S = components[1],
 		  V = components[2];
