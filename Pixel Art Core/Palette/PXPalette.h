@@ -107,7 +107,7 @@ NSDictionary *PXPalette_dictForArchiving(PXPalette *self);
 
 NSColor *_PXPalette_correctColor(NSColor *color);
 unsigned int _PXPalette_indexOfCorrectedColor(PXPalette *self, NSColor *colorToCheck);
-
+unsigned int PXPalette_indexOfColorClosestToAddingIfTooFar(PXPalette *self, NSColor *color, float threshold, BOOL *added);
 double PXPalette_hashEfficiency(PXPalette *self);
 
 int PXPalette_colorCount(PXPalette *self);
