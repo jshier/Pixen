@@ -35,7 +35,7 @@ GifLastError(void) {
  ****************************************************************************/
 void
 PrintGifError(void) {
-    char *Err;
+    const char *Err;
 
     switch (_GifError) {
       case E_GIF_ERR_OPEN_FAILED:
