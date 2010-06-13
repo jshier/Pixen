@@ -296,7 +296,7 @@ FreeExtension(SavedImage * Image)
 /* Private Function:
  * Frees the last image in the GifFile->SavedImages array
  */
-void
+static void
 FreeLastSavedImage(GifFileType *GifFile) {
 
     SavedImage *sp;
