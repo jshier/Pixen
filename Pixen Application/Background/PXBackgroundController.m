@@ -122,16 +122,15 @@ typedef enum _PXStackType
 
 - (void)populateViews:(NSMutableArray *)views forStackedView:(OSStackedView *)stack withSectionNamed:(NSString *)headerName withTemplates:(NSArray *)templates viewClass:(Class)class
 {
-//FIXME: minor leak?  not autoreleasing this fixes the open/close-background-config-repeatedly crasher.
+    //FIXME: minor leak?  not autoreleasing this fixes the open/close-background-config-repeatedly crasher.
 	PXBackgroundTableHeader *header = [[PXBackgroundTableHeader alloc] initWithFrame:NSMakeRect(0, 0, NSWidth([stack frame]), 18)];
 	[header setStringValue:headerName];
 	[views addObject:header];
 	[stack stackSubview:header];
 	[header setFrame:NSMakeRect(-1, -1, NSWidth([header frame]) + 2, NSHeight([header frame]) + 2)];
-	int i;
-	for (i = 0; i < [templates count]; i++)
+	
+    for (id template in templates)
 	{
-		id template = [templates objectAtIndex:i];
 		id newView = [[[class alloc] init] autorelease];
 		if (template == [NSNull null])
 			[newView setBackground:nil];
