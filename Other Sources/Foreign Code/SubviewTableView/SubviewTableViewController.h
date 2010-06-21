@@ -52,7 +52,7 @@ have otherwise used "reloadData" from NSTableView:
 
 #import <AppKit/AppKit.h>
 
-@interface SubviewTableViewController : NSObject
+@interface SubviewTableViewController : NSObject <NSTableViewDelegate, NSTableViewDataSource>
 {
     @private
     
