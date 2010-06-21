@@ -39,7 +39,7 @@
 
 	id layerController;
 	
-	id layer;
+	PXLayer *layer;
 	BOOL isHidden; //for backwards compatibility with 10.2
 	NSRect changedRect;	
 }
