@@ -35,7 +35,7 @@
 	Classes:
    -------------------------------------------------------------------------- */
 
-@interface UKPrefsPanel : NSObject
+@interface UKPrefsPanel : NSObject <NSToolbarDelegate>
 {
 	IBOutlet NSTabView*		tabView;			// The tabless tab-view that we're a switcher for.
 	IBOutlet id				windowController;
