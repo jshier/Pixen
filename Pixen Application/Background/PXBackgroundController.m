@@ -528,8 +528,7 @@ typedef enum _PXStackType
 
 - (void)windowWillClose:(NSNotification *)notification
 {
-	[[delegate mainBackground] windowWillClose:notification];
-	[[delegate alternateBackground] windowWillClose:notification];
+	[delegate windowWillClose:notification];
 }
 
 @end
