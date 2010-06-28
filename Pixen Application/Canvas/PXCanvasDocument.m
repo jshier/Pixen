@@ -104,7 +104,7 @@ BOOL isPowerOfTwo(int num)
 	return (logResult == (int)logResult);
 }
 
-- (void)saveToFile:(NSString *)fileName saveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo
+- (void)saveToURL:(NSURL *)fileName ofType:(NSString *)type forSaveOperation:(NSSaveOperationType)saveOperation delegate:(id)delegate didSaveSelector:(SEL)didSaveSelector contextInfo:(void *)contextInfo
 {
 	if(fileName == nil) 
 	{
@@ -114,15 +114,16 @@ BOOL isPowerOfTwo(int num)
 	if ([[self fileTypeFromLastRunSavePanel] isEqualToString:JPEGFileType])
 	{
 		saveFactor = 100;
-		[super saveToFile:fileName
-        saveOperation:saveOperation
-             delegate:delegate
-		  didSaveSelector:didSaveSelector
-          contextInfo:contextInfo];
+		[super saveToURL:fileName
+                  ofType:type
+        forSaveOperation:saveOperation
+                delegate:delegate
+         didSaveSelector:didSaveSelector
+            contextInfo:contextInfo];
 	}
 	else
 	{
-		[super saveToFile:fileName saveOperation:saveOperation delegate:delegate didSaveSelector:didSaveSelector contextInfo:contextInfo];
+		[super saveToURL:fileName ofType:type forSaveOperation:saveOperation delegate:delegate didSaveSelector:didSaveSelector contextInfo:contextInfo];
 	}
 }
 
@@ -276,16 +277,12 @@ BOOL isPowerOfTwo(int num)
   NSPrintOperation *op;
 	op = [NSPrintOperation printOperationWithView:printableView 
                                       printInfo:[self printInfo]];
-  [op setShowPanels:showPanels];
+  [op setShowsPrintPanel:showPanels];
 	
-#ifdef __COCOA__
 	[self runModalPrintOperation:op 
                       delegate:nil 
                 didRunSelector:NULL 
                    contextInfo:NULL];
-#else
-    //FIXME: GNUstep TODO
-#endif
 }
 
 -(PXCanvas *)canvas

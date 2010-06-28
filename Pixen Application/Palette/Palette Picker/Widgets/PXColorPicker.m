@@ -68,14 +68,16 @@ int kPXColorPickerMode = 23421337;
 
 - (IBAction)installPalette:sender
 {
-	id importer = [[PXPaletteImporter alloc] init];
+	PXPaletteImporter *importer = [[PXPaletteImporter alloc] init];
 	[importer runInWindow:[self colorPanel]];
+    [importer release];
 }
 
 - (IBAction)exportPalette:sender
 {
-	id exporter = [[PXPaletteExporter alloc] init];
+	PXPaletteExporter *exporter = [[PXPaletteExporter alloc] init];
 	[exporter runWithPalette:[paletteView palette] inWindow:[self colorPanel]];
+    [exporter release];
 }
 
 - (void)setColor:(NSColor *)aColor
@@ -275,7 +277,8 @@ int kPXColorPickerMode = 23421337;
 {
 	if (returnCode == NSAlertFirstButtonReturn)
 	{
-		[[NSFileManager defaultManager] removeFileAtPath:[[GetPixenPaletteDirectory() stringByAppendingPathComponent:[paletteView palette]->name] stringByAppendingPathExtension:PXPaletteSuffix] handler:nil];
+        //FIXME: Handle error.
+		[[NSFileManager defaultManager] removeItemAtPath:[[GetPixenPaletteDirectory() stringByAppendingPathComponent:[paletteView palette]->name] stringByAppendingPathExtension:PXPaletteSuffix] error:NULL];
 		[self reloadData];
 		[[NSNotificationCenter defaultCenter] postNotificationName:PXUserPalettesChangedNotificationName object:self];
 	}

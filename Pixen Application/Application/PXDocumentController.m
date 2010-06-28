@@ -84,17 +84,18 @@
 	BOOL isDir;
 	NSString *path = [root stringByAppendingPathComponent:sub];
 	
-	if  ( ! [fileManager fileExistsAtPath:path isDirectory:&isDir] )
+	if  (![fileManager fileExistsAtPath:path isDirectory:&isDir])
 	{
-		if ( ! [fileManager createDirectoryAtPath:path attributes:nil] ) 
+		if (![fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:NULL]) 
 		{
-			[NSException raise:@"Directory Error" format:@"Couldn't create Pixen support directory."];
+			//FIXME: Turn exceptions into error reports.
+            [NSException raise:@"Directory Error" format:@"Couldn't create Pixen support directory."];
 			return;
 		}
 	}
 	else
 	{
-		if ( ! isDir ) 
+		if (!isDir) 
 		{
 			[NSException raise:@"Directory Error" format:@"Couldn't create Pixen support directory."];
 			return;
@@ -158,9 +159,9 @@ NSString *palettesSubdirName = @"Palettes";
 	}
 }
 
-- (IBAction)globalInstallPalette:sender
+- (IBAction)globalInstallPalette:(id)sender
 {
-	id importer = [[PXPaletteImporter alloc] init];
+	PXPaletteImporter *importer = [[[PXPaletteImporter alloc] init] autorelease];
 	[importer runInWindow:nil];
 }
 
@@ -261,12 +262,13 @@ NSString *palettesSubdirName = @"Palettes";
 {
 	if([[filename pathExtension] isEqual:PXBackgroundSuffix])
 	{
-		id bgName = [filename lastPathComponent];
-		id dest = [GetBackgroundPresetsDirectory() stringByAppendingPathComponent:bgName];
+		NSString *bgName = [filename lastPathComponent];
+		NSString *dest = [GetBackgroundPresetsDirectory() stringByAppendingPathComponent:bgName];
 		int result = [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"Install Background Template \"%@\"?", @"Install Background Template \"%@\"?"), bgName] defaultButton:NSLocalizedString(@"Install", @"Install") alternateButton:NSLocalizedString(@"Cancel", @"CANCEL") otherButton:nil informativeTextWithFormat:NSLocalizedString(@"%@ will be copied to %@.", @"%@ will be copied to %@."), [filename stringByAbbreviatingWithTildeInPath], [dest stringByAbbreviatingWithTildeInPath]] runModal];
 		if(result == NSAlertDefaultReturn)
 		{
-			[[NSFileManager defaultManager] copyPath:filename toPath:dest handler:nil];
+			[[NSFileManager defaultManager] copyItemAtPath:filename toPath:dest error:NULL];
+            //FIXME: Handle errors.
 			[[NSNotificationCenter defaultCenter] postNotificationName:PXBackgroundTemplateInstalledNotificationName object:self];
 		}
 	}
@@ -284,17 +286,18 @@ NSString *palettesSubdirName = @"Palettes";
 	}
 	if([[filename pathExtension] isEqual:PXPaletteSuffix] || [[filename pathExtension] isEqual:MicrosoftPaletteSuffix] || [[filename pathExtension] isEqual:AdobePaletteSuffix])
 	{
-		id paletteName = [filename lastPathComponent];
-		id dest = [GetPixenPaletteDirectory() stringByAppendingPathComponent:paletteName];
+		NSString *paletteName = [filename lastPathComponent];
+		NSString *dest = [GetPixenPaletteDirectory() stringByAppendingPathComponent:paletteName];
 		int result = [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"Install Palette \"%@\"?", @"Instal Palette \"%@\"?"), paletteName] defaultButton:NSLocalizedString(@"Install", @"Install") alternateButton:NSLocalizedString(@"Cancel", @"CANCEL") otherButton:nil informativeTextWithFormat:NSLocalizedString(@"%@ will be copied to %@.", @"%@ will be copied to %@."), [filename stringByAbbreviatingWithTildeInPath], [dest stringByAbbreviatingWithTildeInPath]] runModal];
 		if(result == NSAlertDefaultReturn)
 		{
-			id importer = [[[PXPaletteImporter alloc] init] autorelease];
+			PXPaletteImporter *importer = [[[PXPaletteImporter alloc] init] autorelease];
 			[importer importPaletteAtPath:filename];
 			[[NSNotificationCenter defaultCenter] postNotificationName:PXUserPalettesChangedNotificationName object:self];
 		}
 	}
-	[self openDocumentWithContentsOfFile:filename display:YES];
+	[self openDocumentWithContentsOfURL:[NSURL URLWithString:[filename stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]] display:YES error:NULL];
+    //FIXME: Handle errors.
 	return YES;
 }
 
@@ -308,14 +311,15 @@ NSString *palettesSubdirName = @"Palettes";
 
 //IBAction 
 
-- (IBAction)newFromClipboard:sender
+- (IBAction)newFromClipboard:(id)sender
 {
-	PXCanvasDocument *doc = [self makeUntitledDocumentOfType:PixenImageFileType];
+	PXCanvasDocument *doc = [self makeUntitledDocumentOfType:PixenImageFileType error:NULL];
+    //FIXME: Handle error.
 	[self addDocument:doc];
 	[doc loadFromPasteboard:[NSPasteboard generalPasteboard]];
 }
 
-- (IBAction)donate:(id) sender
+- (IBAction)donate:(id)sender
 {
 	NSString *urlString = @"http://www.opensword.org/donate.php";
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:urlString]];
@@ -324,7 +328,7 @@ NSString *palettesSubdirName = @"Palettes";
 // It occurs to me (after having renamed this object to be a document controller, of course)
 // that this sort of method really should be in, like, an app delegate. But I'm not going
 // to deal with that right now.
-- (IBAction)toggleAlignmentCrosshairs:sender
+- (IBAction)toggleAlignmentCrosshairs:(id)sender
 {
 	BOOL showCrosshairs = [[NSUserDefaults standardUserDefaults] boolForKey:PXCrosshairEnabledKey];
 	showCrosshairs = !showCrosshairs;
@@ -338,7 +342,7 @@ NSString *palettesSubdirName = @"Palettes";
 	return cachedShowsToolPreview;
 }
 
-- (IBAction)toggleToolPreview:sender
+- (IBAction)toggleToolPreview:(id)sender
 {
 	BOOL showToolPreview = [[NSUserDefaults standardUserDefaults] boolForKey:PXToolPreviewEnabledKey];
 	cachedShowsToolPreview = !showToolPreview;
@@ -356,7 +360,7 @@ NSString *palettesSubdirName = @"Palettes";
 	return cachedShowsPreviousCelOverlay;
 }
 
-- (void)togglePreviousCelOverlay:sender
+- (void)togglePreviousCelOverlay:(id)sender
 {
 	BOOL showPreviousCelOverlay = [[NSUserDefaults standardUserDefaults] boolForKey:PXPreviousCelOverlayEnabledKey];
 	cachedShowsPreviousCelOverlay = !showPreviousCelOverlay;
@@ -428,18 +432,8 @@ NSString *palettesSubdirName = @"Palettes";
 		if (potentiallyAnimatedDocument)
 			return potentiallyAnimatedDocument;
 	}
-	return [super makeDocumentWithContentsOfURL:aURL ofType:docType];
-}
-
-- (id)makeDocumentWithContentsOfFile:(NSString *)fileName ofType:(NSString *)docType
-{
-	if ([docType isEqualToString:GIFFileType])
-	{
-		id potentiallyAnimatedDocument = [self handleAnimatedGifAtURL:[NSURL fileURLWithPath:fileName]];
-		if (potentiallyAnimatedDocument)
-			return potentiallyAnimatedDocument;
-	}
-	return [super makeDocumentWithContentsOfFile:fileName ofType:docType];	
+    //FIXME: Handle error.
+	return [super makeDocumentWithContentsOfURL:aURL ofType:docType error:NULL];
 }
 
 - (id)makeDocumentForURL:(NSURL *)absoluteDocumentURL withContentsOfURL:(NSURL *)absoluteDocumentContentsURL ofType:(NSString *)typeName error:(NSError **)outError
@@ -453,9 +447,10 @@ NSString *palettesSubdirName = @"Palettes";
 	return [super makeDocumentForURL:absoluteDocumentURL withContentsOfURL:absoluteDocumentContentsURL ofType:typeName error:nil];
 }
 
-- (IBAction)newAnimationDocument:sender
+- (IBAction)newAnimationDocument:(id)sender
 {
-	[self openUntitledDocumentOfType:PixenAnimationFileType display:YES];
+	//FIXME: This is deprecated, but I don't know how to use the current API to replicate the functionality.
+    [self openUntitledDocumentOfType:PixenAnimationFileType display:YES];
 }
 
 - (NSArray *)animationDocuments
@@ -470,7 +465,7 @@ NSString *palettesSubdirName = @"Palettes";
 	return animationDocuments;
 }
 
-- (IBAction)importAnimationFromImageSequence:sender
+- (IBAction)importAnimationFromImageSequence:(id)sender
 {
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
 	[openPanel setAllowsMultipleSelection:YES];

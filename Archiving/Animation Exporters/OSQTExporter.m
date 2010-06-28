@@ -166,8 +166,9 @@
 	[qtMovie writeToFile:tempPath withAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithLong:MovieFileType], QTMovieExportType, [NSNumber numberWithLong:kAppleManufacturer], QTMovieExportManufacturer, [NSNumber numberWithBool:YES], QTMovieExport, [NSData dataWithBytes:*gExportSettings length:GetHandleSize(gExportSettings)], QTMovieExportSettings, nil]];
 	//[target performSelector:selector withObject:tempPath];
 	if ([[NSFileManager defaultManager] fileExistsAtPath:path])
-		[[NSFileManager defaultManager] removeFileAtPath:path handler:nil];
-	[[NSFileManager defaultManager] movePath:tempPath toPath:path handler:nil];
+		[[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
+	[[NSFileManager defaultManager] moveItemAtPath:tempPath toPath:path error:NULL];
+    //FIXME: Handle errors.
 	DisposeHandle(gExportSettings);
 }
 

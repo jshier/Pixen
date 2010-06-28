@@ -451,7 +451,8 @@ void PXPalette_setName(PXPalette *self, NSString *name)
 	PXPalette_saveChanges(self);
 	if(self->canSave)
 	{
-		[[NSFileManager defaultManager] removeFileAtPath:[[GetPixenPaletteDirectory() stringByAppendingPathComponent:oldName] stringByAppendingPathExtension:PXPaletteSuffix] handler:nil];
+        //FIXME: Handle error.
+		[[NSFileManager defaultManager] removeItemAtPath:[[GetPixenPaletteDirectory() stringByAppendingPathComponent:oldName] stringByAppendingPathExtension:PXPaletteSuffix] error:NULL];
 	}
 }
 

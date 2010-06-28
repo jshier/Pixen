@@ -94,7 +94,8 @@
 	}
 	else if ([aType isEqualToString:GIFFileType])
 	{
-		return [[[NSFileWrapper alloc] initRegularFileWithContents:[self dataRepresentationOfType:GIFFileType]] autorelease];
+        //FIXME: Handle error.
+		return [[[NSFileWrapper alloc] initRegularFileWithContents:[self dataOfType:GIFFileType error:NULL]] autorelease];
 	}
 	return nil;
 }
@@ -166,7 +167,8 @@
 	}
 	else if ([docType isEqualToString:GIFFileType])
 	{
-		return [self loadDataRepresentation:[wrapper regularFileContents] ofType:docType];
+        //FIXME: Handle error.
+		return [self readFromData:[wrapper regularFileContents] ofType:docType error:NULL];
 	}
 	else
 	{
