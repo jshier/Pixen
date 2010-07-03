@@ -65,8 +65,7 @@ static PXPreviewController *instance = nil;
 - (id) init
 {
 	if(instance) {
-		[self autorelease];
-		return self = instance;
+		return instance;
 	}
 	if ( ! ( self = [super initWithWindowNibName:@"PXPreview"] ) ) 
 		return nil;
