@@ -115,7 +115,7 @@
 					[canvas setColor:E3 atPoint:NSMakePoint(x*2 + 1, y*2 + 1) onLayer:layer];
 				}
 			}
-			[pool release];
+			[pool drain];
 		}
 		xScale = xScale >> 1;
 		yScale = yScale >> 1;
