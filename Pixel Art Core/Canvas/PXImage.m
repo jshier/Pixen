@@ -530,6 +530,7 @@ void PXImage_drawInRectFromRectWithOperationFraction(PXImage *self, NSRect dst, 
 		NSPoint drawPoint = [transform transformPoint:(*(NSPoint *)&(tileLoc))];
 		PXTileDraw(self->tiles[i], source, CGRectMake(drawPoint.x, drawPoint.y, drawSize.width, drawSize.height));
 	}
+    [transform release];
 	CGContextTranslateCTM(target, fullDest.origin.x, fullDest.origin.y);
 }
 
