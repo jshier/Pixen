@@ -90,10 +90,12 @@
 
 - (id)_rawInit
 {
-	if (![super init]) return nil;
-  plusColors = [[NSCountedSet alloc] init];
-  minusColors = [[NSCountedSet alloc] init];
-  frequencyPaletteDirty = NO;
+	if (![super init]) 
+        return nil;
+    
+    plusColors = [[NSCountedSet alloc] init];
+    minusColors = [[NSCountedSet alloc] init];
+    frequencyPaletteDirty = NO;
 	return self;
 }
 
@@ -104,7 +106,7 @@
 
 - (id)duplicateWithinAnimation
 {
-	PXCanvas *canvas = [[[self class] alloc] _rawInit];
+	PXCanvas *canvas = [[[[self class] alloc] _rawInit] autorelease];
 	[canvas setLayers:[[self layers] deepMutableCopy]];
 	[canvas recacheSize];
 	[canvas setMainBackground:[self mainBackground]];
@@ -116,7 +118,7 @@
 	[canvas setWraps:[self wraps]];
 	[canvas reallocateSelection];
 	[canvas setUndoManager:[self undoManager]];
-	return canvas;
+	return [canvas retain];
 }
 
 - (id)init
@@ -147,8 +149,8 @@
 	[newColors release];
 	[layers release];
 	[bgConfig release];
-  [minusColors release];
-  [plusColors release];
+    [minusColors release];
+    [plusColors release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[super dealloc];
 }
@@ -254,9 +256,9 @@
   }
     //NSLog(@"change color %@ to %@", down, up);
     //time isn't the best way to do this.  should be undo group-based.
-  [self performSelector:@selector(reallyRefreshIncrementalPalette:) withObject:nil afterDelay:0.5f];
-  [minusColors addObject:down];
-  [plusColors addObject:up];
+    [self performSelector:@selector(reallyRefreshIncrementalPalette:) withObject:nil afterDelay:0.5f];
+    [minusColors addObject:down];
+    [plusColors addObject:up];
 }
 
 - (void)setSize:(NSSize)aSize 
