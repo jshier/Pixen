@@ -42,10 +42,9 @@
 		newRect.origin.y = 0;
 		newRect.size.height = [self size].width;
 	}
-	NSSize newSize = newRect.size;
 	if(NSMaxX(newRect) >= [self size].width)
 	{
-		newSize = NSMakeSize([self size].width - NSMinX(newRect), NSHeight(newRect));
+		NSSize newSize = NSMakeSize([self size].width - NSMinX(newRect), NSHeight(newRect));
 		NSRect newRectComponent = NSMakeRect(0, NSMinY(newRect), NSWidth(newRect) - newSize.width, NSHeight(newRect));
 		newRect.size = newSize;
 		[rects addObject:NSStringFromRect(newRectComponent)];
