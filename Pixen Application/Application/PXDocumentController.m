@@ -296,7 +296,7 @@ NSString *palettesSubdirName = @"Palettes";
 			[[NSNotificationCenter defaultCenter] postNotificationName:PXUserPalettesChangedNotificationName object:self];
 		}
 	}
-	[self openDocumentWithContentsOfURL:[NSURL URLWithString:[filename stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding]] display:YES error:NULL];
+	[self openDocumentWithContentsOfURL:[NSURL fileURLWithPath: filename] display:YES error:NULL];
     //FIXME: Handle errors.
 	return YES;
 }
