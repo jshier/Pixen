@@ -3072,6 +3072,136 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3156615F11E2726E00C623D1 /* Debug (64-bit) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 314E725910820C2200DAE4B3 /* Debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DEBUGGING_SYMBOLS = full;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_ENABLE_PASCAL_STRINGS = YES;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_ENABLE_SSE41_EXTENSIONS = YES;
+				GCC_ENABLE_SSE42_EXTENSIONS = YES;
+				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
+				GCC_ENABLE_TRIGRAPHS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				LINKER_DISPLAYS_MANGLED_NAMES = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = macosx10.6;
+				STRIP_INSTALLED_PRODUCT = NO;
+				UNSTRIPPED_PRODUCT = "";
+				USER_HEADER_SEARCH_PATHS = ".//**";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = "Debug (64-bit)";
+		};
+		3156616011E2726E00C623D1 /* Debug (64-bit) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 314E725910820C2200DAE4B3 /* Debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)\"";
+				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/Frameworks and Palettes\"";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Other Sources/Pixen_Prefix.h";
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Resources/Info.plist;
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				LINKER_DISPLAYS_MANGLED_NAMES = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
+				PRODUCT_NAME = Pixen;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				VALID_ARCHS = "i386 x86_64";
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Debug (64-bit)";
+		};
+		3156616111E2727B00C623D1 /* Test (64-bit) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 314E725B10820C2200DAE4B3 /* Test.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_PASCAL_STRINGS = YES;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_ENABLE_SSE41_EXTENSIONS = YES;
+				GCC_ENABLE_SSE42_EXTENSIONS = YES;
+				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_THUMB_SUPPORT = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				LINKER_DISPLAYS_MANGLED_NAMES = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx10.6;
+				SKIP_INSTALL = NO;
+				UNSTRIPPED_PRODUCT = "";
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = "Test (64-bit)";
+		};
+		3156616211E2727B00C623D1 /* Test (64-bit) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 314E725B10820C2200DAE4B3 /* Test.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)",
+					/System/Library/Frameworks,
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks and Palettes\"";
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Other Sources/Pixen_Prefix.h";
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = Resources/Info.plist;
+				INSTALL_PATH = /Applications;
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
+				LIBRARY_STYLE = STATIC;
+				LINKER_DISPLAYS_MANGLED_NAMES = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-funroll-loops";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = Pixen;
+				SECTORDER_FLAGS = "";
+				VALID_ARCHS = "i386 x86_64";
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Test (64-bit)";
+		};
 		31DF299E1059F62300908047 /* Test */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 314E725B10820C2200DAE4B3 /* Test.xcconfig */;
@@ -3273,7 +3403,9 @@
 			buildConfigurations = (
 				616BAEA708553EFB004CF172 /* Release */,
 				31DF299F1059F62300908047 /* Test */,
+				3156616211E2727B00C623D1 /* Test (64-bit) */,
 				616BAEA608553EFB004CF172 /* Debug */,
+				3156616011E2726E00C623D1 /* Debug (64-bit) */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Test;
@@ -3283,7 +3415,9 @@
 			buildConfigurations = (
 				616BAEAB08553EFB004CF172 /* Release */,
 				31DF299E1059F62300908047 /* Test */,
+				3156616111E2727B00C623D1 /* Test (64-bit) */,
 				616BAEAA08553EFB004CF172 /* Debug */,
+				3156615F11E2726E00C623D1 /* Debug (64-bit) */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Test;
