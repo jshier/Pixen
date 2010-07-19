@@ -18,7 +18,7 @@ GCC_WARN_UNUSED_VARIABLE = YES;
 LINKER_DISPLAYS_MANGLED_NAMES = YES;
 PREBINDING = NO;
 VALID_ARCHS = i386 x86_64;
-WARNING_CFLAGS = -Wall -Wcast-align -Wchar-subscripts -Wextra-tokens -Wformat-security -Winit-self -Wmissing-format-attribute -Wpacked -Wpointer-arith -Wredundant-decls -Wundef -Wwrite-strings -Wno-four-char-constants -Wno-unknown-pragmas -Winline;
+WARNING_CFLAGS = -Wall -Wcast-align -Wchar-subscripts -Wextra-tokens -Wformat-security -Winit-self -Wmissing-format-attribute -Wpacked -Wpointer-arith -Wredundant-decls -Wundef -Wwrite-strings -Wno-four-char-constants -Wno-unknown-pragmas -Winline -Wshorten-64-to-32;
 
 MACOSX_DEPLOYMENT_TARGET = $(MACOSX_DEPLOYMENT_TARGET_$(MAC_OS_X_VERSION_MAJOR));
 MACOSX_DEPLOYMENT_TARGET_ = 10.6;
