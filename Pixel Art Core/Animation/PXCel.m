@@ -51,7 +51,7 @@
 	return cel;
 }
 
-- initWithImage:(NSImage *)image animation:(PXAnimation *)animation atIndex:(int)index
+- initWithImage:(NSImage *)image animation:(PXAnimation *)animation atIndex:(NSUInteger)index
 {
 	if (![super init]) {
 		return nil;

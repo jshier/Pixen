@@ -18,15 +18,15 @@
 - (void)setColor:(NSColor *)aColor atPoint:(NSPoint)aPoint onLayer:(PXLayer *)l;
 - (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds;
 - (void)setColor:(NSColor *)color atIndices:(NSArray *)indices updateIn:(NSRect)bounds onLayer:(PXLayer *)layer;
-- (void)reduceColorsTo:(int)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
+- (void)reduceColorsTo:(NSUInteger)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
 + (void)reduceColorsInCanvases:(NSArray*)canvases 
-				  toColorCount:(int)colors
+				  toColorCount:(NSUInteger)colors
 			  withTransparency:(BOOL)transparency 
 					matteColor:(NSColor *)matteColor;
 
 - (NSPoint)correct:(NSPoint)aPoint;
 - (BOOL)containsPoint:(NSPoint)aPoint;
-- (void)rotateByDegrees:(int)degrees;
+- (void)rotateByDegrees:(NSUInteger)degrees;
 
 - (BOOL)wraps;
 - (void)setWraps:(BOOL)newWraps;

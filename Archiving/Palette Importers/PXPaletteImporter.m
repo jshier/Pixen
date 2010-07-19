@@ -48,7 +48,7 @@
 	int i = 2, j;
 	
 	// First make the name not conflict with system palettes
-	int systemPaletteCount = PXPalette_getSystemPalettes(NULL, 0);
+	NSUInteger systemPaletteCount = PXPalette_getSystemPalettes(NULL, 0);
 	PXPalette **systemPalettes = malloc(sizeof(PXPalette *) * systemPaletteCount);
 	PXPalette_getSystemPalettes(systemPalettes, 0);
 	id names = [NSMutableArray array];
@@ -88,7 +88,7 @@
 	PXPalette_release(newPal);
 }
 
-- (void)panelDidEnd:(NSOpenPanel *)panel returnCode:(int)code contextInfo:(void *)info
+- (void)panelDidEnd:(NSOpenPanel *)panel returnCode:(NSInteger)code contextInfo:(void *)info
 {
 	if (code == NSCancelButton) { return; }
 	for (id current in [panel filenames])
@@ -112,7 +112,7 @@
 	}
 	else
 	{
-		int code = [openPanel runModalForTypes:types];
+		NSInteger code = [openPanel runModalForTypes:types];
 		[self panelDidEnd:openPanel returnCode:code contextInfo:nil];
 	}
 }

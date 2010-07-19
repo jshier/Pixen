@@ -127,7 +127,7 @@
 	NSPoint origin = [aTransform transformPoint:rect.origin];
 	NSSize size = [aTransform transformSize:rect.size];
 
-	id newTransform = [NSAffineTransform transform];
+	NSAffineTransform *newTransform = [NSAffineTransform transform];
 	NSAffineTransformStruct s = [aTransform transformStruct];
 	float dx = s.tX, dy = s.tY;
 	while(dx < 0) { dx += [aCanvas size].width; }

@@ -24,12 +24,10 @@
 
 - (void)drawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op fraction:(float)frac
 {
-	id enumerator = [layers objectEnumerator];
-	id current;
-	while ( (current = [enumerator nextObject]) )
-	{
-		[current drawInRect:dst fromRect:src operation:op fraction:frac];
-	}	
+    for(PXLayer *current in layers)
+    {
+        [current drawInRect:dst fromRect:src operation:op fraction:frac];
+    }
 }
 
 - (void)drawInRect:(NSRect)dst fromRect:(NSRect)src operation:(NSCompositingOperation)op

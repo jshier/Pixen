@@ -13,15 +13,15 @@
 
 @implementation PXCanvas(CopyPaste)
 
-- (int)runPasteTooBigAlert:(NSString *)pastedThing size:(NSSize)aSize
+- (NSInteger)runPasteTooBigAlert:(NSString *)pastedThing size:(NSSize)aSize
 {
 	return [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"The pasted %@ is too big!", @"The pasted %@ is too big!"), pastedThing]
                           defaultButton:NSLocalizedString(@"Resize Canvas to Fit", @"Resize Canvas to Fit")
                         alternateButton:NSLocalizedString(@"Cancel Paste", @"Cancel Paste")
                             otherButton:NSLocalizedString(@"Paste Anyway", @"Paste Anyway")
-              informativeTextWithFormat:NSLocalizedString(@"The pasted %@ is %dx%d, while the canvas is only %dx%d.", @"The pasted %@ is %dx%d, while the canvas is only %dx%d."), pastedThing,
-           (int)(aSize.width), (int)(aSize.height),
-           (int)([self size].width), (int)([self size].height)] runModal];
+              informativeTextWithFormat:NSLocalizedString(@"The pasted %@ is %ldx%ld, while the canvas is only %ldx%ld.", @"The pasted %@ is %ldx%ld, while the canvas is only %ldx%ld."), pastedThing,
+           (long)(aSize.width), (long)(aSize.height),
+           (long)([self size].width), (long)([self size].height)] runModal];
 }
 
 - (BOOL)canContinuePasteOf:(NSString *)pastedThing size:(NSSize)aSize
@@ -99,7 +99,7 @@
 - (void)pasteFromPasteboard:(NSPasteboard *) board type:type intoLayer:(PXLayer *)layer
 {
   PXLayer *newLayer = [self layerForPastingFromPasteboard:board type:type];
-  int idx = [layers indexOfObject:layer];
+  NSUInteger idx = [layers indexOfObject:layer];
   [self beginUndoGrouping]; {
       //FIXME wasteful copy
 		[self setLayers:[[layers deepMutableCopy] autorelease] fromLayers:layers];

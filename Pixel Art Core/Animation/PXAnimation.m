@@ -39,17 +39,17 @@
 	return newAnimation;
 }
 
-- (PXCel *)objectInCelsAtIndex:(unsigned int)index 
+- (PXCel *)objectInCelsAtIndex:(NSUInteger)index 
 {
 	return [cels objectAtIndex:index];
 }
 
-- (unsigned int)indexOfObjectInCels:(PXCel *)cel
+- (NSUInteger)indexOfObjectInCels:(PXCel *)cel
 {
 	return [cels indexOfObject:cel];
 }
 
-- (unsigned int)countOfCels
+- (NSUInteger)countOfCels
 {
 	return [cels count];
 }
@@ -130,7 +130,7 @@
 	[cels setValue:man forKey:@"undoManager"];
 }
 
-- (void)insertObject:(PXCel *)cel inCelsAtIndex:(unsigned int)index
+- (void)insertObject:(PXCel *)cel inCelsAtIndex:(NSUInteger)index
 {
 	[self willChangeValueForKey:@"countOfCels"];
 	[undoManager beginUndoGrouping];
@@ -161,7 +161,7 @@
 	[self insertObject:cel inCelsAtIndex:[self countOfCels]];
 }
 
-- (void)insertNewCelAtIndex:(unsigned int)index
+- (void)insertNewCelAtIndex:(NSUInteger)index
 {
 	PXCel *newCel = [[[PXCel alloc] init] autorelease];
 	[newCel setSize:[self size]];
@@ -177,14 +177,14 @@
 	[self insertNewCelAtIndex:0];
 }
 
-- (void)moveCelFromIndex:(int)index1 toIndex:(int)index2
+- (void)moveCelFromIndex:(NSUInteger)index1 toIndex:(NSUInteger)index2
 {
 	if(index1 == index2) { return; }
 	[self willChangeValueForKey:@"countOfCels"];
 	[undoManager beginUndoGrouping];
 	id cel = [cels objectAtIndex:index1];
 	[cels insertObject:cel atIndex:index2];
-	int removeIndex = index1;
+	NSUInteger removeIndex = index1;
 	if(index1 > index2)
 	{
 		removeIndex++;
@@ -196,7 +196,7 @@
 	[self didChangeValueForKey:@"countOfCels"];
 }
 
-- (void)copyCelFromIndex:(int)originalIndex toIndex:(int)insertionIndex
+- (void)copyCelFromIndex:(NSUInteger)originalIndex toIndex:(NSUInteger)insertionIndex
 {
 	[self willChangeValueForKey:@"countOfCels"];
 	[undoManager beginUndoGrouping];
@@ -209,7 +209,7 @@
 	[self didChangeValueForKey:@"countOfCels"];
 }
 
-- (void)removeObjectFromCelsAtIndex:(unsigned int)index
+- (void)removeObjectFromCelsAtIndex:(NSUInteger)index
 {
 	[self willChangeValueForKey:@"countOfCels"];
 	[undoManager beginUndoGrouping];
@@ -225,7 +225,7 @@
 	[self removeObjectFromCelsAtIndex:[cels indexOfObject:cel]];
 }
 
-- (NSImage *)spriteSheetWithCelMargin:(int)margin
+- (NSImage *)spriteSheetWithCelMargin:(NSUInteger)margin
 {
 	int fullWidth = [self countOfCels]*[self size].width + ([self countOfCels] - 1)*margin;
   int width = fullWidth; //could change this if multirow sheets were desirable.  they're not.
@@ -248,7 +248,7 @@
 	return spriteSheet;
 }
 
-- (void)reduceColorsTo:(int)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor
+- (void)reduceColorsTo:(NSUInteger)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor
 {
 	[PXCanvas reduceColorsInCanvases:[cels valueForKey:@"canvas"] 
 						toColorCount:colors

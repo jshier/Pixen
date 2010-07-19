@@ -123,7 +123,7 @@
     }
 }
 
-- (BOOL) tableView:(NSTableView *) tableView shouldEditTableColumn:(NSTableColumn *) tableColumn row:(int) row
+- (BOOL) tableView:(NSTableView *) tableView shouldEditTableColumn:(NSTableColumn *) tableColumn row:(NSInteger) row
 {
     if ([self isValidDelegateForSelector: _cmd])
     {
@@ -135,7 +135,7 @@
     }
 }
 
-- (BOOL) tableView:(NSTableView *) tableView shouldSelectRow:(int) row
+- (BOOL) tableView:(NSTableView *) tableView shouldSelectRow:(NSInteger) row
 {
     if ([self isValidDelegateForSelector: _cmd])
     {
@@ -159,7 +159,7 @@
     }
 }
 
-- (NSView *) tableView:(NSTableView *) tableView viewForRow:(int) row
+- (NSView *) tableView:(NSTableView *) tableView viewForRow:(NSInteger) row
 {
 	if ([self isValidDelegateForSelector: @selector(tableView:viewForRow:)])
 	{
@@ -168,7 +168,7 @@
 	return nil;
 }
 
-- (void) tableView:(NSTableView *) tableView willDisplayCell:(id) cell forTableColumn:(NSTableColumn *) tableColumn row:(int) row
+- (void) tableView:(NSTableView *) tableView willDisplayCell:(id) cell forTableColumn:(NSTableColumn *) tableColumn row:(NSInteger) row
 {
     if (tableColumn == subviewTableColumn)
     {
@@ -224,9 +224,9 @@
 
 // Methods from NSTableDataSource protocol
 
-- (int) numberOfRowsInTableView:(NSTableView *) tableView
+- (NSInteger) numberOfRowsInTableView:(NSTableView *) tableView
 {
-    int count = 0;
+    NSInteger count = 0;
     
     if ([self isValidDelegateForSelector: _cmd])
     {
@@ -236,7 +236,7 @@
     return count;
 }
 
-- (BOOL) tableView:(NSTableView *) tableView acceptDrop:(id <NSDraggingInfo>) info row:(int) row dropOperation:(NSTableViewDropOperation) operation
+- (BOOL) tableView:(NSTableView *) tableView acceptDrop:(id <NSDraggingInfo>) info row:(NSInteger) row dropOperation:(NSTableViewDropOperation) operation
 {
     if ([self isValidDelegateForSelector: _cmd])
     {
@@ -248,7 +248,7 @@
     }
 }
 
-- (id) tableView:(NSTableView *) tableView objectValueForTableColumn:(NSTableColumn *) tableColumn row:(int) row
+- (id) tableView:(NSTableView *) tableView objectValueForTableColumn:(NSTableColumn *) tableColumn row:(NSInteger) row
 {
     id obj = nil;
 	
@@ -260,7 +260,7 @@
     return obj;
 }
 
-- (void) tableView:(NSTableView *) tableView setObjectValue:(id) obj forTableColumn:(NSTableColumn *) tableColumn row:(int) row
+- (void) tableView:(NSTableView *) tableView setObjectValue:(id) obj forTableColumn:(NSTableColumn *) tableColumn row:(NSInteger) row
 {
     if ((tableColumn != subviewTableColumn) && [self isValidDelegateForSelector: _cmd])
     {
@@ -268,7 +268,7 @@
     }
 }
 
-- (NSDragOperation) tableView:(NSTableView *) tableView validateDrop:(id <NSDraggingInfo>) info proposedRow:(int) row proposedDropOperation:(NSTableViewDropOperation) operation
+- (NSDragOperation) tableView:(NSTableView *) tableView validateDrop:(id <NSDraggingInfo>) info proposedRow:(NSInteger) row proposedDropOperation:(NSTableViewDropOperation) operation
 {
     if ([self isValidDelegateForSelector: _cmd])
     {

@@ -41,7 +41,7 @@
 	id tableViewController;
 	IBOutlet id removeButton;
 	id document;
-	int layersCreated;
+	NSUInteger layersCreated;
 }
 -(id) initWithCanvas:(PXCanvas *)aCanvas;
 - (void)toggle:(id)sender;
@@ -57,7 +57,7 @@
 - (IBAction)removeLayer: (id)sender;
 - (void)removeLayerObject: (PXLayer *)layer;
 - (IBAction)selectLayer: (id)sender;
-- (void)selectRow:(int)index;
+- (void)selectRow:(NSUInteger)index;
 
 - (IBAction)nextLayer: (id)sender;
 - (IBAction)previousLayer: (id)sender;
@@ -68,26 +68,26 @@
 
 - (void)mergeDownLayerObject:(PXLayer *)layer;
 
-- (int)invertLayerIndex:(int)anIndex;
+- (NSInteger)invertLayerIndex:(NSInteger)anIndex;
 
 	/*
 	 * Table View dateSource
 	 */
 - (id)tableView:(NSTableView *)aTableView 
 objectValueForTableColumn:(NSTableColumn *)aTableColumn
-			row:(int)rowIndex;
+			row:(NSUInteger)rowIndex;
 
 - (void)tableView:(NSTableView *)aTableView 
    setObjectValue:(id)anObject 
    forTableColumn:(NSTableColumn *)aTableColumn
-			  row:(int)rowIndex;
+			  row:(NSUInteger)rowIndex;
 
 	/*
 	 * TableView drag & drop 
 	 */
 - (NSDragOperation)tableView:(NSTableView *)aTableView
 				validateDrop:(id <NSDraggingInfo>)info
-				 proposedRow:(int)row
+				 proposedRow:(NSUInteger)row
        proposedDropOperation:(NSTableViewDropOperation)operation;
 
 @end

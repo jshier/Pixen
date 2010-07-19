@@ -76,7 +76,7 @@ backgroundColor:(NSColor *)color;
 - (NSColor *)colorAtIndex:(unsigned int)index;
 - (NSColor *)colorAtPoint:(NSPoint)aPoint;
 - (void)setColor:(NSColor *)aColor atPoint:(NSPoint)aPoint;
-- (void)setColor:(NSColor *)c atIndex:(unsigned int)loc;
+- (void)setColor:(NSColor *)c atIndex:(NSUInteger)loc;
 
 - (void)moveToPoint:(NSPoint)newOrigin;
 - (void)translateXBy:(float)amountX yBy:(float)amountY;
@@ -96,9 +96,9 @@ backgroundColor:(NSColor *)color;
 
 - (void)flipHorizontally;
 - (void)flipVertically;
-- (void)rotateByDegrees:(int)degrees;
+//- (void)rotateByDegrees:(int)degrees;
 
-- (void)rotateByDegrees:(int)degrees;
+- (void)rotateByDegrees:(NSUInteger)degrees;
 
 - (void)applyImage:(NSImage *)img;
 

@@ -123,7 +123,7 @@
 	document = doc;
 }
 
-- (NSView *) tableView:(NSTableView *)tableView viewForRow:(int)row
+- (NSView *) tableView:(NSTableView *)tableView viewForRow:(NSInteger)row
 {
 	return [views objectAtIndex:[self invertLayerIndex:row]];	
 }
@@ -133,14 +133,14 @@
 	[self selectRow:[self invertLayerIndex:[[canvas layers] indexOfObject:[canvas activeLayer]]]];
 }
 
-- (int)numberOfRowsInTableView:(NSTableView *)view
+- (NSUInteger)numberOfRowsInTableView:(NSTableView *)view
 {
 	return [[canvas layers] count];
 }
 
 - (void)reloadData:(NSNotification *) aNotification
 {
-	int i, selectedRow;
+	NSUInteger i, selectedRow;
 	
 	if ([tableView selectedRow] == -1)
 	{
@@ -208,7 +208,7 @@
 	[self selectLayer:[[canvas layers] objectAtIndex:[self invertLayerIndex:[tableView selectedRow]]]];
 }
 
-- (void)selectRow:(int)index
+- (void)selectRow:(NSUInteger)index
 {
 	if ([tableView respondsToSelector:@selector(selectRowIndexes:byExtendingSelection:)])
 	{
@@ -229,7 +229,7 @@
 
 - (id)tableView:(NSTableView *)aTableView 
 objectValueForTableColumn:(NSTableColumn *)aTableColumn 
-			row:(int)rowIndex
+			row:(NSUInteger)rowIndex
 {
 	if([[aTableColumn identifier] isEqualToString:@"visible"])
 	{
@@ -245,7 +245,7 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 - (void)tableView:(NSTableView *)aTableView
    setObjectValue:(id)anObject
    forTableColumn:(NSTableColumn *)aTableColumn 
-			  row:(int)rowIndex
+			  row:(NSUInteger)rowIndex
 {
 	if([[aTableColumn identifier] isEqualToString:@"visible"])
 	{
@@ -300,11 +300,11 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 	[canvas duplicateLayerAtIndex:[[canvas layers] indexOfObject:layer]];
 }
 
-- (void)removeLayerAtCanvasLayersIndex:(unsigned)index
+- (void)removeLayerAtCanvasLayersIndex:(NSUInteger)index
 {
 	if([[canvas layers] count] <= 1) { return; }
 	[canvas removeLayerAtIndex:index];
-	int newIndex = MAX(index - 1, 0);
+    NSUInteger newIndex = MAX(index - 1, 0);
 	[self selectRow:[self invertLayerIndex:newIndex]];
 	[self selectLayer:nil];
 }
@@ -335,7 +335,7 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 		return;
 	}
 	
-	int row = [self invertLayerIndex:[tableView selectedRow]];
+	NSInteger row = [self invertLayerIndex:[tableView selectedRow]];
 	
 	[self selectRow:[self invertLayerIndex:row]];
 	
@@ -355,14 +355,14 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 		[removeButton setEnabled:YES];
 }
 
-- (int)invertLayerIndex:(int)anIndex
+- (NSInteger)invertLayerIndex:(NSInteger)anIndex
 {
 	return [[canvas layers] count] - anIndex - 1;
 }
 
-- (void)mergeDownLayerAtCanvasLayersIndex:(unsigned)ind
+- (void)mergeDownLayerAtCanvasLayersIndex:(NSUInteger)ind
 {
-	int index = ind;
+	NSUInteger index = ind;
 	if (index >= [[canvas layers] count]) {
 		index = 0;
 	}
@@ -404,7 +404,7 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 
 - (NSDragOperation)tableView:(NSTableView *)aTableView 
 				validateDrop:(id <NSDraggingInfo>)info
-				 proposedRow:(int)row
+				 proposedRow:(NSUInteger)row
 	   proposedDropOperation:(NSTableViewDropOperation)operation
 {
 	if (![[[info draggingPasteboard] types] containsObject:PXLayerRowPboardType])
@@ -412,7 +412,7 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 		return NSDragOperationNone; 
 	}
 	
-	int sourceRow = [self invertLayerIndex:[[[info draggingPasteboard] stringForType:PXLayerRowPboardType] intValue]];
+	NSInteger sourceRow = [self invertLayerIndex:[[[info draggingPasteboard] stringForType:PXLayerRowPboardType] intValue]];
 	if ( row == sourceRow + 1 || row == sourceRow)
 	{
 		return NSDragOperationNone;

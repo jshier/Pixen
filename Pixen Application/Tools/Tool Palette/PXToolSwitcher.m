@@ -168,7 +168,7 @@ NSMutableArray * toolNames;
 
 - (PXToolTag)tagForTool:(id) aTool
 {
-  return [tools indexOfObject:aTool];
+  return (PXToolTag)[tools indexOfObject:aTool];
 }
 
 - (void)setIcon:(NSImage *)anImage forTool:(id)aTool
@@ -246,7 +246,7 @@ NSMutableArray * toolNames;
 - (IBAction)toolClicked:(id)sender
 {
 	
-  [self useToolTagged:[[toolsMatrix selectedCell] tag]];
+  [self useToolTagged:(PXToolTag)[[toolsMatrix selectedCell] tag]];
 }
 
 - (IBAction)toolDoubleClicked:(id)sender
@@ -262,7 +262,7 @@ NSMutableArray * toolNames;
   {
 		if ([chars characterAtIndex:0] == [[[NSUserDefaults standardUserDefaults] objectForKey:current] characterAtIndex:0])
 		{
-			[self useToolTagged:[[PXToolSwitcher toolNames] indexOfObject:current]];
+			[self useToolTagged:(PXToolTag)[[PXToolSwitcher toolNames] indexOfObject:current]];
 			break;
 		}
   }

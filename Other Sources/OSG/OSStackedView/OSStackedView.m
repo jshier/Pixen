@@ -205,7 +205,7 @@
 	return [selectedElement view];
 }
 
-- (int)selectedRow
+- (NSUInteger)selectedRow
 {
 	return [views indexOfObject:selectedElement];
 }
@@ -228,7 +228,7 @@
 	return bgImage;
 }
 
-- (unsigned int)draggingSourceOperationMaskForLocal:(BOOL)local
+- (NSUInteger)draggingSourceOperationMaskForLocal:(BOOL)local
 {
 	return NSDragOperationEvery;
 }
@@ -238,7 +238,7 @@
 	if(![delegate respondsToSelector:@selector(stackedView:writeRows:toPasteboard:)]) { return; }
 	NSPasteboard *pasteboard = [NSPasteboard pasteboardWithName:NSDragPboard];
 	dragOffset = [element convertPoint:[event locationInWindow] fromView:nil];
-	if([delegate stackedView:self writeRows:[NSArray arrayWithObject:[NSNumber numberWithInt:[views indexOfObject:element]]] toPasteboard:pasteboard])
+	if([delegate stackedView:self writeRows:[NSArray arrayWithObject:[NSNumber numberWithInteger:[views indexOfObject:element]]] toPasteboard:pasteboard])
 	{
 		NSImage *image = [self dragImageForElement:element];
 		[element dragImage:image at:NSZeroPoint offset:NSMakeSize(dragOffset.x, dragOffset.y) event:event pasteboard:pasteboard source:self slideBack:NO];
@@ -331,12 +331,12 @@
 	return YES;
 }
 
-- (int)tag
+- (NSInteger)tag
 {
 	return tag;
 }
 
-- (void)setTag:(int)newTag
+- (void)setTag:(NSInteger)newTag
 {
 	tag = newTag;
 }
@@ -354,7 +354,7 @@
 - (void)restackViews
 {
 	float totalHeight = [self height];
-	int i;
+	NSInteger i;
 	for (i = [views count] - 1; i >= 0; i--)
 	{
 		OSStackedViewElement *current = [views objectAtIndex:i];

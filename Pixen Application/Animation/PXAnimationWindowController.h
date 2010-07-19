@@ -16,12 +16,12 @@
 	IBOutlet PXAnimationPreview *animationPreview;
 	
 	IBOutlet RBSplitSubview *topSubview;
-	unsigned oldMin, oldMax;
+	NSUInteger oldMin, oldMax;
 	
 	IBOutlet NSButton *playPauseButton;
 	
 	PXCel *activeCel;
-	int activeIndex;
+	NSUInteger activeIndex;
 }
 - (void)setAnimation:anim;
 - (void)activateCel:(PXCel *)cel;

@@ -52,9 +52,9 @@
 - calibratedBitmapImageRep
 {
 	NSSize size = [self size];
-	int samplesPerPixel = [self samplesPerPixel];
-	int extraBytesPerPixel = [self bitsPerPixel] / 8 - samplesPerPixel;
-	int extraBytesPerRow = [self bytesPerRow] - [self pixelsWide] * (samplesPerPixel + extraBytesPerPixel);
+	NSUInteger samplesPerPixel = [self samplesPerPixel];
+	NSUInteger extraBytesPerPixel = [self bitsPerPixel] / 8 - samplesPerPixel;
+	NSUInteger extraBytesPerRow = [self bytesPerRow] - [self pixelsWide] * (samplesPerPixel + extraBytesPerPixel);
 		
 	CMBitmap sourceBitmap;
 	sourceBitmap.image = (char *)[self bitmapData];

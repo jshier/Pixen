@@ -94,10 +94,10 @@ static PXPanelManager *sharedManager = nil;
 	[self showToolPalette:self];
 	
 	// Palette panels!
-	int systemPalettesCount = PXPalette_getSystemPalettes(NULL, 0);
+	NSUInteger systemPalettesCount = PXPalette_getSystemPalettes(NULL, 0);
 	PXPalette **systemPalettes = malloc(sizeof(PXPalette *) * systemPalettesCount);
 	PXPalette_getSystemPalettes(systemPalettes, 0);
-	int userPalettesCount = PXPalette_getUserPalettes(NULL, 0);
+	NSUInteger userPalettesCount = PXPalette_getUserPalettes(NULL, 0);
 	PXPalette **userPalettes = malloc(sizeof(PXPalette *) * userPalettesCount);
 	PXPalette_getUserPalettes(userPalettes, 0);
 	NSArray *palettePanels = [defaults objectForKey:PXPalettePanelsKey];
@@ -144,10 +144,10 @@ static PXPanelManager *sharedManager = nil;
 	// Popout color panels
 	NSMutableArray *palettePanels = [NSMutableArray array];
 	
-	int systemPalettesCount = PXPalette_getSystemPalettes(NULL, 0);
+	NSUInteger systemPalettesCount = PXPalette_getSystemPalettes(NULL, 0);
 	PXPalette **systemPalettes = malloc(sizeof(PXPalette *) * systemPalettesCount);
 	PXPalette_getSystemPalettes(systemPalettes, 0);
-	int userPalettesCount = PXPalette_getUserPalettes(NULL, 0);
+	NSUInteger userPalettesCount = PXPalette_getUserPalettes(NULL, 0);
 	PXPalette **userPalettes = malloc(sizeof(PXPalette *) * userPalettesCount);
 	PXPalette_getUserPalettes(userPalettes, 0);
 	
@@ -157,7 +157,7 @@ static PXPanelManager *sharedManager = nil;
 		if (![current isVisible]) { continue; }
 		NSMutableDictionary *panelInfo = [NSMutableDictionary dictionary];
 		[panelInfo setObject:NSStringFromRect([current frame]) forKey:PXPalettePanelFrameKey];
-		[panelInfo setObject:[NSNumber numberWithInt:[[(PXPalettePanel *)current paletteView] controlSize]] forKey:PXPalettePanelPaletteViewSizeKey];
+		[panelInfo setObject:[NSNumber numberWithUnsignedInteger:[[(PXPalettePanel *)current paletteView] controlSize]] forKey:PXPalettePanelPaletteViewSizeKey];
 		
 		// Now we've got to identify the palette and see how we're going to classify it.
 		PXPalette *palette = [[(PXPalettePanel *)current paletteView] palette];

@@ -116,7 +116,7 @@ int kPXColorPickerMode = 23421337;
 	PXPalette *palette = [paletteView palette];
 	PXPalette *newPalette = [paletteSelector reloadDataExcluding:aDoc withCurrentPalette:palette];
 	if (palette == NULL) { [self showPalette:newPalette]; return; }
-	int paletteCount = [paletteSelector paletteCount];
+	NSUInteger paletteCount = [paletteSelector paletteCount];
 	PXPalette **palettes = [paletteSelector palettes];
 	int i;
 	for (i = 0; i < paletteCount; i++)
@@ -145,7 +145,7 @@ int kPXColorPickerMode = 23421337;
 	[buttonCell setImage:newButtonImage];
 }
 
-- (void)setMode:(int)mode { }
+- (void)setMode:(NSColorPanelMode)mode { }
 
 - (NSView *)provideNewView:(BOOL)initialRequest
 {
@@ -168,12 +168,12 @@ int kPXColorPickerMode = 23421337;
 	[pickerView setFrameOrigin:NSZeroPoint];
 }
 
-- (int)currentMode
+- (NSColorPanelMode)currentMode
 {
 	return kPXColorPickerMode;
 }
 
-- (BOOL)supportsMode:(int)mode
+- (BOOL)supportsMode:(NSColorPanelMode)mode
 {
 	return kPXColorPickerMode == mode;
 }
@@ -228,10 +228,10 @@ int kPXColorPickerMode = 23421337;
 
 - (void)prompter:aPrompter didFinishWithName:aName context:context
 {
-	int systemPaletteCount = PXPalette_getSystemPalettes(NULL, 0);
+	NSUInteger systemPaletteCount = PXPalette_getSystemPalettes(NULL, 0);
 	PXPalette **systemPalettes = malloc(sizeof(PXPalette *) * systemPaletteCount);
 	PXPalette_getSystemPalettes(systemPalettes, 0);
-	int j;
+	NSUInteger j;
 	for (j = 0; j < systemPaletteCount; j++)
 	{
 		if ([aName isEqualToString:PXPalette_name(systemPalettes[j])])

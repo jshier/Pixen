@@ -61,9 +61,9 @@
 
 	//Events methods
 - (void)keyDown:(NSEvent *)event fromCanvasController:(PXCanvasController *)cc;
-- (BOOL)keyWasDown:(unsigned int)mask;
-- (BOOL)isMask:(unsigned int)newMask upEventForModifierMask:(unsigned int)mask;
-- (BOOL)isMask:(unsigned int)newMask downEventForModifierMask:(unsigned int)mask;
+- (BOOL)keyWasDown:(NSUInteger)mask;
+- (BOOL)isMask:(NSUInteger)newMask upEventForModifierMask:(NSUInteger)mask;
+- (BOOL)isMask:(NSUInteger)newMask downEventForModifierMask:(NSUInteger)mask;
 - (void)flagsChanged:(NSEvent *)theEvent;
 
 - (void)rightMouseDown;

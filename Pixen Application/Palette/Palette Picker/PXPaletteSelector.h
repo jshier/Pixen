@@ -15,10 +15,10 @@
 	IBOutlet id delegate;
 	
 	PXPalette **palettes;
-	int paletteCount;
+	NSUInteger paletteCount;
 }
 
-- (int)paletteCount;
+- (NSUInteger)paletteCount;
 - (PXPalette **)palettes;
 
 - (void)showPalette:(PXPalette *)pal;

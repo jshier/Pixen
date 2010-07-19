@@ -58,7 +58,7 @@
 	{
 		cachedEmptyPath = [[NSBezierPath bezierPathWithRoundedRect:NSInsetRect([self bounds], 5, 5) cornerRadius:15] retain];
 		[cachedEmptyPath setLineWidth:4];
-		float pattern[2] = { 15.0, 5.0 };
+		CGFloat pattern[2] = { 15.0, 5.0 };
 		if (!isActiveDragTarget)
 			[cachedEmptyPath setLineDash:pattern count:2 phase:0.0];
 	}

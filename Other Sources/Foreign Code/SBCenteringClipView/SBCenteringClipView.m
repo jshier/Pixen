@@ -90,7 +90,7 @@
     [self centerDocument];
 }
 
-- (void)setFrameRotation:(float)angle
+- (void)setFrameRotation:(CGFloat)angle
 {
     [super setFrameRotation:angle];
     [self centerDocument];

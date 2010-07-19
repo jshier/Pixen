@@ -34,7 +34,7 @@ typedef BOOL * PXSelectionMask;
 
 @interface PXCanvas : NSObject <NSCopying>
 {
-	id layers;
+	NSMutableArray *layers;
 	
 //I want to move these to the document somehow, eventually.
 //Maybe for Pixen 5... but it would require a huge overhaul

@@ -31,13 +31,13 @@
 @end
 
 @interface PXColorPickerColorWellCell : NSCell {
-	int index;
+	NSUInteger index;
 	NSColor *color;
 	NSImage *smallNewColorImage, *bigNewColorImage;
 }
 
-- (int)index;
-- (void)setIndex:(int)newIndex;
+- (NSUInteger)index;
+- (void)setIndex:(NSUInteger)newIndex;
 - (NSColor *)color;
 - (void)setColor:(NSColor *)newColor;
 

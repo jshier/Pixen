@@ -15,9 +15,9 @@
 }
 - init;
 - (NSArray *)canvases;
-- (PXCel *)objectInCelsAtIndex:(unsigned int)index;
-- (unsigned)indexOfObjectInCels:(PXCel *)cel;
-- (unsigned)countOfCels;
+- (PXCel *)objectInCelsAtIndex:(NSUInteger)index;
+- (NSUInteger)indexOfObjectInCels:(PXCel *)cel;
+- (NSUInteger)countOfCels;
 - (NSSize)size;
 - (void)setSize:(NSSize)aSize;
 - (void)setSizeNoUndo:(NSSize)aSize;
@@ -25,14 +25,14 @@
 - (void)setSize:(NSSize)aSize withOrigin:(NSPoint)origin backgroundColor:(NSColor *)bgcolor undo:(BOOL)undo;
 - (NSUndoManager *)undoManager;
 - (void)setUndoManager:man;
-- (void)insertObject:(PXCel *)cel inCelsAtIndex:(unsigned int)index;
+- (void)insertObject:(PXCel *)cel inCelsAtIndex:(NSUInteger)index;
 - (void)addNewCel;
-- (void)insertNewCelAtIndex:(unsigned int)index;
+- (void)insertNewCelAtIndex:(NSUInteger)index;
 - (void)addCel:(PXCel *)cel;
-- (void)removeObjectFromCelsAtIndex:(unsigned)index;
+- (void)removeObjectFromCelsAtIndex:(NSUInteger)index;
 - (void)removeCel:(PXCel *)cel;
-- (void)moveCelFromIndex:(int)index1 toIndex:(int)index2;
-- (void)copyCelFromIndex:(int)originalIndex toIndex:(int)insertionIndex;
-- (NSImage *)spriteSheetWithCelMargin:(int)margin;
-- (void)reduceColorsTo:(int)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
+- (void)moveCelFromIndex:(NSUInteger)index1 toIndex:(NSUInteger)index2;
+- (void)copyCelFromIndex:(NSUInteger)originalIndex toIndex:(NSUInteger)insertionIndex;
+- (NSImage *)spriteSheetWithCelMargin:(NSUInteger)margin;
+- (void)reduceColorsTo:(NSUInteger)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor;
 @end

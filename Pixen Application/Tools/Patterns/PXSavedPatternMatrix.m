@@ -81,7 +81,7 @@
 {
 	int columns = [self columns];
 	int rows = ceilf((float)[patterns count] / (float)columns);
-	int currentRow = [self selectedRow], currentColumn = [self selectedColumn];
+	NSInteger currentRow = [self selectedRow], currentColumn = [self selectedColumn];
 	while([self numberOfRows] < rows)
 	{
 		[self addRow];
@@ -90,7 +90,7 @@
 	{
 		[self addColumn];
 	}
-	int i;
+	NSUInteger i;
 	for (i=0; i<[patterns count]; i++)
 	{
 		PXPatternCell *patternCell = [[self cells] objectAtIndex:i];

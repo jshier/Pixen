@@ -135,12 +135,12 @@
 	[badgeString drawAtPoint:NSMakePoint(NSMaxX(frame) - badgeSize.width + 3, flipped ? NSMaxY(frame) - badgeSize.height - verticalTextOffset : verticalTextOffset)];
 }
 
-- (int)index
+- (NSUInteger)index
 {
 	return index;
 }
 
-- (void)setIndex:(int)newIndex
+- (void)setIndex:(NSUInteger)newIndex
 {
 	index = newIndex;
 }

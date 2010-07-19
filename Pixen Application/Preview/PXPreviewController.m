@@ -205,7 +205,7 @@ static PXPreviewController *instance = nil;
 	[view setDelegate:bezelView]; // for mouse up
 	[view setShouldDrawToolBeziers:NO];
 	[view setShouldDrawGrid:NO];
-	[view setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
+	[(NSView *)view setAutoresizingMask:NSViewMinXMargin | NSViewMaxXMargin | NSViewMinYMargin | NSViewMaxYMargin];
 }
 
 - (void)updateViewPercentage

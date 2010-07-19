@@ -30,10 +30,10 @@
 
 @interface PXCanvasView : NSView 
 {
-	PXCanvas * canvas;
+	PXCanvas *canvas;
 
-	PXCrosshair * crosshair;
-	NSAffineTransform * transform;
+	PXCrosshair *crosshair;
+	NSAffineTransform *transform;
 	
 	NSBezierPath *cachedMarqueePath;
 	NSColor *antsPattern;

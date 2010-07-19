@@ -43,7 +43,7 @@ typedef struct
 - (NSData *)palDataForPalette:(PXPalette *)palette
 {
 	NSMutableData *data = [NSMutableData data];
-	unsigned long length = 24 + (4 * PXPalette_colorCount(palette));
+	uint32_t length = 24 + (4 * PXPalette_colorCount(palette));
 	
 	// Construct the header
 	OSPALHeader header;
@@ -55,7 +55,7 @@ typedef struct
 	// Construct the RIFF chunk
 	unsigned long riffSignature = CFSwapInt32HostToLittle('atad');
 	[data appendBytes:&riffSignature length:4];
-	unsigned long chunkSize = CFSwapInt32HostToLittle(length - 20);
+	uint32_t chunkSize = CFSwapInt32HostToLittle(length - 20);
 	[data appendBytes:&chunkSize length:4];
 	
 	// The first data long is in two shorts: a palette version and the number of colors in the palette.

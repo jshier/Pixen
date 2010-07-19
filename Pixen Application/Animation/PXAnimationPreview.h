@@ -31,7 +31,7 @@
 @interface NSObject(PXAnimationPreviewDataSource)
 
 - (int)numberOfCels;
-- (id)celAtIndex:(int)currentIndex;
+- (id)celAtIndex:(NSUInteger)currentIndex;
 - (NSTimeInterval)durationOfCelAtIndex:(int)currentIndex;
 
 @end

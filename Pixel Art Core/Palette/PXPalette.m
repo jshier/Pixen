@@ -109,10 +109,10 @@ NSColor *_PXPalette_correctColor(NSColor *color)
 }
 
 static PXPalette **systemPalettes = NULL;
-static unsigned int systemPalettesCount = 0;
+static NSUInteger systemPalettesCount = 0;
 
 static PXPalette **userPalettes = NULL;
-static unsigned int userPalettesCount = 0;
+static NSUInteger userPalettesCount = 0;
 
 NSDictionary *PXPalette_dictForArchiving(PXPalette *self)
 {
@@ -156,7 +156,7 @@ BOOL PXPalette_isDocumentPalette(PXPalette *self)
 {
 	if (self->canSave) { return NO; } // Must be a user palette.
 	// Let's see if it's a system palette.
-	int systemCount = PXPalette_getSystemPalettes(NULL,0);
+	NSUInteger systemCount = PXPalette_getSystemPalettes(NULL,0);
 	PXPalette **systemPalettes = calloc(systemCount, sizeof(PXPalette *));
 	PXPalette_getSystemPalettes(systemPalettes, 0);
 	int i;
@@ -206,10 +206,10 @@ NSArray *CreateGrayList()
 	return grays;
 }
 
-unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex)
+NSUInteger PXPalette_getSystemPalettes(PXPalette **pals, NSUInteger initialIndex)
 {
 	NSArray *lists = [NSColorList availableColorLists];
-	int newCount = [lists count] + 1;
+	NSUInteger newCount = [lists count] + 1;
 	if(pals == NULL) { return newCount; }
 	if(systemPalettes == NULL)
 	{
@@ -254,7 +254,7 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 		systemPalettes[[lists count]] = palette;
 		systemPalettesCount = newCount;
 	}
-	int i;
+	NSUInteger i;
 	for (i = initialIndex; i < (initialIndex + systemPalettesCount); i++)
 	{
 		pals[i] = systemPalettes[i - initialIndex];
@@ -262,7 +262,7 @@ unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex
 	return systemPalettesCount;
 }
 
-unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex)
+NSUInteger PXPalette_getUserPalettes(PXPalette **pals, NSUInteger initialIndex)
 {
 //FIXME: this code will leak or worse(probably just leak) if palettes are removed at runtime.
 	NSMutableArray *paths = [NSMutableArray array];
@@ -276,7 +276,7 @@ unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex)
 		}
 	}
 	[paths sortUsingSelector:@selector(compareNumeric:)];
-	int newCount = [paths count];
+	NSUInteger newCount = [paths count];
 	if(pals == NULL) { return newCount; }
 	if(userPalettes == NULL)
 	{
@@ -297,7 +297,7 @@ unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex)
 		}
 		userPalettesCount = newCount;
 	}
-	int i;
+	NSUInteger i;
 	for (i = initialIndex; i < (initialIndex + userPalettesCount); i++)
 	{
 		pals[i] = userPalettes[i - initialIndex];
@@ -633,7 +633,7 @@ unsigned int PXPalette_indexOfColorAddingIfNotPresent(PXPalette *self, NSColor *
 }
 
   //this one keeps the colors sorted, as long as it's the only way used to take colors out.
-void PXPalette_decrementColorCount(PXPalette *self, NSColor *color, int amt)
+void PXPalette_decrementColorCount(PXPalette *self, NSColor *color, NSUInteger amt)
 {
 	NSColor *correctedColor = _PXPalette_correctColor(color);
   BOOL added = NO;
@@ -667,7 +667,7 @@ void PXPalette_decrementColorCount(PXPalette *self, NSColor *color, int amt)
   }
 }
   //this one keeps the colors sorted, as long as it's the only way used to put colors in.
-void PXPalette_incrementColorCount(PXPalette *self, NSColor *color, int amt)
+void PXPalette_incrementColorCount(PXPalette *self, NSColor *color, NSUInteger amt)
 {
     //this could be hilariously accelerated if we were coalescing color updates.
 	NSColor *correctedColor = _PXPalette_correctColor(color);

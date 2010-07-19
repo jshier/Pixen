@@ -166,7 +166,7 @@
 	return PXImage_colorAtXY(image, point.x, point.y);
 }
 
-- (void)setColor:(NSColor *)c atIndex:(unsigned int)loc
+- (void)setColor:(NSColor *)c atIndex:(NSUInteger)loc
 {
 	PXImage_setColorAtIndex(image, c, loc);
 }
@@ -188,7 +188,7 @@
 	PXImage_setColorAtXY(image, color, point.x, point.y);
 }
 
-- (void)rotateByDegrees:(int)degrees
+- (void)rotateByDegrees:(NSUInteger)degrees
 {
 	PXImage_rotateByDegrees(image, degrees);
 }
@@ -292,7 +292,7 @@
 			[[NSGraphicsContext currentContext] setImageInterpolation:NSImageInterpolationNone];
 			[[NSGraphicsContext currentContext] setShouldAntialias:NO];
 			[[NSColor blackColor] set];
-			id translate = [NSAffineTransform transform];
+			NSAffineTransform *translate = [NSAffineTransform transform];
 			[translate translateXBy:-src.origin.x*widthScale yBy:-src.origin.y*heightScale];
 			[translate concat];
 			[[transform transformBezierPath:meldedBezier] fill];
@@ -490,11 +490,11 @@
 	id outputImage = [[[self displayImage] copy] autorelease];
 	id rep = [NSBitmapImageRep imageRepWithData:[outputImage TIFFRepresentation]];
 	unsigned char *bitmapData = [rep bitmapData];
-	int i;
+	NSUInteger i;
 	id calibratedClear = [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 	for (i = 0; i < [self size].width * [self size].height; i++)
 	{
-		int base = i * [rep samplesPerPixel];
+		NSUInteger base = i * [rep samplesPerPixel];
 		NSColor *color;
 		if (transparency && bitmapData[base + 3] == 0)
 		{

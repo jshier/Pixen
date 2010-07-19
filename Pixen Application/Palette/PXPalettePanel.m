@@ -98,7 +98,7 @@
 {
 	PXPalette *newPalette = [paletteSelector reloadDataExcluding:nil withCurrentPalette:palette];
 	if (palette == NULL) { [self showPalette:newPalette]; return; }
-	int paletteCount = [paletteSelector paletteCount];
+	NSUInteger paletteCount = [paletteSelector paletteCount];
 	PXPalette **palettes = [paletteSelector palettes];
 	int i;
 	for (i = 0; i < paletteCount; i++)
@@ -156,7 +156,7 @@
 
 - (void)prompter:aPrompter didFinishWithName:aName context:context
 {
-	int systemPaletteCount = PXPalette_getSystemPalettes(NULL, 0);
+	NSUInteger systemPaletteCount = PXPalette_getSystemPalettes(NULL, 0);
 	PXPalette **systemPalettes = malloc(sizeof(PXPalette *) * systemPaletteCount);
 	PXPalette_getSystemPalettes(systemPalettes, 0);
 	int j;

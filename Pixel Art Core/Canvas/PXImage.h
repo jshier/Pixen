@@ -37,20 +37,20 @@ typedef struct {
 
 typedef struct {
 	PXTile** tiles;
-	unsigned tileCount;
+	NSUInteger tileCount;
 	CGColorSpaceRef colorspace;	
 
-	int retainCount;
+	NSUInteger retainCount;
 		
-	int width, height;
+	NSUInteger width, height;
 } PXImage;
 
 PXTile* PXTileCreate(CGPoint loc, CGSize size, CGColorSpaceRef colorspace, unsigned char *data);
 void PXTileRelease(PXTile* t);
 void PXTileDraw(PXTile* t, CGRect source, CGRect dest);
-CGColorRef PXTileColorAtXY(PXTile *t, int xv, int yv);
-void PXTileSetAtXY(PXTile *t, int xv, int yv, CGColorRef color);
-unsigned int PXTileGetData(PXTile *t, unsigned char **data);
+CGColorRef PXTileColorAtXY(PXTile *t, NSUInteger xv, NSUInteger yv);
+void PXTileSetAtXY(PXTile *t, NSUInteger xv, NSUInteger yv, CGColorRef color);
+NSUInteger PXTileGetData(PXTile *t, unsigned char **data);
 
 PXImage *PXImage_alloc(void);
 
@@ -63,19 +63,19 @@ PXImage *PXImage_release(PXImage *self);
 
 NSColor *PXImage_backgroundColor(PXImage *self);
 
-NSColor *PXImage_colorAtIndex(PXImage *self, int loc);
-NSColor *PXImage_colorAtXY(PXImage *self, int x, int y);
-void PXImage_setColorAtXY(PXImage *self, NSColor *color, int x, int y);
-void PXImage_setColorAtIndex(PXImage *self, NSColor *c, unsigned loc);
+NSColor *PXImage_colorAtIndex(PXImage *self, NSUInteger loc);
+NSColor *PXImage_colorAtXY(PXImage *self, NSUInteger x, NSUInteger y);
+void PXImage_setColorAtXY(PXImage *self, NSColor *color, NSUInteger x, NSUInteger y);
+void PXImage_setColorAtIndex(PXImage *self, NSColor *c, NSUInteger loc);
 
-PXTile *PXImage_tileAtXY(PXImage *self, int xv, int yv);
+PXTile *PXImage_tileAtXY(PXImage *self, NSUInteger xv, NSUInteger yv);
 void PXImage_swapTiles(PXImage *self, PXImage *other);
 void PXImage_drawRect(PXImage *self, NSRect rect, double opacity);
 
 void PXImage_flipHorizontally(PXImage *self);
 void PXImage_flipVertically(PXImage *self);
-void PXImage_translate(PXImage *self, int deltaX, int deltaY, BOOL wrap);
-void PXImage_rotateByDegrees(PXImage *self, int degrees);
+void PXImage_translate(PXImage *self, NSInteger deltaX, NSInteger deltaY, BOOL wrap);
+void PXImage_rotateByDegrees(PXImage *self, NSInteger degrees);
 
 void PXImage_setSize(PXImage *self, NSSize newSize, NSPoint origin, NSColor * backgroundColor);
 

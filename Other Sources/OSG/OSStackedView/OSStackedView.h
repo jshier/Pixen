@@ -32,7 +32,7 @@
 @interface OSStackedView : NSView {
 	id delegate;
 	id views;
-	int tag;
+	NSInteger tag;
 	id selectedElement;
 	id target;
 	SEL singleAction, doubleAction;
@@ -40,7 +40,7 @@
 	NSPoint dragOffset;
 }
 - (NSView *)selectedView;
-- (int)selectedRow;
+- (NSUInteger)selectedRow;
 - (void)stackSubview:(NSView *)sub;
 - (void)unstackSubview:(NSView *)sub;
 - (void)clearStack;
@@ -50,8 +50,8 @@
 - (void)setAction:(SEL)act;
 - (void)setDoubleAction:(SEL)act;
 
-- (void)setTag:(int)newTag;
-- (int)tag;
+- (void)setTag:(NSInteger)newTag;
+- (NSInteger)tag;
 @end
 
 @interface NSObject(OSStackedViewDelegate)

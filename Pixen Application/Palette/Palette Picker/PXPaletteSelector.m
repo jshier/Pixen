@@ -54,8 +54,8 @@
 - (PXPalette *)reloadDataExcluding:(PXCanvasDocument *)aDoc withCurrentPalette:(PXPalette *)currentPalette
 {
 	[selectionPopup removeAllItems];
-	int index = 0;
-	int i;
+	NSUInteger index = 0;
+	NSUInteger i;
 	for (i = 0; i < paletteCount; i++)
 	{
 		if(palettes[i] == currentPalette)
@@ -69,10 +69,9 @@
 	{
 		[docs removeObject:aDoc];
 	}
-//	int docPaletteCount = [docs count];	
-	int docPaletteCount = 0;
-	int userPaletteCount = PXPalette_getUserPalettes(NULL, 0);
-	int sysPaletteCount = PXPalette_getSystemPalettes(NULL, 0);
+	NSUInteger docPaletteCount = 0;
+	NSUInteger userPaletteCount = PXPalette_getUserPalettes(NULL, 0);
+	NSUInteger sysPaletteCount = PXPalette_getSystemPalettes(NULL, 0);
 	[selectionPopup setEnabled:YES];
 	if(docPaletteCount == 0 && userPaletteCount == 0 && sysPaletteCount == 0)
 	{
@@ -158,7 +157,7 @@
 	}
 }
 
-- (int)paletteCount
+- (NSUInteger)paletteCount
 {
 	return paletteCount;
 }

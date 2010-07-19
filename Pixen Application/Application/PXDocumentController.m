@@ -264,7 +264,7 @@ NSString *palettesSubdirName = @"Palettes";
 	{
 		NSString *bgName = [filename lastPathComponent];
 		NSString *dest = [GetBackgroundPresetsDirectory() stringByAppendingPathComponent:bgName];
-		int result = [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"Install Background Template \"%@\"?", @"Install Background Template \"%@\"?"), bgName] defaultButton:NSLocalizedString(@"Install", @"Install") alternateButton:NSLocalizedString(@"Cancel", @"CANCEL") otherButton:nil informativeTextWithFormat:NSLocalizedString(@"%@ will be copied to %@.", @"%@ will be copied to %@."), [filename stringByAbbreviatingWithTildeInPath], [dest stringByAbbreviatingWithTildeInPath]] runModal];
+		NSInteger result = [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"Install Background Template \"%@\"?", @"Install Background Template \"%@\"?"), bgName] defaultButton:NSLocalizedString(@"Install", @"Install") alternateButton:NSLocalizedString(@"Cancel", @"CANCEL") otherButton:nil informativeTextWithFormat:NSLocalizedString(@"%@ will be copied to %@.", @"%@ will be copied to %@."), [filename stringByAbbreviatingWithTildeInPath], [dest stringByAbbreviatingWithTildeInPath]] runModal];
 		if(result == NSAlertDefaultReturn)
 		{
 			[[NSFileManager defaultManager] copyItemAtPath:filename toPath:dest error:NULL];
@@ -275,7 +275,7 @@ NSString *palettesSubdirName = @"Palettes";
 	if([[filename pathExtension] isEqual:PXPatternSuffix])
 	{
 		NSString *patternName = [filename lastPathComponent];
-		int result = [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"Install Pattern \"%@\"?", @"Install Pattern \"%@\"?"), patternName] defaultButton:NSLocalizedString(@"Install", @"Install") alternateButton:NSLocalizedString(@"Cancel", @"CANCEL") otherButton:nil informativeTextWithFormat:NSLocalizedString(@"The pattern %@ will be added to Pixen's saved pattern list.", @"The pattern %@ will be added to Pixen's saved pattern list."), [filename stringByAbbreviatingWithTildeInPath]] runModal];
+		NSInteger result = [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"Install Pattern \"%@\"?", @"Install Pattern \"%@\"?"), patternName] defaultButton:NSLocalizedString(@"Install", @"Install") alternateButton:NSLocalizedString(@"Cancel", @"CANCEL") otherButton:nil informativeTextWithFormat:NSLocalizedString(@"The pattern %@ will be added to Pixen's saved pattern list.", @"The pattern %@ will be added to Pixen's saved pattern list."), [filename stringByAbbreviatingWithTildeInPath]] runModal];
 		if(result == NSAlertDefaultReturn)
 		{
 			NSString *patternArchiveFilename = GetPixenPatternFile();
@@ -288,7 +288,7 @@ NSString *palettesSubdirName = @"Palettes";
 	{
 		NSString *paletteName = [filename lastPathComponent];
 		NSString *dest = [GetPixenPaletteDirectory() stringByAppendingPathComponent:paletteName];
-		int result = [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"Install Palette \"%@\"?", @"Instal Palette \"%@\"?"), paletteName] defaultButton:NSLocalizedString(@"Install", @"Install") alternateButton:NSLocalizedString(@"Cancel", @"CANCEL") otherButton:nil informativeTextWithFormat:NSLocalizedString(@"%@ will be copied to %@.", @"%@ will be copied to %@."), [filename stringByAbbreviatingWithTildeInPath], [dest stringByAbbreviatingWithTildeInPath]] runModal];
+		NSInteger result = [[NSAlert alertWithMessageText:[NSString stringWithFormat:NSLocalizedString(@"Install Palette \"%@\"?", @"Instal Palette \"%@\"?"), paletteName] defaultButton:NSLocalizedString(@"Install", @"Install") alternateButton:NSLocalizedString(@"Cancel", @"CANCEL") otherButton:nil informativeTextWithFormat:NSLocalizedString(@"%@ will be copied to %@.", @"%@ will be copied to %@."), [filename stringByAbbreviatingWithTildeInPath], [dest stringByAbbreviatingWithTildeInPath]] runModal];
 		if(result == NSAlertDefaultReturn)
 		{
 			PXPaletteImporter *importer = [[[PXPaletteImporter alloc] init] autorelease];
@@ -482,7 +482,7 @@ NSString *palettesSubdirName = @"Palettes";
 	[openPanel setAllowsOtherFileTypes:NO];
 	[openPanel setCanChooseDirectories:NO];
 
-	int returnCode = [openPanel runModalForTypes:types];
+	NSInteger returnCode = [openPanel runModalForTypes:types];
 	if (returnCode == NSFileHandlingPanelCancelButton) { return; }
 
 	PXAnimationDocument *animationDocument = (PXAnimationDocument *)[self makeUntitledDocumentOfType:PixenAnimationFileType error:NULL];

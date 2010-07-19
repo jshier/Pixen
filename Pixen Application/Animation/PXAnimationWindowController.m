@@ -70,13 +70,13 @@
 
 - (void)activateCel:(PXCel *)cel
 {
-	int newCelIndex = [animation indexOfObjectInCels:cel];
+	NSUInteger newCelIndex = [animation indexOfObjectInCels:cel];
 		
 	if(cel == activeCel && activeIndex == newCelIndex) { return; }
 	activeIndex = newCelIndex;
 	activeCel = cel;
 	[self setCanvas:[cel canvas]];
-	int prevIndex = newCelIndex - 1;
+	NSInteger prevIndex = newCelIndex - 1;
 	if (prevIndex < 0)
 		prevIndex = [self numberOfCels] ? [self numberOfCels] - 1 : 0;
 	if (newCelIndex != prevIndex)
@@ -144,7 +144,7 @@
 		// If the change involved the number of cels getting bigger, this means a new cel was added; we should activate it.
 		if ([[change objectForKey:NSKeyValueChangeOldKey] intValue] < [animation countOfCels])
 		{
-			[self activateCel:[self celAtIndex:MIN([filmStrip selectedIndex]+1, [animation countOfCels]-1)]];
+			[self activateCel:[self celAtIndex:MIN([filmStrip selectedIndex] + 1, [animation countOfCels] - 1)]];
 		}
 		// It's gone down, so select the next one down.
 		else if([[change objectForKey:NSKeyValueChangeOldKey] intValue] > [animation countOfCels])
@@ -162,7 +162,7 @@
 	}
 }
 
-- (int)numberOfCels
+- (NSUInteger)numberOfCels
 {
 	return NSEqualSizes([animation size], NSZeroSize) ? 0 : [animation countOfCels];
 }
@@ -176,7 +176,7 @@
 	if ([indices count] < 1) {
 		return;
 	}
-	int index = [indices firstIndex];
+	NSUInteger index = [indices firstIndex];
 	
 	PXCel *cel = [self celAtIndex:index];
 	
@@ -194,7 +194,7 @@
 	return [[[NSArray arrayWithObject:PXCelPboardType] arrayByAddingObjectsFromArray:[NSImage imagePasteboardTypes]] arrayByAddingObject:NSFilenamesPboardType];
 }
 
-- (BOOL)insertCelIntoFilmStripView:view fromPasteboard:(NSPasteboard *)pboard atIndex:(int)targetDraggingIndex
+- (BOOL)insertCelIntoFilmStripView:view fromPasteboard:(NSPasteboard *)pboard atIndex:(NSUInteger)targetDraggingIndex
 {
 	NSString *type = [pboard availableTypeFromArray:[self draggedTypesForFilmStripView:view]];
 	if ([[NSImage imagePasteboardTypes] containsObject:type]) {
@@ -266,7 +266,7 @@
 
 - (IBAction)duplicateCel:sender
 {
-	int selectedIndex = [filmStrip selectedIndex];
+	NSUInteger selectedIndex = [filmStrip selectedIndex];
 	[animation copyCelFromIndex:selectedIndex toIndex:selectedIndex+1];
 }
 
@@ -277,7 +277,7 @@
 	return YES;
 }
 
-- (id)celAtIndex:(int)currentIndex
+- (id)celAtIndex:(NSUInteger)currentIndex
 {
 	return [animation objectInCelsAtIndex:currentIndex];
 }
@@ -301,7 +301,7 @@
 
 - (IBAction)newCel:sender
 {
-	unsigned int newIndex = [filmStrip selectedIndex] + 1;
+	NSUInteger newIndex = [filmStrip selectedIndex] + 1;
 	if (newIndex == NSNotFound) {newIndex = [animation countOfCels];}
 	[animation insertNewCelAtIndex:newIndex];
 	[[animation objectInCelsAtIndex:newIndex] setDuration:[[animation objectInCelsAtIndex:newIndex - 1] duration]];
@@ -320,7 +320,7 @@
 - (void)deleteCelsAtIndices:(NSIndexSet *)indices
 {
 	if([animation countOfCels] <= 1) { return; }
-	int currentIndex = [indices firstIndex];
+	NSUInteger currentIndex = [indices firstIndex];
 	do
 	{
 		[animation removeCel:[self celAtIndex:currentIndex]];
@@ -334,7 +334,7 @@
 
 - (IBAction)selectPreviousCel:sender
 {
-	int newIndex = [filmStrip selectedIndex];
+	NSInteger newIndex = [filmStrip selectedIndex];
 	if (newIndex == NSNotFound)
 	{
 		NSBeep();
@@ -348,7 +348,7 @@
 
 - (IBAction)selectNextCel:sender
 {
-	unsigned int newIndex = [filmStrip selectedIndex];
+	NSUInteger newIndex = [filmStrip selectedIndex];
 	if (newIndex == NSNotFound)
 	{
 		NSBeep();
@@ -401,8 +401,8 @@
 	NSString *finalString = [fileTemplate substringToIndex:range.location];
 	finalString = [finalString stringByAppendingString:@"%d"];
 	finalString = [finalString stringByAppendingString:[fileTemplate substringFromIndex:range.location + 2]];
-	int i;
-	int numberOfCels = [animation countOfCels];
+	NSUInteger i;
+	NSUInteger numberOfCels = [animation countOfCels];
 	NSString *directoryPath = [[[prompter savePanel] filenames] objectAtIndex:0];
 	for (i = 0; i < numberOfCels; i++)
 	{
@@ -425,7 +425,7 @@
 	if (code == NSCancelButton) { return; }
 	[panel orderOut:self];
 	id sharedExporter = [[OSQTExporter alloc] init];
-	int celCount = [animation countOfCels];
+	NSUInteger celCount = [animation countOfCels];
 	int i;
 	for (i = 0; i < celCount; i++)
 	{
@@ -448,7 +448,7 @@
 	if ([shouldScale boolValue])
 	{
 		id currentCanvas = [activeCel canvas];
-		int celCount = [animation countOfCels];
+		NSUInteger celCount = [animation countOfCels];
 		int i;
 		for (i = 0; i < celCount; i++)
 		{
@@ -496,7 +496,7 @@ didFinishWithSize:(NSSize)aSize
 
 - (IBAction)pasteCel:sender
 {
-	int newIndex = [filmStrip selectedIndex];
+	NSUInteger newIndex = [filmStrip selectedIndex];
 	if (newIndex == NSNotFound)
 		newIndex = [self numberOfCels];
 	else

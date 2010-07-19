@@ -104,7 +104,7 @@
 	[NSBezierPath strokeRect:oldRect]; // draw an outline around the image
 	
 	NSBezierPath *canvasOutline = [NSBezierPath bezierPathWithRect:newRect];
-	float dashed[2] = {3, 3};
+	CGFloat dashed[2] = {3, 3};
 	[canvasOutline setLineDash:dashed count:2 phase:0];
 	[canvasOutline stroke]; // draw an outline around the canvas
 	[canvasOutline setLineDash:dashed count:2 phase:3];

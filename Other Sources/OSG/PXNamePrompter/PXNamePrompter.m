@@ -89,7 +89,7 @@
 	_runningModal = YES;
 	_modalString = nil;
 	[promptString setStringValue:string];
-	int result = [NSApp runModalForWindow:panel];
+	NSInteger result = [NSApp runModalForWindow:panel];
 	_runningModal = NO;
 	[panel close];
 	if (result == NSRunAbortedResponse) {

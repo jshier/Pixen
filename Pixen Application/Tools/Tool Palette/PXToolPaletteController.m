@@ -242,7 +242,7 @@ static PXToolPaletteController *singleInstance = nil;
 	if (_locked) {
 		return usingRightToolBeforeLock;
 	}
-	int modFlags = [[[NSApplication sharedApplication] currentEvent] modifierFlags];
+	NSUInteger modFlags = [[[NSApplication sharedApplication] currentEvent] modifierFlags];
 	BOOL controlReallyDown = ((modFlags & NSControlKeyMask) == NSControlKeyMask); // sometimes we don't actually receive the message.  what a bother...
 	if (controlKeyDown != controlReallyDown) {
 		controlKeyDown = controlReallyDown;
@@ -287,17 +287,17 @@ static PXToolPaletteController *singleInstance = nil;
 		[leftSwitcher keyDown:event fromCanvasController:cc];
 }
 
-- (BOOL)keyWasDown:(unsigned int)mask
+- (BOOL)keyWasDown:(NSUInteger)mask
 {
     return (keyMask & mask) == mask;
 }
 
-- (BOOL)isMask:(unsigned int)newMask upEventForModifierMask:(unsigned int)mask
+- (BOOL)isMask:(NSUInteger)newMask upEventForModifierMask:(NSUInteger)mask
 {
     return [self keyWasDown:mask] && ((newMask & mask) == 0x0000);
 }
 
-- (BOOL)isMask:(unsigned int)newMask downEventForModifierMask:(unsigned int)mask
+- (BOOL)isMask:(NSUInteger)newMask downEventForModifierMask:(NSUInteger)mask
 {
     return ![self keyWasDown:mask] && ((newMask & mask) == mask);
 }

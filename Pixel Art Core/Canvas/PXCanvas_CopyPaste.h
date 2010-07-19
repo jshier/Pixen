@@ -10,7 +10,7 @@
 #import "PXCanvas.h"
 
 @interface PXCanvas(CopyPaste)
-- (int)runPasteTooBigAlert:(NSString *)pastedThing size:(NSSize)aSize;
+- (NSInteger)runPasteTooBigAlert:(NSString *)pastedThing size:(NSSize)aSize;
 - (BOOL)canContinuePasteOf:(NSString *)pastedThing size:(NSSize)aSize;
 - (void)pasteLayer:(PXLayer *)layer;
 - (void)pasteLayerFromPasteboard:(NSPasteboard *)board type:type;

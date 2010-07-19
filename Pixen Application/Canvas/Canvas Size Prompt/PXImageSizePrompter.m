@@ -114,8 +114,8 @@
 		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:[NSColor clearColor]] forKey:PXDefaultNewDocumentBackgroundColor];
 	
 	[self setBackgroundColor:[NSKeyedUnarchiver unarchiveObjectWithData:[defaults objectForKey:PXDefaultNewDocumentBackgroundColor]]];
-	[widthField setIntValue:[defaults integerForKey:PXDefaultNewDocumentWidth]];
-	[heightField setIntValue:[defaults integerForKey:PXDefaultNewDocumentHeight]];
+	[widthField setIntegerValue:[defaults integerForKey:PXDefaultNewDocumentWidth]];
+	[heightField setIntegerValue:[defaults integerForKey:PXDefaultNewDocumentHeight]];
 }
 
 - (void)updateSizeIndicators

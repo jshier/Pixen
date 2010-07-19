@@ -174,7 +174,7 @@ fromCanvasController:(PXCanvasController *) controller
 			[copyLayer finalizeMotion];
 		}
 		selectedRect = lastSelectedRect;
-		int index = [[canvas layers] indexOfObject:moveLayer];
+		NSUInteger index = [[canvas layers] indexOfObject:moveLayer];
 		[canvas mergeDownLayer:moveLayer];
 		[moveLayer release];
 		if(isCopying && copyLayer != nil)

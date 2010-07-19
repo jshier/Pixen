@@ -13,7 +13,7 @@
 	PXCanvas *canvas;
 	NSTimeInterval duration;
 }
-- initWithImage:(NSImage *)image animation:(PXAnimation *)animation atIndex:(int)index;
+- initWithImage:(NSImage *)image animation:(PXAnimation *)animation atIndex:(NSUInteger)index;
 - initWithImage:(NSImage *)image animation:(PXAnimation *)animation;
 - initWithCanvas:(PXCanvas *)initCanvas duration:(NSTimeInterval)initDuration;
 - (PXCanvas *)canvas;

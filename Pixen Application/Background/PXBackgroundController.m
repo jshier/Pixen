@@ -216,7 +216,7 @@ typedef enum _PXStackType
 {
 	if (returnCode == NSAlertFirstButtonReturn)
 	{
-		int tag;
+		NSInteger tag;
 		[[NSWorkspace sharedWorkspace] performFileOperation:NSWorkspaceRecycleOperation
                                                  source:GetBackgroundPresetsDirectory()
                                             destination:nil 
@@ -364,8 +364,8 @@ typedef enum _PXStackType
 - (NSDragOperation)stackedView:(OSStackedView *)aStackedView 
 				  validateDrop:(id <NSDraggingInfo>)info
 {
-	if(([[info draggingSource] tag] == PXTemplatesStackViewType && [aStackedView tag] == PXTemplatesStackViewType) ||
-	   ([[info draggingSource] tag] == PXDefaultsStackViewType && [aStackedView tag] == PXDefaultsStackViewType))
+	if(([(NSView *)[info draggingSource] tag] == PXTemplatesStackViewType && [aStackedView tag] == PXTemplatesStackViewType) ||
+	   ([(NSView *)[info draggingSource] tag] == PXDefaultsStackViewType && [aStackedView tag] == PXDefaultsStackViewType))
 	{
 		[[NSCursor arrowCursor] set];
 		return NSDragOperationNone;
@@ -536,8 +536,8 @@ typedef enum _PXStackType
 
 - (NSDragOperation)draggingEntered:(id <NSDraggingInfo>)info
 {
-	if(([[info draggingSource] tag] == PXTemplatesStackViewType && [[self documentView] tag] == PXTemplatesStackViewType) ||
-	   ([[info draggingSource] tag] == PXDefaultsStackViewType && [[self documentView] tag] == PXDefaultsStackViewType))
+	if(([(NSView *)[info draggingSource] tag] == PXTemplatesStackViewType && [(NSView *)[self documentView] tag] == PXTemplatesStackViewType) ||
+	   ([(NSView *)[info draggingSource] tag] == PXDefaultsStackViewType && [(NSView *)[self documentView] tag] == PXDefaultsStackViewType))
 	{
 		[[NSCursor arrowCursor] set];
 		return NSDragOperationNone;
@@ -549,7 +549,7 @@ typedef enum _PXStackType
 {		
 	if (NSPointInRect([[self documentView] convertPoint:[info draggingLocation] fromView:nil], [[self documentView] bounds])) { return NSDragOperationNone; }
 	
-	if ([[self documentView] tag] == PXDefaultsStackViewType)
+	if ([(NSView *)[self documentView] tag] == PXDefaultsStackViewType)
 	{
 		PXDefaultBackgroundTemplateView *mainBackgroundTemplate = (PXDefaultBackgroundTemplateView *)[[[[self documentView] valueForKey:@"views"] objectAtIndex:1] view];
 		PXDefaultBackgroundTemplateView *alternateBackgroundTemplate = (PXDefaultBackgroundTemplateView *)[[[[self documentView] valueForKey:@"views"] objectAtIndex:2] view];

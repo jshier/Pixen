@@ -19,7 +19,7 @@ const float PXPlusButtonPadding = 12;
     if (self) {
         buttonPath = [[NSBezierPath bezierPathWithRoundedRect:NSInsetRect([self bounds], 4, 4) cornerRadius:10] retain];
 		[buttonPath setLineWidth:3];
-		float pattern[2] = { 9.0, 3.0 };
+		CGFloat pattern[2] = { 9.0, 3.0 };
 		[buttonPath setLineDash:pattern count:2 phase:0.0];
 		
 		plusPath = [[NSBezierPath bezierPath] retain];

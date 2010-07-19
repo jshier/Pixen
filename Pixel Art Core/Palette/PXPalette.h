@@ -60,8 +60,8 @@ void PXPalette_saveChanges(PXPalette *self);
 NSArray *CreateGrayList(void);
 
 
-unsigned int PXPalette_getSystemPalettes(PXPalette **pals, unsigned initialIndex);
-unsigned int PXPalette_getUserPalettes(PXPalette **pals, unsigned initialIndex);
+NSUInteger PXPalette_getSystemPalettes(PXPalette **pals, NSUInteger initialIndex);
+NSUInteger PXPalette_getUserPalettes(PXPalette **pals, NSUInteger initialIndex);
 BOOL PXPalette_isDocumentPalette(PXPalette *self);
 
 PXPalette *PXPalette_alloc(void);
@@ -113,5 +113,5 @@ double PXPalette_hashEfficiency(PXPalette *self);
 int PXPalette_colorCount(PXPalette *self);
 NSArray *PXPalette_colors(PXPalette *self);
 
-void PXPalette_decrementColorCount(PXPalette *self, NSColor *color, int amt);
-void PXPalette_incrementColorCount(PXPalette *self, NSColor *color, int amt);
+void PXPalette_decrementColorCount(PXPalette *self, NSColor *color, NSUInteger amt);
+void PXPalette_incrementColorCount(PXPalette *self, NSColor *color, NSUInteger amt);

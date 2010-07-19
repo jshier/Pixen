@@ -131,7 +131,7 @@
 }
 
 
-- (void)rotateByDegrees:(int)degrees
+- (void)rotateByDegrees:(NSUInteger)degrees
 {
 	[self beginUndoGrouping];
     for (PXLayer *current in layers)
@@ -193,7 +193,7 @@
 	[self endUndoGrouping:NSLocalizedString(@"Flip Canvas Vertically", @"Flip Canvas Vertically")];
 }
 
-- (void)reduceColorsTo:(int)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor
+- (void)reduceColorsTo:(NSUInteger)colors withTransparency:(BOOL)transparency matteColor:(NSColor *)matteColor
 {
 	[PXCanvas reduceColorsInCanvases:[NSArray arrayWithObject:self] 
 						toColorCount:colors
@@ -202,7 +202,7 @@
 }
 
 +(void)reduceColorsInCanvases:(NSArray*)canvases 
-				 toColorCount:(int)colors
+				 toColorCount:(NSUInteger)colors
 			 withTransparency:(BOOL)transparency 
 				   matteColor:(NSColor *)matteColor;
 {
@@ -260,10 +260,10 @@
 	}
 	
 	GifColorType *map = malloc(sizeof(GifColorType) * 256);
-	int size = colors - (transparency ? 1 : 0);
+	NSUInteger size = colors - (transparency ? 1 : 0);
 	unsigned char *output = malloc(sizeof(unsigned char*) * [first size].width * [first size].height * [canvases count]);
 	if (quantizedPixels)
-		QuantizeBuffer(quantizedPixels, &size, red, green, blue, output, map);
+		QuantizeBuffer(quantizedPixels, (int *)&size, red, green, blue, output, map);
 	//NSLog(@"Quantized to %d colors", size);
 
 	PXPalette *palette = PXPalette_init(PXPalette_alloc());
@@ -328,8 +328,8 @@
 		pt = [[pts objectAtIndex:0] pointValue];
 		changedRect = NSMakeRect(pt.x, pt.y, 1, 1);
 	}
-	int i;
-	for (i = [pts count]-1; i >= 0; i--) 
+	NSUInteger i;
+	for (i = [pts count] - 1; i >= 0; i--) 
 	{
 		pt = [[pts objectAtIndex:i] pointValue];
 		NSColor *c = [colors objectAtIndex:i];

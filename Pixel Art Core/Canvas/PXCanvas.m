@@ -74,7 +74,7 @@
 {
 	count++;
 }
-- (NSComparisonResult)compare:other
+- (NSComparisonResult)compare:(NSArray *)other
 {
 	return count < [other count];
 }
@@ -363,29 +363,28 @@ backgroundColor:(NSColor *)color
 
 - (PXPalette *)createFrequencyPalette
 {
-	PXPalette *freqPal = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
-  NSSize sz = [self size];
-  float w = sz.width;
-  float h = sz.height;
-  NSCountedSet *colors = [NSCountedSet set];
+    PXPalette *freqPal = PXPalette_initWithoutBackgroundColor(PXPalette_alloc());
+    NSSize sz = [self size];
+    float w = sz.width;
+    float h = sz.height;
+    NSCountedSet *colors = [NSCountedSet set];
 	for (PXLayer * current in layers)
 	{
-		int i;
-		for (i = 0; i < w; i++)
-		{
-			int j;
+        int i;
+        for (i = 0; i < w; i++)
+        {
+            int j;
 			for (j = 0; j < h; j++)
 			{
 				id color = [current colorAtPoint:NSMakePoint(i, j)];
-        [colors addObject:color];
+                [colors addObject:color];
 			}
 		}
-	}
-  for(NSColor *c in colors)
-  {
-    PXPalette_incrementColorCount(freqPal, c, [colors countForObject:c]);
-  }
-  return freqPal;
+    }
+    for(NSColor *c in colors)
+        PXPalette_incrementColorCount(freqPal, c, [colors countForObject:c]);
+    
+    return freqPal;
 }
 
 @end

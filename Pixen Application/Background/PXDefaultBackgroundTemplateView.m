@@ -83,7 +83,7 @@
 	NSBezierPath *dottedPath = [NSBezierPath bezierPathWithRoundedRect:NSInsetRect([self bounds], 7, 7)
 														  cornerRadius:10];
 	[dottedPath setLineWidth:2];
-	float pattern[2] = { 9.0, 3.0 };
+	CGFloat pattern[2] = { 9.0, 3.0 };
 	[dottedPath setLineDash:pattern count:2 phase:0.0];
 	[[(highlighted ? [NSColor whiteColor] : [NSColor lightGrayColor]) colorWithAlphaComponent:0.5] set];
 	[dottedPath stroke];	

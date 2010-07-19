@@ -73,7 +73,7 @@ void PXTileDraw(PXTile* t, CGRect source, CGRect dest)
     CGContextRef target = (CGContextRef)[[NSGraphicsContext currentContext] graphicsPort];
 	CGContextDrawImage(target, dest, t->image);
 }
-CGColorRef PXTileColorAtXY(PXTile *t, int xv, int yv)
+CGColorRef PXTileColorAtXY(PXTile *t, NSUInteger xv, NSUInteger yv)
 {
 	if(xv < t->location.x || xv >= t->location.x + CGBitmapContextGetWidth(t->painting)) { return NULL; }
 	if(yv < t->location.y || yv >= t->location.y + CGBitmapContextGetHeight(t->painting)) { return NULL; }
@@ -81,9 +81,9 @@ CGColorRef PXTileColorAtXY(PXTile *t, int xv, int yv)
 	unsigned y = yv - t->location.y;
 	
 	unsigned char *data = CGBitmapContextGetData(t->painting);
-	int bytesPerRow = CGBitmapContextGetBytesPerRow(t->painting);
-	unsigned startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y)*bytesPerRow+x*PXTileComponentsPerPixel;
-	float a,b,c,d;
+	size_t bytesPerRow = CGBitmapContextGetBytesPerRow(t->painting);
+	NSUInteger startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y)*bytesPerRow+x*PXTileComponentsPerPixel;
+	CGFloat a,b,c,d;
 	d = data[startIndex+3] / 255.0;
 	if(d > 0)
 	{
@@ -95,10 +95,10 @@ CGColorRef PXTileColorAtXY(PXTile *t, int xv, int yv)
 	{
 		a = b = c = 0;
 	}
-	const float components[4] = {a, b, c, d};
+	const CGFloat components[4] = {a, b, c, d};
 	return CGColorCreate(CGBitmapContextGetColorSpace(t->painting), components);
 }
-void PXTileSetAtXY(PXTile *t, int xv, int yv, CGColorRef color)
+void PXTileSetAtXY(PXTile *t, NSUInteger xv, NSUInteger yv, CGColorRef color)
 {
 	if(xv < t->location.x || xv >= t->location.x + CGBitmapContextGetWidth(t->painting)) { return; }
 	if(yv < t->location.y || yv >= t->location.y + CGBitmapContextGetHeight(t->painting)) { return; }
@@ -111,16 +111,16 @@ void PXTileSetAtXY(PXTile *t, int xv, int yv, CGColorRef color)
 		t->image = NULL;
 	}
 	unsigned char *data = CGBitmapContextGetData(t->painting);
-	int bytesPerRow = CGBitmapContextGetBytesPerRow(t->painting);
-	unsigned startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y)*bytesPerRow+x*PXTileComponentsPerPixel;
-	const float *components = CGColorGetComponents(color);
+	size_t bytesPerRow = CGBitmapContextGetBytesPerRow(t->painting);
+	NSUInteger startIndex = (CGBitmapContextGetHeight(t->painting) - 1 - y)*bytesPerRow+x*PXTileComponentsPerPixel;
+	const CGFloat *components = CGColorGetComponents(color);
 	float a = components[3];
 	data[startIndex+0] = a*components[0]*255;
 	data[startIndex+1] = a*components[1]*255;
 	data[startIndex+2] = a*components[2]*255;
 	data[startIndex+3] = a*255;
 }
-unsigned int PXTileGetData(PXTile *t, unsigned char **data)
+NSUInteger PXTileGetData(PXTile *t, unsigned char **data)
 {
 	if(data != NULL)
 	{
@@ -149,15 +149,15 @@ PXImage *PXImage_init(PXImage *self)
 void PXImage_encodeWithCoder(PXImage *self, NSCoder *coder)
 {
 	id dict = [NSMutableDictionary dictionaryWithCapacity:4];
-	[dict setObject:[NSNumber numberWithInt:(self->width)] forKey:@"width"];
-	[dict setObject:[NSNumber numberWithInt:(self->height)] forKey:@"height"];
+	[dict setObject:[NSNumber numberWithInteger:(self->width)] forKey:@"width"];
+	[dict setObject:[NSNumber numberWithInteger:(self->height)] forKey:@"height"];
 	NSMutableArray *tiles = [NSMutableArray arrayWithCapacity:self->tileCount];
 	int i;
 	for (i = 0; i < self->tileCount; i++)
 	{
 		PXTile *t = self->tiles[i];
 		unsigned char *bytes;
-		unsigned int length = PXTileGetData(t, &bytes);
+		NSUInteger length = PXTileGetData(t, &bytes);
 		NSDictionary *d = [NSDictionary dictionaryWithObjectsAndKeys:
 						   NSStringFromPoint((*(NSPoint *)&(t->location))), @"location",
 						   [NSData dataWithBytes:bytes length:length], @"data", nil];
@@ -227,7 +227,7 @@ PXImage *PXImage_copy(PXImage *self)
 	{
 		PXTile *t = self->tiles[i];
 		unsigned char *bytes;
-		unsigned int length = PXTileGetData(t, &bytes);
+		NSUInteger length = PXTileGetData(t, &bytes);
 		unsigned char *copyBytes = calloc(length, sizeof(unsigned char));
 		memcpy(copyBytes, bytes, length);
 		image->tiles[i] = PXTileCreate(t->location, 
@@ -259,7 +259,7 @@ PXImage *PXImage_release(PXImage *self)
 	return self;
 }
 
-PXTile *PXImage_tileAtXY(PXImage *self, int xv, int yv)
+PXTile *PXImage_tileAtXY(PXImage *self, NSUInteger xv, NSUInteger yv)
 {
 	CGPoint tileLocation = CGPointMake((xv / PXTileDimension) * PXTileDimension, (yv / PXTileDimension) * PXTileDimension);
 	PXTile *t;
@@ -284,10 +284,10 @@ PXTile *PXImage_tileAtXY(PXImage *self, int xv, int yv)
 	return t;
 }
 
-NSColor *PXImage_colorAtIndex(PXImage *self, int loc)
+NSColor *PXImage_colorAtIndex(PXImage *self, NSUInteger loc)
 {
-	int xLoc = loc % self->width;
-	int yLoc = (loc - (loc % self->width))/self->width;
+	NSUInteger xLoc = loc % self->width;
+	NSUInteger yLoc = (loc - (loc % self->width))/self->width;
 	return PXImage_colorAtXY(self, xLoc, self->height - yLoc - 1);
 }
 
@@ -296,7 +296,7 @@ NSColor *PXImage_backgroundColor(PXImage *self)
 	return [[NSColor clearColor] colorUsingColorSpaceName:NSDeviceRGBColorSpace];
 }
 
-NSColor *PXImage_colorAtXY(PXImage *self, int x, int y)
+NSColor *PXImage_colorAtXY(PXImage *self, NSUInteger x, NSUInteger y)
 {
 	CGColorRef c = PXTileColorAtXY(PXImage_tileAtXY(self, x, y), x, y);
 	if(c == NULL)
@@ -308,17 +308,17 @@ NSColor *PXImage_colorAtXY(PXImage *self, int x, int y)
 	return color;
 }
 
-void PXImage_setColorAtIndex(PXImage *self, NSColor *c, unsigned loc)
+void PXImage_setColorAtIndex(PXImage *self, NSColor *c, NSUInteger loc)
 {
-	int xLoc = loc % self->width;
-	int yLoc = (loc - (loc % self->width))/self->width;
+	NSUInteger xLoc = loc % self->width;
+	NSUInteger yLoc = (loc - (loc % self->width))/self->width;
 	PXImage_setColorAtXY(self, c, xLoc, self->height - yLoc - 1);
 }
 
-void PXImage_setColorAtXY(PXImage *self, NSColor *color, int xv, int yv)
+void PXImage_setColorAtXY(PXImage *self, NSColor *color, NSUInteger xv, NSUInteger yv)
 {
 	PXTile *t = PXImage_tileAtXY(self, xv, yv);
-	float components[4];
+	CGFloat components[4];
 	[[color colorUsingColorSpaceName:NSDeviceRGBColorSpace] getComponents:components];
 	CGColorRef c = CGColorCreate(self->colorspace, components);
 	PXTileSetAtXY(t, xv, yv, c);
@@ -360,11 +360,11 @@ if(x##thing >= self->width) { x##thing -= self->width; }\
 if(y##thing >= self->height) { y##thing -= self->height; }\
 }	
 
-void PXImage_translate(PXImage *self, int deltaX, int deltaY, BOOL wrap)
+void PXImage_translate(PXImage *self, NSInteger deltaX, NSInteger deltaY, BOOL wrap)
 {
 	if (deltaX == 0 && deltaY == 0) { return; }
 	PXImage *copy = PXImage_copy(self);
-	int startX=0, startY=0, endX=self->width-1, endY=self->height-1, x, y;
+	NSUInteger startX=0, startY=0, endX=self->width-1, endY=self->height-1, x, y;
 	int directionX=1, directionY=1;
 	if (deltaX > 0) {
 		startX = endX;
@@ -378,7 +378,7 @@ void PXImage_translate(PXImage *self, int deltaX, int deltaY, BOOL wrap)
 	}
 	for (y=startY; y*directionY <= endY*directionY; y+=directionY) {
 		for (x=startX; x*directionX <= endX*directionX; x+=directionX) {
-			int xDst = x, yDst = y, xSrc = x-deltaX, ySrc = y-deltaY;
+			NSInteger xDst = x, yDst = y, xSrc = x-deltaX, ySrc = y-deltaY;
 			if(wrap)
 			{
 				WRAP(Dst)
@@ -392,7 +392,7 @@ void PXImage_translate(PXImage *self, int deltaX, int deltaY, BOOL wrap)
 
 void PXImage_swapTiles(PXImage *self, PXImage *other)
 {
-	int swapC = self->tileCount;
+	NSUInteger swapC = self->tileCount;
 	self->tileCount = other->tileCount;
 	other->tileCount = swapC;
 	PXTile **swapT = self->tiles;
@@ -424,15 +424,15 @@ void PXImage_setSize(PXImage *self, NSSize newSize, NSPoint origin, NSColor * ba
 	PXImage_release(dup);
 }
 
-void PXImage_rotateByDegrees(PXImage *self, int degrees)
+void PXImage_rotateByDegrees(PXImage *self, NSInteger degrees)
 {
 	if (degrees != 90 && degrees != 180 && degrees != 270) { return; } // only support orthogonal rotation
-	int i, j;
+	NSUInteger i, j;
 	PXImage *dup = PXImage_copy(self);
 	
 	// update our size if necessary
-	int oldWidth = self->width;
-	int oldHeight = self->height;
+	NSUInteger oldWidth = self->width;
+	NSUInteger oldHeight = self->height;
 	if (degrees != 180)
 	{
 		self->height = oldWidth;
@@ -443,7 +443,7 @@ void PXImage_rotateByDegrees(PXImage *self, int degrees)
 	{
 		for (i = 0; i < oldWidth; i++)
 		{
-			int x=0, y=0;
+			NSUInteger x=0, y=0;
 			if (degrees == 270)
 			{
 				x = j;
@@ -593,14 +593,14 @@ NSImage *PXImage_bitmapImage(PXImage *self)
 		unsigned char * oldData = [tempRep bitmapData];
 		int i, j;
 		NSSize imageSize = NSMakeSize([tempRep pixelsWide], [tempRep pixelsHigh]);
-		int bytesPerRow = [tempRep bytesPerRow];
-		int samplesPerPixel = [tempRep samplesPerPixel];
+		NSInteger bytesPerRow = [tempRep bytesPerRow];
+		NSInteger samplesPerPixel = [tempRep samplesPerPixel];
 		for (j = 0; j < imageSize.height; j++)
 		{
 			for (i = 0; i < imageSize.width; i++)
 			{
-				int oldBase = j * bytesPerRow + i * samplesPerPixel;
-				int newBase = j * 4 * self->width + i * 4;
+				NSInteger oldBase = j * bytesPerRow + i * samplesPerPixel;
+				NSUInteger newBase = j * 4 * self->width + i * 4;
 				newData[newBase + 0] = oldData[oldBase + 0];
 				newData[newBase + 1] = oldData[oldBase + 1];
 				newData[newBase + 2] = oldData[oldBase + 2];
@@ -630,7 +630,7 @@ NSImage *PXImage_bitmapImage(PXImage *self)
 		{
 			for (i = 0; i < self->width; i++)
 			{
-				int baseIndex = j * [rep bytesPerRow] + i*4;
+				NSInteger baseIndex = j * [rep bytesPerRow] + i*4;
 				unsigned char temp;
 				temp = bitmapData[baseIndex];
 				bitmapData[baseIndex] = bitmapData[baseIndex+1];

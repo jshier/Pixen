@@ -34,7 +34,7 @@
 	[super dealloc];
 }
 
-- (int)writeHeaderWithSize:(NSSize)size usingColorMap:(ColorMapObject *)colorMap ofSize:(int)numberOfColors withTransparentColor:(int)transColor
+- (size_t)writeHeaderWithSize:(NSSize)size usingColorMap:(ColorMapObject *)colorMap ofSize:(int)numberOfColors withTransparentColor:(int)transColor
 {
 	iterations = 0;
 	char iterationString[3];
@@ -43,9 +43,9 @@
 	iterationString[2] = iterations / 256;
 	iterationString[3] = 0;
 	
-	int result = EGifPutScreenDesc(gifFile, size.width, size.height, numberOfColors, transColor, colorMap);
+	size_t result = EGifPutScreenDesc(gifFile, size.width, size.height, numberOfColors, transColor, colorMap);
 	if (result == GIF_ERROR) { return result; }
-	result = EGifPutExtensionFirst(gifFile, 0xFF, strlen(GIF_ITERATION_HEADER), GIF_ITERATION_HEADER);
+	result = EGifPutExtensionFirst(gifFile, 0xFF, (int)strlen(GIF_ITERATION_HEADER), GIF_ITERATION_HEADER);
 	if (result == GIF_ERROR) { return result; }
 	result = EGifPutExtensionLast(gifFile, 0, 3, iterationString);
 	if (result == GIF_ERROR) { return result; }

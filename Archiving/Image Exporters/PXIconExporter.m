@@ -200,8 +200,8 @@ typedef struct
 	NSSize canvasSize = [canvas size];
 	// note all the endian swaps; these are important
 	bitmapHeader.biSize = CFSwapInt32HostToLittle(sizeof(BITMAPINFOHEADER));
-	bitmapHeader.biWidth = CFSwapInt32HostToLittle((long)canvasSize.width);
-	bitmapHeader.biHeight = CFSwapInt32HostToLittle((long)canvasSize.height*2); // height is doubled because it covers the mask, too
+	bitmapHeader.biWidth = CFSwapInt32HostToLittle(canvasSize.width);
+	bitmapHeader.biHeight = CFSwapInt32HostToLittle(canvasSize.height*2); // height is doubled because it covers the mask, too
 	bitmapHeader.biPlanes = CFSwapInt16HostToLittle(1); // I think this is always supposed to be 1 for icons
 	bitmapHeader.biBitCount = CFSwapInt16HostToLittle(24); // We're only gonna write 24-bit images for now.
 	bitmapHeader.biSizeImage = CFSwapInt32HostToLittle([self imageSize]);
