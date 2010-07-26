@@ -109,6 +109,8 @@
 		EA31F9770CE7CD9300EC481B /* PXLayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F96C0CE7CD9300EC481B /* PXLayerController.m */; };
 		EA31F9780CE7CD9300EC481B /* PXLayerDetailsView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F96D0CE7CD9300EC481B /* PXLayerDetailsView.h */; };
 		EA31F9790CE7CD9300EC481B /* PXLayerDetailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F96E0CE7CD9300EC481B /* PXLayerDetailsView.m */; };
+		EA31F97A0CE7CD9300EC481B /* PXLayerTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F96F0CE7CD9300EC481B /* PXLayerTableView.h */; };
+		EA31F97B0CE7CD9300EC481B /* PXLayerTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9700CE7CD9300EC481B /* PXLayerTableView.m */; };
 		EA31F97C0CE7CD9300EC481B /* PXLayerTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9710CE7CD9300EC481B /* PXLayerTextField.h */; };
 		EA31F97D0CE7CD9300EC481B /* PXLayerTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */; };
 		EA31F97E0CE7CD9300EC481B /* PXInfoPanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = EA31F9740CE7CD9300EC481B /* PXInfoPanelController.h */; };
@@ -657,6 +659,8 @@
 		EA31F96C0CE7CD9300EC481B /* PXLayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerController.m; sourceTree = "<group>"; };
 		EA31F96D0CE7CD9300EC481B /* PXLayerDetailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerDetailsView.h; sourceTree = "<group>"; };
 		EA31F96E0CE7CD9300EC481B /* PXLayerDetailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerDetailsView.m; sourceTree = "<group>"; };
+		EA31F96F0CE7CD9300EC481B /* PXLayerTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerTableView.h; sourceTree = "<group>"; };
+		EA31F9700CE7CD9300EC481B /* PXLayerTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerTableView.m; sourceTree = "<group>"; };
 		EA31F9710CE7CD9300EC481B /* PXLayerTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXLayerTextField.h; sourceTree = "<group>"; };
 		EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PXLayerTextField.m; sourceTree = "<group>"; };
 		EA31F9740CE7CD9300EC481B /* PXInfoPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXInfoPanelController.h; sourceTree = "<group>"; };
@@ -1350,6 +1354,8 @@
 				EA31F96E0CE7CD9300EC481B /* PXLayerDetailsView.m */,
 				615C3B5F0D15038F00ACFA33 /* PXLayerPaneBackgroundView.h */,
 				615C3B600D15038F00ACFA33 /* PXLayerPaneBackgroundView.m */,
+				EA31F96F0CE7CD9300EC481B /* PXLayerTableView.h */,
+				EA31F9700CE7CD9300EC481B /* PXLayerTableView.m */,
 				EA31F9710CE7CD9300EC481B /* PXLayerTextField.h */,
 				EA31F9720CE7CD9300EC481B /* PXLayerTextField.m */,
 			);
@@ -2203,6 +2209,7 @@
 				EA31F9680CE7BF0900EC481B /* PXCanvasResizeView.h in Headers */,
 				EA31F9760CE7CD9300EC481B /* PXLayerController.h in Headers */,
 				EA31F9780CE7CD9300EC481B /* PXLayerDetailsView.h in Headers */,
+				EA31F97A0CE7CD9300EC481B /* PXLayerTableView.h in Headers */,
 				EA31F97C0CE7CD9300EC481B /* PXLayerTextField.h in Headers */,
 				EA31F97E0CE7CD9300EC481B /* PXInfoPanelController.h in Headers */,
 				EA31F9A90CE7CE4800EC481B /* PXGradientBuilderController.h in Headers */,
@@ -2580,6 +2587,7 @@
 				EA31F9690CE7BF0900EC481B /* PXCanvasResizeView.m in Sources */,
 				EA31F9770CE7CD9300EC481B /* PXLayerController.m in Sources */,
 				EA31F9790CE7CD9300EC481B /* PXLayerDetailsView.m in Sources */,
+				EA31F97B0CE7CD9300EC481B /* PXLayerTableView.m in Sources */,
 				EA31F97D0CE7CD9300EC481B /* PXLayerTextField.m in Sources */,
 				EA31F97F0CE7CD9300EC481B /* PXInfoPanelController.m in Sources */,
 				EA31F9AA0CE7CE4800EC481B /* PXGradientBuilderController.m in Sources */,
@@ -3211,7 +3219,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 314E725B10820C2200DAE4B3 /* Test.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_PASCAL_STRINGS = YES;
@@ -3238,7 +3246,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 314E725B10820C2200DAE4B3 /* Test.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				COPY_PHASE_STRIP = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3264,7 +3272,6 @@
 				LIBRARY_STYLE = STATIC;
 				LINKER_DISPLAYS_MANGLED_NAMES = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-funroll-loops";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Pixen;
@@ -3278,7 +3285,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 314E725910820C2200DAE4B3 /* Debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
@@ -3336,7 +3343,6 @@
 				LIBRARY_STYLE = STATIC;
 				LINKER_DISPLAYS_MANGLED_NAMES = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-funroll-loops";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Pixen;
@@ -3383,7 +3389,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 314E725A10820C2200DAE4B3 /* Release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = "$(ARCHS_INTEL_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_PASCAL_STRINGS = YES;
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
