@@ -15,7 +15,9 @@
 
 - init
 {
-	[super init];
+	if(!(self = [super init]))
+        return nil;
+    
 	return self;
 }
 
@@ -52,8 +54,7 @@
 	[self setWindowControllerData];
 	[windowController prepare];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:PXDocumentOpenedNotificationName
-														object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXDocumentOpenedNotificationName object:self];
 }
 
 - (PXCanvas *)canvas
@@ -75,12 +76,10 @@
 {
 	if ([[[self canvas] layers] count])
 	{
-		[[NSNotificationCenter defaultCenter] postNotificationName:PXDocumentWillCloseNotificationName
-															object:self];
+		[[NSNotificationCenter defaultCenter] postNotificationName:PXDocumentWillCloseNotificationName object:self];
 	}
 	[super close];
-	[[NSNotificationCenter defaultCenter] postNotificationName:PXDocumentDidCloseNotificationName
-														object:self];
+	[[NSNotificationCenter defaultCenter] postNotificationName:PXDocumentDidCloseNotificationName object:self];
 }
 
 - (void)setFileURL:(NSURL *)fileName

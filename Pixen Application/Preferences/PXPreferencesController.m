@@ -34,9 +34,9 @@
 
 PXPreferencesController * preferences = nil;
 
-+(id) sharedPreferencesController
++ (PXPreferencesController *) sharedPreferencesController
 {
-	if( ! preferences )
+	if(!preferences)
     {
 		preferences = [[self alloc] init]; 
     }
@@ -44,7 +44,7 @@ PXPreferencesController * preferences = nil;
 	return preferences;
 }
 
--(id) init
+- (id) init
 {
 	return [super initWithWindowNibName:@"PXPreferences"];
 }
@@ -53,47 +53,39 @@ PXPreferencesController * preferences = nil;
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
-	if ([defaults boolForKey:PXCrosshairEnabledKey]) {
+	if ([defaults boolForKey:PXCrosshairEnabledKey])
 		[crosshairColor setEnabled:YES];
-	} else {
+    else
 		[crosshairColor setEnabled:NO];
-	}
 	
-	if ([defaults boolForKey:PXAutosaveEnabledKey]) {
+	if ([defaults boolForKey:PXAutosaveEnabledKey])
 		[autoupdateFrequency setEnabled:YES];
-	} else {
+	else 
 		[autoupdateFrequency setEnabled:NO];
-	}
 	
-	NSEnumerator *enumerator = [[form cells] objectEnumerator];
-	id current;
-	
-	while ((current = [enumerator nextObject]))
-    {
+	for(id current in [form cells])
 		[current setFormatter:[[[PXHotkeyFormatter alloc] init] autorelease]];
-    }
 }
 
 - (IBAction)switchCrosshair:(id)sender
 {
-	if ([sender state] == NSOnState) {
+	if ([sender state] == NSOnState)
 		[crosshairColor setEnabled:YES];
-	} else {
+	else
 		[crosshairColor setEnabled:NO];
-	}
 }
 
-- (IBAction)switchAutoupdate:(id) sender
+- (IBAction)switchAutoupdate:(id)sender
 {
 	[self updateAutoupdate:sender];
-	if ([sender state] == NSOnState) {
+    
+	if ([sender state] == NSOnState)
 		[autoupdateFrequency setEnabled:YES];
-	} else {
+	else
 		[autoupdateFrequency setEnabled:NO];
-	}
 }
 
-- (IBAction)updateAutoupdate:(id) sender
+- (IBAction)updateAutoupdate:(id)sender
 {
 	[(PXDocumentController *)[NSDocumentController sharedDocumentController] rescheduleAutosave];
 }

@@ -33,17 +33,21 @@
 
 - (id)initWithFrame:(NSRect)frame
 {
-	if(!(self = [super initWithFrame:frame])) { return nil; }
+	if(!(self = [super initWithFrame:frame]))
+        return nil;
+    
 	[NSBundle loadNibNamed:@"PXBackgroundTemplateView" owner:self];
     [self setAutoresizesSubviews:NO];
 	[self addSubview:view];
+    
 	return self;
 }
 
 - (id)init
 {
-	if ( ! (self = [self initWithFrame:NSMakeRect(0, 0, 0, 45)] ) ) 
+	if (!(self = [self initWithFrame:NSMakeRect(0, 0, 0, 45)])) 
 		return nil;
+    
 	return self;
 }
 
@@ -72,7 +76,8 @@
 {
 	[background autorelease];
 	background = [bg retain];
-	if(!bg) { return; }
+	if(!bg)
+        return;
 	[imageView setImage:[background previewImageOfSize:[imageView bounds].size]];
 	[imageView display];
 	[templateClassName setStringValue:[bg defaultName]];

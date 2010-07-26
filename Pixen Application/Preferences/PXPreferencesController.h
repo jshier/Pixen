@@ -37,7 +37,7 @@
   IBOutlet id form;
 }
 
-+(id) sharedPreferencesController;
++ (PXPreferencesController *) sharedPreferencesController;
 - (IBAction)switchCrosshair:(id) sender;
 - (IBAction)switchAutoupdate:(id) sender;
 - (IBAction)updateAutoupdate:(id) sender;

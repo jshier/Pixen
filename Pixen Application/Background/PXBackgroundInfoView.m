@@ -9,9 +9,11 @@
 
 - (id)initWithFrame:(NSRect)frameRect
 {
-	if ((self = [super initWithFrame:frameRect]) != nil) {
-		[self registerForDraggedTypes:[NSArray arrayWithObject:PXBackgroundTemplatePboardType]];
-	}
+	if (!(self = [super initWithFrame:frameRect]))
+        return nil;
+    
+    [self registerForDraggedTypes:[NSArray arrayWithObject:PXBackgroundTemplatePboardType]];
+
 	return self;
 }
 
@@ -32,8 +34,8 @@
 	
 	NSPoint location = [event locationInWindow];
 	float xOffset = location.x - dragOrigin.x, yOffset = location.y - dragOrigin.y;
-	float distance = sqrt(xOffset*xOffset + yOffset*yOffset);
-	if (distance <= 5)
+	float distance = sqrt(xOffset * xOffset + yOffset * yOffset);
+	if (distance <= 5.0f)
 		return;
 	
 	NSData *viewData = [self dataWithPDFInsideRect:[self bounds]];

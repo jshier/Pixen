@@ -31,59 +31,61 @@
 
 @implementation PXHotkeyFormatter
 
--(NSString *) stringForObjectValue:anObject
+-(NSString *) stringForObjectValue:(id)anObject
 {
-  if (![anObject isKindOfClass:[NSString class]]) 
-    return nil; 
+    if (![anObject isKindOfClass:[NSString class]]) 
+      return nil; 
 
-  if ([anObject length] > 0)
+    if ([anObject length] > 0)
     {
-      unichar theCharacter = [anObject characterAtIndex:([anObject length] - 1)];
-      if(![[NSCharacterSet letterCharacterSet] characterIsMember:theCharacter])
-	{
-	  return nil;
-	}
-      return [NSString stringWithFormat:@"%c", theCharacter];
+        unichar theCharacter = [anObject characterAtIndex:([anObject length] - 1)];
+        if(![[NSCharacterSet letterCharacterSet] characterIsMember:theCharacter])
+        {
+            return nil;
+        }
+        return [NSString stringWithFormat:@"%c", theCharacter];
     }
-  else
-    return @"";
+    else
+    {    
+        return @"";
+    }
 }
 
 - (BOOL)isPartialStringValid:(NSString *)partialString 
 	    newEditingString:(NSString **)newString
 	    errorDescription:(NSString **)error
 {
-  if ([partialString length] > 0)
+    if ([partialString length] > 0)
     {
-      unichar theCharacter = [partialString characterAtIndex:([partialString length] - 1)];
-      if(![[NSCharacterSet letterCharacterSet] characterIsMember:theCharacter])
-	{
-	  *newString = nil;
-	  return NO;
-	}
-      if ([partialString length] > 1) 
-	{
-	  *newString = [NSString stringWithFormat:@"%c", theCharacter];
-	  return NO;
-	}
+        unichar theCharacter = [partialString characterAtIndex:([partialString length] - 1)];
+        if(![[NSCharacterSet letterCharacterSet] characterIsMember:theCharacter])
+        {
+            *newString = nil;
+            return NO;
+        }
+        if ([partialString length] > 1) 
+        {
+            *newString = [NSString stringWithFormat:@"%c", theCharacter];
+            return NO;
+        }
     }
-  return YES;
+    return YES;
 }
 
 - (BOOL)getObjectValue:(id *)anObject
 	     forString:(NSString *) string
       errorDescription:(NSString **)error;
 {
-  *anObject = [[string copy] autorelease];
-  return YES;
+    *anObject = [[string copy] autorelease];
+    return YES;
 }
 
 //FIXME: why attributes param is for ? 
 //Required argument of this method for NSFormatter subclasses to implement.
 - (NSAttributedString *)attributedStringForObjectValue:(id)anObject
-				     defaultAttributes:attributes
+				     withDefaultAttributes:(NSDictionary *)attributes
 {
-	return [[[NSAttributedString alloc] initWithString:[self stringForObjectValue:anObject]] autorelease];
+    return [[[NSAttributedString alloc] initWithString:[self stringForObjectValue:anObject]] autorelease];
 }
 
 @end

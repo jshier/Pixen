@@ -18,49 +18,43 @@ typedef enum _PXStackType
 
 @implementation PXBackgroundController
 
-- builtinTemplates
+- (NSArray *)builtinTemplates
 {
-    static id backgrounds = nil;
-    if(backgrounds == nil) { backgrounds = [[NSArray alloc] initWithObjects:
-		[[[PXSlashyBackground alloc] init] autorelease], 
-		[[[PXMonotoneBackground alloc] init] autorelease], 
-		[[[PXCheckeredBackground alloc] init] autorelease], 
-		[[[PXImageBackground alloc] init] autorelease], 
-		nil]; 
-	}
+    static NSArray *backgrounds = nil;
+    if(backgrounds == nil) 
+        backgrounds = [[NSArray alloc] initWithObjects: [[[PXSlashyBackground alloc] init] autorelease], 
+                                                        [[[PXMonotoneBackground alloc] init] autorelease], 
+                                                        [[[PXCheckeredBackground alloc] init] autorelease], 
+                                                        [[[PXImageBackground alloc] init] autorelease], 
+                                                        nil];
+    
     return backgrounds;
 }
 
-- presetTemplates
+- (NSMutableArray *)presetTemplates
 {
 	NSMutableArray *results = [NSMutableArray array];
-	id enumerator = [[NSFileManager defaultManager] enumeratorAtPath:GetBackgroundPresetsDirectory()], current;
-    while((current = [enumerator nextObject]))
-    {
+    for(id current in [[NSFileManager defaultManager] enumeratorAtPath:GetBackgroundPresetsDirectory()])
         if([[current pathExtension] isEqualToString:PXBackgroundSuffix])
-        {
             [results addObject:[NSKeyedUnarchiver unarchiveObjectWithFile:[GetBackgroundPresetsDirectory() stringByAppendingPathComponent:current]]];
-        }
-    }
+        
 	return results;
 }
 
-- defaultTemplates
+- (NSMutableArray *)defaultTemplates
 {
 	NSMutableArray *results = [NSMutableArray arrayWithObject:[delegate defaultMainBackground]];
 	PXBackground *alt = [delegate defaultAlternateBackground];
-	if(alt)
-	{
+	
+    if(alt)
 		[results addObject:alt];
-	}
 	else
-	{
 		[results addObject:[NSNull null]];
-	}
-	return results;
+	
+    return results;
 }
 
-- init
+- (id)init
 {
 	self = [self initWithWindowNibName:@"PXBackgroundController"];
 	if(self)
@@ -89,7 +83,9 @@ typedef enum _PXStackType
 - (void)stackedViewDoubleClicked:sender
 {
 	NSView *view = [sender selectedView];
-	if(![view isKindOfClass:[PXBackgroundTemplateView class]]) { return; }
+	if(![view isKindOfClass:[PXBackgroundTemplateView class]])
+        return;
+    
 	[mainBackgroundView setBackground:[(PXBackgroundTemplateView *)view background]];
 	[delegate setMainBackground:[(PXBackgroundTemplateView *)view background]];
 }
@@ -181,7 +177,7 @@ typedef enum _PXStackType
 	delegate = del;
 }
 
-- (IBAction)displayHelp:sender
+- (IBAction)displayHelp:(id)sender
 {
 	[[NSHelpManager sharedHelpManager] openHelpAnchor:@"workingwithbackgrounds" inBook:@"Pixen Help"];
 }
@@ -193,38 +189,35 @@ typedef enum _PXStackType
 		[alternateBackgroundView setBackground:nil];
 		[delegate setAlternateBackground:nil];
 	}
-	else
-	{
-		NSBeep();		
-	}
+    else
+        NSBeep();
 }
 
 - (void)backgroundInfoView:(PXBackgroundInfoView *)infoView receivedBackground:(PXBackground *)bg
 {
 	[[self window] makeFirstResponder:[infoView nameField]];
 	if(infoView == mainBackgroundView)
-	{
 		[delegate setMainBackground:bg];
-	}
 	else if(infoView == alternateBackgroundView)
-	{
 		[delegate setAlternateBackground:bg];
-	}
 }
 
-- (void)deleteSheetDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:contextInfo
+- (void)deleteSheetDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:(id)contextInfo
 {
 	if (returnCode == NSAlertFirstButtonReturn)
-	{
-		NSInteger tag;
+    {
+        NSInteger tag;
 		[[NSWorkspace sharedWorkspace] performFileOperation:NSWorkspaceRecycleOperation
-                                                 source:GetBackgroundPresetsDirectory()
-                                            destination:nil 
-                                                  files:[NSArray arrayWithObject:[[contextInfo objectForKey:PXBackgroundPathKey] lastPathComponent]] 
-                                                    tag:&tag];
+                                                     source:GetBackgroundPresetsDirectory()
+                                                destination:nil 
+                                                      files:[NSArray arrayWithObject:[[contextInfo objectForKey:PXBackgroundPathKey] lastPathComponent]] 
+                                                        tag:&tag];
+        
 		NSPoint poofPoint = NSPointFromString([contextInfo objectForKey:PXPoofLocationKey]);
+        
 		if (!NSEqualPoints(poofPoint, NSZeroPoint))
 			NSShowAnimationEffect(NSAnimationEffectPoof, poofPoint, NSZeroSize, nil, NULL, nil);
+        
 		[self reloadData];
 	}
 	[contextInfo release];
@@ -250,18 +243,15 @@ typedef enum _PXStackType
 
 - (void)saveBackground:(PXBackground *)background atPath:(NSString *)path
 {
-	if(![NSKeyedArchiver archiveRootObject:background toFile:path])
-  {
-    [NSException raise:@"PXBackgroundSaveFailure" format:@"couldn't save background %@ to %@", background, path];
-  }
+    if(![NSKeyedArchiver archiveRootObject:background toFile:path])
+        [NSException raise:@"PXBackgroundSaveFailure" format:@"couldn't save background %@ to %@", background, path];
 }
 
 - (void)overwriteSheetDidEnd:(NSAlert *)alert returnCode:(int)returnCode contextInfo:contextInfo
 {
 	if (returnCode == NSAlertFirstButtonReturn)
-	{
 		[self saveBackground:contextInfo atPath:[self pathForBackground:contextInfo]];
-	}
+
 	[contextInfo release];
 	[self reloadData];
 }
@@ -269,7 +259,7 @@ typedef enum _PXStackType
 - (void)tryToSaveBackground:(PXBackground *)bg
 {
 	NSString *path = [self pathForBackground:bg];
-	id manager = [NSFileManager defaultManager];
+	NSFileManager  *manager = [NSFileManager defaultManager];
 	if([manager fileExistsAtPath:path])
 	{
 		NSAlert *alert = [[[NSAlert alloc] init] autorelease];
@@ -288,7 +278,7 @@ typedef enum _PXStackType
 	}
 }
 
-- (NSString *)newBackgroundNameForTemplateView:(PXBackgroundTemplateView *)templateView
+- (NSString *)backgroundNameForTemplateView:(PXBackgroundTemplateView *)templateView
 {
 	if ([templateView isKindOfClass:[PXBuiltinBackgroundTemplateView class]])
 	{
@@ -305,59 +295,53 @@ typedef enum _PXStackType
 	   toPasteboard:(NSPasteboard *)pboard
 {
 	// get the correct view
-	NSView *view = (aStackedView == mainStack) ? [mainViews objectAtIndex:[[rows lastObject] intValue]] :
-												 [defaultsViews objectAtIndex:[[rows lastObject] intValue]];
-	if(![view isKindOfClass:[PXBackgroundTemplateView class]]) { return NO; }
-	if ([(PXBackgroundTemplateView *)view background] == nil) { return NO;}
-	PXBackground *bg = [(PXBackgroundTemplateView *)view background];
+	id view = (aStackedView == mainStack) ? [mainViews objectAtIndex:[[rows lastObject] intValue]] :
+                                            [defaultsViews objectAtIndex:[[rows lastObject] intValue]];
+    
+	if(![view isKindOfClass:[PXBackgroundTemplateView class]])
+        return NO;
+    
+	if ([view background] == nil)
+        return NO;
+    
+	PXBackground *bg = [view background];
 	
 	// figure out what types are applicable and set them up
 	NSArray *types = [NSArray arrayWithObjects:PXBackgroundTemplatePboardType, PXBackgroundNamePboardType, PXBackgroundNewTemplatePboardType, nil];
-	if([[NSFileManager defaultManager] fileExistsAtPath:[self pathForBackground:bg]])
-	{
+	
+    if([[NSFileManager defaultManager] fileExistsAtPath:[self pathForBackground:bg]])
 		types = [types arrayByAddingObject:NSFilenamesPboardType];
-	}
+	
 	if (aStackedView == defaultsStack)
-	{
 		types = [types arrayByAddingObject:PXBackgroundTypePboardType];
-	}
+	
 	if ([view isKindOfClass:[PXBuiltinBackgroundTemplateView class]])
-	{
 		types = [types arrayByAddingObject:PXBackgroundNoDeletePboardType];
-	}
+	
 	
 	[pboard declareTypes:types owner:self];
 	
 	// set the default type if we're a defaults stack
 	if (aStackedView == defaultsStack)
-	{
-		[pboard setString:[(PXDefaultBackgroundTemplateView *)view backgroundTypeText] forType:PXBackgroundTypePboardType];
-	}
+		[pboard setString:[view backgroundTypeText] forType:PXBackgroundTypePboardType];
 	
 	// set the "no delete" flag if we're a built-in template
 	if ([view isKindOfClass:[PXBuiltinBackgroundTemplateView class]])
-	{
 		[pboard setString:[NSString stringWithFormat:@"%d", 1] forType:PXBackgroundNoDeletePboardType];
-	}
 	
 	if ([view isKindOfClass:[PXDefaultBackgroundTemplateView class]])
-	{
 		if ([[(PXDefaultBackgroundTemplateView *)view backgroundTypeText] isEqualToString:PXMainBackgroundType])
-		{
 			[pboard setString:[NSString stringWithFormat:@"%d", 1] forType:PXBackgroundNoDeletePboardType];
-		}
-	}
 	
 	[pboard setData:[NSKeyedArchiver archivedDataWithRootObject:bg] forType:PXBackgroundTemplatePboardType];
-	[pboard setString:[self newBackgroundNameForTemplateView:(PXBackgroundTemplateView *)view] forType:PXBackgroundNewTemplatePboardType];
+	[pboard setString:[self backgroundNameForTemplateView:view] forType:PXBackgroundNewTemplatePboardType];
 	
 	// set the data for file-based drags
-	id path = [self pathForBackground:bg];
+	NSString *path = [self pathForBackground:bg];
 	[pboard setString:path forType:PXBackgroundNamePboardType];
 	if([[NSFileManager defaultManager] fileExistsAtPath:[self pathForBackground:bg]])
-	{
 		[pboard setPropertyList:[NSArray arrayWithObject:path] forType:NSFilenamesPboardType];
-	}
+
 	return YES;
 }
 
@@ -380,32 +364,7 @@ typedef enum _PXStackType
 
 - (void)stackedView:(OSStackedView *)aStackedView dragMovedToScreenPoint:(NSPoint)point
 {
-/*	NSPoint location = [[self window] convertScreenToBase:point];
-	// set up poof and not allowed cursors
-	if (![self windowPoint:location inView:[mainStack enclosingScrollView]] &&
-		![self windowPoint:location inView:[defaultsStack enclosingScrollView]] &&
-		![self windowPoint:location inView:mainBackgroundView] &&
-		![self windowPoint:location inView:alternateBackgroundView])
-	{
-		if ([[[NSPasteboard pasteboardWithName:NSDragPboard] stringForType:PXBackgroundNoDeletePboardType] intValue])
-		{
-			SetThemeCursor(kThemeNotAllowedCursor);
-			return;
-		}
-		
-		if (aStackedView == mainStack)
-		{
-			[[NSCursor disappearingItemCursor] set];
-		}
-		else
-		{
-			id typeData = [[NSPasteboard pasteboardWithName:NSDragPboard] stringForType:PXBackgroundTypePboardType];
-			if ([typeData isEqualToString:PXMainBackgroundType])
-			{
-				SetThemeCursor(kThemeNotAllowedCursor);
-			}
-		}
-	}*/
+
 }	
 
 - (NSDragOperation)stackedView:(OSStackedView *)aStackedView
@@ -423,14 +382,14 @@ typedef enum _PXStackType
 	{
 		if ([self windowPoint:location inView:mainBackgroundTemplate])
 		{
-			id typeData = [[NSPasteboard pasteboardWithName:NSDragPboard] stringForType:PXBackgroundTypePboardType];
-			if (![typeData isEqualToString:PXMainBackgroundType])
+			NSString *typeString = [[NSPasteboard pasteboardWithName:NSDragPboard] stringForType:PXBackgroundTypePboardType];
+			if (![typeString isEqualToString:PXMainBackgroundType])
 				[mainBackgroundTemplate setActiveDragTarget:YES];
 		}
 		if ([self windowPoint:location inView:alternateBackgroundTemplate])
 		{
-			id typeData = [[NSPasteboard pasteboardWithName:NSDragPboard] stringForType:PXBackgroundTypePboardType];
-			if (![typeData isEqualToString:PXAlternateBackgroundType])
+			NSString *typeString = [[NSPasteboard pasteboardWithName:NSDragPboard] stringForType:PXBackgroundTypePboardType];
+			if (![typeString isEqualToString:PXAlternateBackgroundType])
 				[alternateBackgroundTemplate setActiveDragTarget:YES];
 		}
 		dragOperation = NSDragOperationCopy;

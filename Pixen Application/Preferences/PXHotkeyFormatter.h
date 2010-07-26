@@ -40,7 +40,6 @@
 	     forString:(NSString*) string
       errorDescription:(NSString **)error;
 
--(NSAttributedString*) attributedStringForObjectValue:(id)anObject
-				    defaultAttributes:attributes;
+-(NSAttributedString*) attributedStringForObjectValue:(id)anObject withDefaultAttributes:(NSDictionary *)attributes;
 
 @end

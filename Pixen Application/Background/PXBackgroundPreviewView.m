@@ -32,9 +32,9 @@
 @implementation PXBackgroundPreviewView
 
 - (id)initWithFrame:(NSRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-    }
+    if(!(self = [super initWithFrame:frame]))
+        return nil;
+    
     return self;
 }
 

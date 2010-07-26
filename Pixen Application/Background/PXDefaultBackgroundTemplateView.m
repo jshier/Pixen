@@ -96,7 +96,7 @@
 	drawFrame.origin = NSMakePoint(NSWidth([self bounds]) / 2 - stringSize.width / 2, NSHeight([self bounds]) / 2 - stringSize.height / 2);
 	drawFrame.size = stringSize;
 	
-	NSTextFieldCell *textCell = [[NSTextFieldCell alloc] init];
+	NSTextFieldCell *textCell = [[[NSTextFieldCell alloc] init] autorelease];
 	[textCell setAlignment:NSCenterTextAlignment];
 	[textCell setTextColor:(highlighted) ? [NSColor whiteColor] : [NSColor disabledControlTextColor]];
 	[textCell setStringValue:NSLocalizedString(@"Default Alternate Background", @"ALTERNATE_BACKGROUND_INFO")];
@@ -106,9 +106,7 @@
 - (void)drawRect:(NSRect)rect
 {
 	if (activeDragTarget)
-	{
 		NSFrameRectWithWidth([self bounds], 3);
-	}
 	
 	if (background == nil)
 	{

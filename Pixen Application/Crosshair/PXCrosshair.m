@@ -45,10 +45,9 @@
 	rect.origin.x += offset.x;
 	rect.origin.y += offset.y;
 	
-	float lineWidth;
 	BOOL oldShouldAntialias = [[NSGraphicsContext currentContext] shouldAntialias];
 	[[NSGraphicsContext currentContext] setShouldAntialias:NO];
-	lineWidth = [NSBezierPath defaultLineWidth];
+	float lineWidth = [NSBezierPath defaultLineWidth];
 	[NSBezierPath setDefaultLineWidth:0];
 	[[self color] set];
 	
@@ -69,13 +68,13 @@
 	[[NSGraphicsContext currentContext] setShouldAntialias:oldShouldAntialias];     
 }
 
--(NSColor *) color
+- (NSColor *)color
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	NSData *colorData = [defaults objectForKey:PXCrosshairColorKey];
 	
-	if (! colorData)
+	if (!colorData)
     {
 		colorData = [NSArchiver archivedDataWithRootObject:[NSColor redColor]];
 		[defaults setObject:colorData forKey:PXCrosshairColorKey];

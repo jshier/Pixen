@@ -50,15 +50,15 @@ static PXPanelManager *sharedManager = nil;
 
 +(id) sharedManager
 {
-	if (sharedManager == nil) {
+	if (sharedManager == nil)
 		sharedManager = [[self alloc] init];
-	}
+
 	return sharedManager;
 }
 
 - (id) init
 {
-	if ( ! (self = [super init] ) ) 
+	if (!(self = [super init])) 
 		return nil;
 	
 	sharedManager = self;
@@ -75,20 +75,17 @@ static PXPanelManager *sharedManager = nil;
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	// Open some panels if the user have let them open the last time
-	if ( [defaults boolForKey:PXLeftToolPropertiesIsOpenKey] ) {
+	if ([defaults boolForKey:PXLeftToolPropertiesIsOpenKey])
 		[self showLeftToolProperties:self];
-	}
-	if ( [defaults boolForKey:PXRightToolPropertiesIsOpenKey] ) {
+	
+	if ([defaults boolForKey:PXRightToolPropertiesIsOpenKey])
 		[self showRightToolProperties:self];
-	}
 	
-	if ( [defaults boolForKey:PXInfoPanelIsOpenKey] ) {
+	if ([defaults boolForKey:PXInfoPanelIsOpenKey])
 		[self showInfo:self];
-	}
 	
-	if ( [defaults boolForKey:PXPreviewWindowIsOpenKey] ) {
+	if ([defaults boolForKey:PXPreviewWindowIsOpenKey])
 		[self showPreviewPanel:self];
-	}
 	
 	//Always display toolPanel
 	[self showToolPalette:self];
@@ -153,8 +150,12 @@ static PXPanelManager *sharedManager = nil;
 	
 	for (id current in [NSApp windows])
 	{
-		if (![current isKindOfClass:[PXPalettePanel class]]) { continue; }
-		if (![current isVisible]) { continue; }
+		if (![current isKindOfClass:[PXPalettePanel class]])
+            continue;
+        
+		if (![current isVisible])
+            continue;
+        
 		NSMutableDictionary *panelInfo = [NSMutableDictionary dictionary];
 		[panelInfo setObject:NSStringFromRect([current frame]) forKey:PXPalettePanelFrameKey];
 		[panelInfo setObject:[NSNumber numberWithUnsignedInteger:[[(PXPalettePanel *)current paletteView] controlSize]] forKey:PXPalettePanelPaletteViewSizeKey];
@@ -199,17 +200,17 @@ static PXPanelManager *sharedManager = nil;
 	[defaults synchronize];
 }
 
-- (void)show:panel
+- (void)show:(id)panel
 {
 	[panel makeKeyAndOrderFront:self];
 }
 
-- (void)hide:panel
+- (void)hide:(id)panel
 {
 	[panel performClose:self];
 }
 
-- (void)toggle:panel
+- (void)toggle:(id)panel
 {
 	if ([panel isVisible]) {
 		[self hide:panel];

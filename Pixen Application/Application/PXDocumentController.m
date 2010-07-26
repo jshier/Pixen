@@ -179,15 +179,13 @@ NSString *palettesSubdirName = @"Palettes";
 	
 	[[PXPanelManager sharedManager] restorePanelStates];
 	
-	if ([defaults boolForKey:@"PXActivateColorWellOnStartup"]) {
+	if ([defaults boolForKey:@"PXActivateColorWellOnStartup"])
 		[[[PXToolPaletteController sharedToolPaletteController] leftSwitcher] activateColorWell];
-	}
 	
 	//If it is the first time Pixen run launch the welcome Panel
 	//TODO (could be cleaner) : Fabien
-	if (! [defaults boolForKey:PXHasRunBeforeKey] )
+	if (![defaults boolForKey:PXHasRunBeforeKey] )
 	{
-		//id welcome = [[PXWelcomeController alloc] init];
 		[defaults setBool:YES forKey:@"PXActivateColorWellOnStartup"];
 		[defaults setBool:YES forKey:@"SUCheckAtStartup"];
 		[defaults setInteger:60 forKey:PXAutosaveIntervalKey];
@@ -198,14 +196,13 @@ NSString *palettesSubdirName = @"Palettes";
 		[defaults synchronize];
 		[[NSColorPanel sharedColorPanel] setMode:NSCustomPaletteModeColorPanel];
 		[[[PXPanelManager sharedManager] welcomePanel] makeKeyAndOrderFront:self];
-		//[welcome showWindow:self];
 	}
 	
 	
-	if ( [defaults floatForKey:PXVersionKey] < 3 ) // <3 <3 <3
+	if ([defaults floatForKey:PXVersionKey] < 3.0f ) // <3 <3 <3
 	{
 		[defaults setBool:YES forKey:PXZoomNewDocumentsToFitKey];
-		[defaults setFloat:3 forKey:@"PXVersion"];
+		[defaults setFloat:3.0f forKey:@"PXVersion"];
 	}
 	
 	mouseTrackingTimer = [[NSTimer scheduledTimerWithTimeInterval:.05
@@ -377,9 +374,7 @@ NSString *palettesSubdirName = @"Palettes";
 		if ([[board types] containsObject:PXLayerPboardType])
 			return YES;
 		
-		NSEnumerator *enumerator = [[NSImage imagePasteboardTypes] objectEnumerator];
-		id current;
-		while ((current = [enumerator nextObject]))
+        for(id current in [NSImage imagePasteboardTypes])
 		{
 			if ([[board types] containsObject:current])
 			{
@@ -409,7 +404,8 @@ NSString *palettesSubdirName = @"Palettes";
 			NSLocalizedString(@"SHOW_PREVIOUS_CEL_OVERLAY", @"Show Previous Cel Overlay")];
 		return YES;
 	}
-	else {
+	else 
+    {
 		return YES;
 	}
 }
@@ -456,7 +452,7 @@ NSString *palettesSubdirName = @"Palettes";
 - (NSArray *)animationDocuments
 {
 	NSMutableArray *animationDocuments = [NSMutableArray array];
-	for (NSDocument *document in [self documents])
+	for (id document in [self documents])
     {
 		if ([document isKindOfClass:[PXAnimationDocument class]]) {
 			[animationDocuments addObject:document];
@@ -483,7 +479,8 @@ NSString *palettesSubdirName = @"Palettes";
 	[openPanel setCanChooseDirectories:NO];
 
 	NSInteger returnCode = [openPanel runModalForTypes:types];
-	if (returnCode == NSFileHandlingPanelCancelButton) { return; }
+	if (returnCode == NSFileHandlingPanelCancelButton) 
+        return;
 
 	PXAnimationDocument *animationDocument = (PXAnimationDocument *)[self makeUntitledDocumentOfType:PixenAnimationFileType error:NULL];
   
@@ -492,18 +489,18 @@ NSString *palettesSubdirName = @"Palettes";
 	NSMutableArray *images = [[[NSMutableArray alloc] initWithCapacity:[[openPanel filenames] count]] autorelease];
     for (NSString *currentFile in [openPanel filenames])
 	{
-    [images addObject:[PXCanvas canvasWithContentsOfFile:currentFile]];
+        [images addObject:[PXCanvas canvasWithContentsOfFile:currentFile]];
 	}
 	
-  float defaultDuration = 1.0f;
-	for(PXCanvas *current in images)
-  {
-    [[animationDocument animation] addCel:[[[PXCel alloc] initWithCanvas:current duration:defaultDuration] autorelease]];
-  }	
-  [self addDocument:animationDocument];
+    float defaultDuration = 1.0f;
+    for(PXCanvas *current in images)
+    {
+        [[animationDocument animation] addCel:[[[PXCel alloc] initWithCanvas:current duration:defaultDuration] autorelease]];
+    }	
+    [self addDocument:animationDocument];
 	[animationDocument makeWindowControllers];
 	[animationDocument showWindows];
-  [animationDocument updateChangeCount:NSChangeReadOtherContents];
+    [animationDocument updateChangeCount:NSChangeReadOtherContents];
 }
 
 @end

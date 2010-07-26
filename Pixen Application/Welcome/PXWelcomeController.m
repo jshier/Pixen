@@ -33,9 +33,9 @@ static PXWelcomeController *sharedWelcomeController = nil;
 
 @implementation PXWelcomeController
 
-+(id) sharedWelcomeController
++ (id)sharedWelcomeController
 {
-	if (! sharedWelcomeController ) 
+	if (!sharedWelcomeController) 
 		sharedWelcomeController = [[self alloc] init];
 	
 	return sharedWelcomeController;
@@ -45,9 +45,9 @@ static PXWelcomeController *sharedWelcomeController = nil;
 Constructor:
 ----------------------------------------------------------- */
 
--(id) init
+- (id)init
 {
-	if(! ( self = [super initWithWindowNibName:@"PXDiscoverPixen"] ) ) 
+	if(!(self = [super initWithWindowNibName:@"PXDiscoverPixen"])) 
 		return nil;
 	
 	tabView = nil;
@@ -62,7 +62,7 @@ Constructor:
 Destructor:
 ---------------------------------------------------------------- */
 
--(void)	dealloc
+- (void)dealloc
 {
 	[itemsList release];
 	[baseWindowName release];
@@ -70,7 +70,7 @@ Destructor:
 }
 
 
--(void)	awakeFromNib
+- (void)awakeFromNib
 {
 	[prev setEnabled:NO];
 	[tabView selectTabViewItemAtIndex: 0];
@@ -83,13 +83,13 @@ setTabView:
 Accessor for specifying the tab view to query.
 ---------------------------------------------------------------------- */
 
--(void)	setTabView: (NSTabView*)tv
+- (void)setTabView:(NSTabView*)tv
 {
 	tabView = tv;
 }
 
 
--(NSTabView*)   tabView
+- (NSTabView*)tabView
 {
 	return tabView;
 }
@@ -102,19 +102,17 @@ reflect the current pane and the proper pane to be shown in response to
 a click.
 --------------------------------------------------------------------- */
 
--(IBAction)changePanes: (id)sender
+-(IBAction)changePanes:(id)sender
 {
 	[[self window] setTitle: [baseWindowName stringByAppendingString: [sender label]]];
 	
 	[tabView selectTabViewItemAtIndex: [sender tag]];
 }
 
-- (IBAction)next:sender
+- (IBAction)next:(id)sender
 {
 	if ([tabView indexOfTabViewItem:[tabView selectedTabViewItem]] == 0)
-    {
 		[prev setEnabled:YES];
-    }
 	
 	if ([tabView indexOfTabViewItem:[tabView selectedTabViewItem]] == 7)
 	{
@@ -123,28 +121,23 @@ a click.
 	}
 	
 	if ([tabView indexOfTabViewItem:[tabView selectedTabViewItem]] == 8)
-	{
 		[self close];
-	}
 	else
-	{
 		[tabView selectNextTabViewItem:sender];
-	}
 }
 
-- (IBAction)prev:sender
+- (IBAction)prev:(id)sender
 {
 	if ([tabView indexOfTabViewItem:[tabView selectedTabViewItem]] == 1)
-	{
 		[prev setEnabled:NO];
-	}
 	
 	if ([tabView indexOfTabViewItem:[tabView selectedTabViewItem]] == 8)
 	{
 		[next setTitle:NSLocalizedString(@"Next", @"Next")];
 		[close setHidden:NO];
 	}
-	[tabView selectPreviousTabViewItem:sender];
+	
+    [tabView selectPreviousTabViewItem:sender];
 }
 
 @end
