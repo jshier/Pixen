@@ -18,3 +18,7 @@ build
 .DS_Store
 
 *.orig
+Pixen.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+Pixen.xcodeproj/project.xcworkspace/xcuserdata/jshier.xcuserdatad/WorkspaceSettings.xcsettings
+Pixen.xcodeproj/project.xcworkspace/xcuserdata/jshier.xcuserdatad/WorkspaceState.xcuserstate
+Pixen.xcodeproj/xcuserdata/jshier.xcuserdatad/xcbreakpoints/Breakpoints.xcbkptlist
