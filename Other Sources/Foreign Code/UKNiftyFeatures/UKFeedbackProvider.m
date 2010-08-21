@@ -42,7 +42,7 @@
 		NSBeep();
 		return;
 	}
-    //FIXME: Decided what to use to replace the email functionality.
+    //FIXME: Decide what to use to replace the email functionality.
 	if( ![NSMailDelivery deliverMessage: msgText subject: msgSubj to: msgDest] )
 	{
 		NSBeginAlertSheet( NSLocalizedString(@"Couldn't send message", @"FEEDBACK_ERROR_TITLE"),
