@@ -36,13 +36,6 @@
 	[[self contentView] display];
 }
 
-- (void)close
-{
-	// The windowWillClose method seems to be getting intercepted somewhere, so we send it manually.
-	[[self delegate] windowWillClose:nil];
-	[super close];
-}
-
 - (void)resignKeyWindow
 {
 	[super resignKeyWindow];
