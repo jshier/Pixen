@@ -462,7 +462,7 @@ typedef enum _PXStackType
 	}
 }
 
-- (void)deleteKeyPressedInStackedView:aStackedView
+- (void)deleteKeyPressedInStackedView:(OSStackedView *)aStackedView
 {
 	PXBackground *template = [(PXBackgroundTemplateView *)[aStackedView selectedView] background];
 	if(aStackedView == mainStack)
