@@ -3219,7 +3219,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 314E725B10820C2200DAE4B3 /* Test.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_PASCAL_STRINGS = YES;
@@ -3246,7 +3246,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 314E725B10820C2200DAE4B3 /* Test.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3272,6 +3272,7 @@
 				LIBRARY_STYLE = STATIC;
 				LINKER_DISPLAYS_MANGLED_NAMES = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-funroll-loops";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Pixen;
@@ -3285,7 +3286,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 314E725910820C2200DAE4B3 /* Debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
@@ -3343,6 +3344,7 @@
 				LIBRARY_STYLE = STATIC;
 				LINKER_DISPLAYS_MANGLED_NAMES = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-funroll-loops";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Pixen;
@@ -3389,7 +3391,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 314E725A10820C2200DAE4B3 /* Release.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_INTEL_32_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_PASCAL_STRINGS = YES;
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
