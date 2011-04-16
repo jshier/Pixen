@@ -74,7 +74,7 @@
 
 - (BOOL)getObjectValue:(id *)anObject
 	     forString:(NSString *) string
-      errorDescription:(NSString **)error;
+      errorDescription:(NSString **)error
 {
     *anObject = [[string copy] autorelease];
     return YES;

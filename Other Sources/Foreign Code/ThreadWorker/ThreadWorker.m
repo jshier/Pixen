@@ -51,7 +51,7 @@
 + (ThreadWorker *) workOn:(id)target 
                    withSelector:(SEL)selector 
                    withObject:(id)argument
-                   didEndSelector:(SEL)didEndSelector;  // Optional
+                   didEndSelector:(SEL)didEndSelector  // Optional
 {
     ThreadWorker *tw;
     NSPort *port1;

@@ -30,9 +30,9 @@ typedef enum {
 - (BOOL)isPaletteIndexKey:(NSEvent *)event;
 - (void)keyDown:(NSEvent *)event;
 
-- (IBAction)useMostRecentColors:sender;
-- (IBAction)useMostFrequentColors:sender;
-- (IBAction)useColorListColors:sender;
+- (IBAction)useMostRecentColors:(id)sender;
+- (IBAction)useMostFrequentColors:(id)sender;
+- (IBAction)useColorListColors:(id)sender;
 
 - (void)refreshPalette:(NSNotification *)note;
 - (void)updatePalette:(NSNotification *)note;

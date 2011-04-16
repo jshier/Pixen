@@ -214,7 +214,7 @@ static PXToolPaletteController *singleInstance = nil;
 	keyMask = 0x0;
 }
 
-- (void)clearBeziers;
+- (void)clearBeziers
 {
 	[rightSwitcher clearBeziers];
 	[leftSwitcher clearBeziers];

@@ -67,12 +67,12 @@
 	return self;
 }
 
-- (RBSplitSubview*)layerSplit;
+- (RBSplitSubview*)layerSplit
 {
 	return layerSplit;
 }
 
-- (RBSplitSubview*)canvasSplit;
+- (RBSplitSubview*)canvasSplit
 {
 	return canvasSplit;
 }
@@ -280,7 +280,7 @@
 
 //this is to fix a bug in animation documents where expanding the
 //split subview trashes the dimensions of the layer control view
-- (void)splitView:(RBSplitView*)sender didExpand:(RBSplitSubview*)subview;
+- (void)splitView:(RBSplitView*)sender didExpand:(RBSplitSubview*)subview
 {
 	[self updateFrameSizes];
 }

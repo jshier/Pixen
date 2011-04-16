@@ -39,7 +39,7 @@
 
 -(id) initWithUnitSize:(NSSize)newUnitSize
 				 color:(NSColor*)newColor
-			shouldDraw:(BOOL)newShouldDraw;
+			shouldDraw:(BOOL)newShouldDraw
 {
 	[self init];
 	if(newColor)

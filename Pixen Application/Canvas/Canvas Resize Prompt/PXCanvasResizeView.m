@@ -152,7 +152,7 @@
 	[self setNeedsDisplay:YES];
 }
 
-- backgroundColor;
+- backgroundColor
 {
 	return backgroundColor;
 }
@@ -214,18 +214,18 @@
 	return YES;
 }
 
-- (int)leftOffset;
+- (int)leftOffset
 {
 	return position.x;
 }
-- (void)setLeftOffset:(int)nx;
+- (void)setLeftOffset:(int)nx
 {
 	[self willChangeValueForKey:@"rightOffset"];
 	position.x = nx;
 	[self didChangeValueForKey:@"rightOffset"];
 	[self setNeedsDisplay:YES];
 }
-- (int)topOffset;
+- (int)topOffset
 {
 	return position.y;
 }
@@ -236,7 +236,7 @@
 	[self didChangeValueForKey:@"bottomOffset"];
 	[self setNeedsDisplay:YES];
 }
-- (int)bottomOffset;
+- (int)bottomOffset
 {
 	return -1 * position.y;
 }
@@ -247,7 +247,7 @@
 	[self didChangeValueForKey:@"topOffset"];
 	[self setNeedsDisplay:YES];
 }
-- (int)rightOffset;
+- (int)rightOffset
 {
 	return -1 * position.x;
 }

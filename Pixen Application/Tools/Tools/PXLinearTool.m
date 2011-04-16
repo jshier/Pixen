@@ -55,7 +55,7 @@
 	return _origin;
 }
 
-- (void)fakeMouseDraggedIfNecessary;
+- (void)fakeMouseDraggedIfNecessary
 {
 	// kind of a HACK
 	if (isClicking)

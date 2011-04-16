@@ -776,7 +776,7 @@ static void resolveHSV(CGFloat *color1, CGFloat *color2);
 
 
 #pragma mark Private Methods
-- (void)setBlendingMode:(CTGradientBlendingMode)mode;
+- (void)setBlendingMode:(CTGradientBlendingMode)mode
   {
   blendingMode = mode;
   
@@ -927,7 +927,7 @@ static void resolveHSV(CGFloat *color1, CGFloat *color2);
   }
 
 
-- (CTGradientElement *)elementAtIndex:(unsigned)index;			
+- (CTGradientElement *)elementAtIndex:(unsigned)index			
   {
   unsigned count = 0;
   CTGradientElement *currentElement = elementList;

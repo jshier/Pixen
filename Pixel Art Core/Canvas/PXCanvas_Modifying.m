@@ -204,7 +204,7 @@
 +(void)reduceColorsInCanvases:(NSArray*)canvases 
 				 toColorCount:(NSUInteger)colors
 			 withTransparency:(BOOL)transparency 
-				   matteColor:(NSColor *)matteColor;
+				   matteColor:(NSColor *)matteColor
 {
 	PXCanvas *first = [canvases objectAtIndex:0];
 	unsigned char *red = calloc([first size].width * [first size].height * [canvases count], sizeof(unsigned char));

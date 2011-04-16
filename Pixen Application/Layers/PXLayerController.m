@@ -108,7 +108,7 @@
 	}
 }
 
-- (NSView *)view;
+- (NSView *)view
 {
 	return view;
 }
@@ -254,7 +254,7 @@ objectValueForTableColumn:(NSTableColumn *)aTableColumn
 	}
 }
 
-- (void)setSubview:(RBSplitSubview *)sv;
+- (void)setSubview:(RBSplitSubview *)sv
 {
 	subview = sv;
 }

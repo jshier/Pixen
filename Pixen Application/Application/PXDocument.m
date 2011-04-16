@@ -88,7 +88,7 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:PXDocumentChangedDisplayNameNotificationName object:self];
 }
 
-- (PXCanvasWindowController *)windowController;
+- (PXCanvasWindowController *)windowController
 {
 	return windowController;
 }

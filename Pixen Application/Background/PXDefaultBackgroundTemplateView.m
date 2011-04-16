@@ -42,7 +42,7 @@
 	return backgroundTypeText;
 }
 
-- (void)setBackgroundTypeText:(NSString *)typeText;
+- (void)setBackgroundTypeText:(NSString *)typeText
 {
 	[backgroundTypeText autorelease];
 	backgroundTypeText = [typeText retain];

@@ -116,7 +116,7 @@
   [paletteView setNeedsDisplay:YES];
 }
 
-- (void)useColorAtIndex:(unsigned)index event:(NSEvent *)e;
+- (void)useColorAtIndex:(unsigned)index event:(NSEvent *)e
 {
 	PXToolSwitcher *switcher = [[PXToolPaletteController sharedToolPaletteController] leftSwitcher];
 	if([e buttonNumber] == 1 || ([e modifierFlags] & NSControlKeyMask))
@@ -126,7 +126,7 @@
 	[switcher setColor:PXPalette_colorAtIndex(frequencyPalette, index)];	
 }
 
-- (void)modifyColorAtIndex:(unsigned)index;
+- (void)modifyColorAtIndex:(unsigned)index
 {
     //FIXME: put palette adds here
 }
@@ -151,19 +151,19 @@
   [self useColorAtIndex:index event:event];
 }
 
-- (IBAction)useMostRecentColors:sender;
+- (IBAction)useMostRecentColors:(id)sender
 {
   mode = PXPaletteModeRecent;
   [paletteView setPalette:recentPalette];
 }
 
-- (IBAction)useMostFrequentColors:sender;
+- (IBAction)useMostFrequentColors:(id)sender
 {
   mode = PXPaletteModeFrequency;
   [paletteView setPalette:frequencyPalette];
 }
 
-- (IBAction)useColorListColors:sender;
+- (IBAction)useColorListColors:(id)sender
 {
   mode = PXPaletteModeColorList;
 }

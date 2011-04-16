@@ -137,7 +137,7 @@ PXSpriteSheetExporter *sharedSpriteSheetExporter = nil;
 	[self updatePreview:self];
 }
 
-- (void)savePanelDidEnd:(NSSavePanel *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo;
+- (void)savePanelDidEnd:(NSSavePanel *)sheet returnCode:(int)returnCode contextInfo:(void *)contextInfo
 {
 	if (returnCode == NSCancelButton) {
 		closeOnEndSheet = NO;

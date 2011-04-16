@@ -306,7 +306,7 @@ void PXDebugRect(NSRect r, float alpha)
 	}
 }
 
-- (void)setShouldDrawGrid:(BOOL)newShouldDraw;
+- (void)setShouldDrawGrid:(BOOL)newShouldDraw
 {
 	shouldDrawGrid = newShouldDraw;
 }

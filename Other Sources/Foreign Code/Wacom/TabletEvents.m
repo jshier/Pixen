@@ -322,7 +322,7 @@ NSString *kEnterProximity = @"enterProximity";
 
 
 //////////////////////////////////////////////////////////////////////////////
-- (float) rotationInDegrees; /* 0.0¡ <-> +359.99999¡ */
+- (float) rotationInDegrees /* 0.0¡ <-> +359.99999¡ */
 {
    OSStatus		result;
    TabletPointerRec tabletData;
@@ -345,7 +345,7 @@ NSString *kEnterProximity = @"enterProximity";
 
 
 //////////////////////////////////////////////////////////////////////////////
-- (float) rotationInRadians; /* 0 <-> 2¹ */
+- (float) rotationInRadians /* 0 <-> 2¹ */
 {
    OSStatus		result;
    TabletPointerRec tabletData;
