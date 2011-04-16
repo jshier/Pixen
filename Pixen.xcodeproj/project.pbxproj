@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		314E725C10820C2200DAE4B3 /* Base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 314E725810820C2200DAE4B3 /* Base.xcconfig */; };
-		314E725D10820C2200DAE4B3 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 314E725910820C2200DAE4B3 /* Debug.xcconfig */; };
-		314E725E10820C2200DAE4B3 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 314E725A10820C2200DAE4B3 /* Release.xcconfig */; };
-		314E725F10820C2200DAE4B3 /* Test.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 314E725B10820C2200DAE4B3 /* Test.xcconfig */; };
+		3120A54C135A4BE3008ADC04 /* FlatButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3120A54B135A4BE3008ADC04 /* FlatButton.framework */; };
+		3120A54E135A4C46008ADC04 /* FlatButton.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3120A54D135A4C46008ADC04 /* FlatButton.framework */; };
 		31E907B5105757C700ADB171 /* CTGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = 31E907B1105757C700ADB171 /* CTGradient.h */; };
 		31E907B6105757C700ADB171 /* CTGradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 31E907B2105757C700ADB171 /* CTGradient.m */; };
 		31E907B7105757C700ADB171 /* CTGradientView.h in Headers */ = {isa = PBXBuildFile; fileRef = 31E907B3105757C700ADB171 /* CTGradientView.h */; };
@@ -460,9 +458,7 @@
 		EAC917A60CE7DC7300E519E1 /* Remove.tiff in Resources */ = {isa = PBXBuildFile; fileRef = EAC917460CE7DC7300E519E1 /* Remove.tiff */; };
 		EAC917A70CE7DC7300E519E1 /* titlebargradient.tif in Resources */ = {isa = PBXBuildFile; fileRef = EAC917470CE7DC7300E519E1 /* titlebargradient.tif */; };
 		EAC917BC0CE7DD8400E519E1 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC917BA0CE7DD8400E519E1 /* Sparkle.framework */; };
-		EAC917BD0CE7DD8400E519E1 /* FlatButton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAC917BB0CE7DD8400E519E1 /* FlatButton.framework */; };
 		EAC917D50CE7DD9200E519E1 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = EAC917BA0CE7DD8400E519E1 /* Sparkle.framework */; };
-		EAC917D60CE7DD9200E519E1 /* FlatButton.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = EAC917BB0CE7DD8400E519E1 /* FlatButton.framework */; };
 		EAC917DC0CE7DDDF00E519E1 /* colorpalette.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = EAC917090CE7DC7300E519E1 /* colorpalette.png */; };
 		EAC918150CE7DF8100E519E1 /* PXCanvasView.h in Headers */ = {isa = PBXBuildFile; fileRef = EA5482DC0513E2DB000101DE /* PXCanvasView.h */; };
 		EACDBD810878B37100564512 /* PXBackgroundTemplateView.nib in Resources */ = {isa = PBXBuildFile; fileRef = EACDBD7F0878B37100564512 /* PXBackgroundTemplateView.nib */; };
@@ -523,8 +519,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				3120A54E135A4C46008ADC04 /* FlatButton.framework in CopyFiles */,
 				EAC917D50CE7DD9200E519E1 /* Sparkle.framework in CopyFiles */,
-				EAC917D60CE7DD9200E519E1 /* FlatButton.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,6 +533,8 @@
 		2A37F4BAFDCFA73011CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = English; path = English.lproj/Credits.html; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		3120A54B135A4BE3008ADC04 /* FlatButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FlatButton.framework; path = "Frameworks and Palettes/FlatButton.framework"; sourceTree = "<group>"; };
+		3120A54D135A4C46008ADC04 /* FlatButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FlatButton.framework; path = "Frameworks and Palettes/FlatButton.framework"; sourceTree = "<group>"; };
 		314E725810820C2200DAE4B3 /* Base.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 		314E725910820C2200DAE4B3 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		314E725A10820C2200DAE4B3 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -1053,7 +1051,6 @@
 		EAC917460CE7DC7300E519E1 /* Remove.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Remove.tiff; sourceTree = "<group>"; };
 		EAC917470CE7DC7300E519E1 /* titlebargradient.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = titlebargradient.tif; sourceTree = "<group>"; };
 		EAC917BA0CE7DD8400E519E1 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = "Frameworks and Palettes/Sparkle.framework"; sourceTree = "<group>"; };
-		EAC917BB0CE7DD8400E519E1 /* FlatButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FlatButton.framework; path = "Frameworks and Palettes/FlatButton.framework"; sourceTree = "<group>"; };
 		EACDBD800878B37100564512 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXBackgroundTemplateView.nib; sourceTree = "<group>"; };
 		EAE126D0054F41A9001208D9 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXImageBackgroundConfigurator.nib; sourceTree = "<group>"; };
 		EAF21E2A08AD0CFD0037A23B /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/PXPalettePanel.nib; sourceTree = "<group>"; };
@@ -1066,13 +1063,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3120A54C135A4BE3008ADC04 /* FlatButton.framework in Frameworks */,
 				EAF6951106A9AE0B0019D8D7 /* Cocoa.framework in Frameworks */,
 				EAF6951206A9AE0B0019D8D7 /* QuickTime.framework in Frameworks */,
 				EAF6951306A9AE0B0019D8D7 /* Message.framework in Frameworks */,
 				EA5E9EE80877237800FCE6FE /* Carbon.framework in Frameworks */,
 				BF269FE6091307BF00B7A218 /* QTKit.framework in Frameworks */,
 				EAC917BC0CE7DD8400E519E1 /* Sparkle.framework in Frameworks */,
-				EAC917BD0CE7DD8400E519E1 /* FlatButton.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1082,8 +1079,8 @@
 		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3120A54B135A4BE3008ADC04 /* FlatButton.framework */,
 				EAC917BA0CE7DD8400E519E1 /* Sparkle.framework */,
-				EAC917BB0CE7DD8400E519E1 /* FlatButton.framework */,
 				61BB8ED608FB58F9009C75A6 /* QTKit.framework */,
 				EA5E9EE70877237800FCE6FE /* Carbon.framework */,
 				61EBB557067A2A3000FF5C2E /* Message.framework */,
@@ -1113,6 +1110,7 @@
 		2A37F4AAFDCFA73011CA2CEA /* Pixen */ = {
 			isa = PBXGroup;
 			children = (
+				3120A54D135A4C46008ADC04 /* FlatButton.framework */,
 				EA68641E054C583900EE395F /* Release Notes.rtf */,
 				2A37F4ABFDCFA73011CA2CEA /* Pixen Application */,
 				EA31F7380CE7B79A00EC481B /* Pixel Art Core */,
@@ -2362,8 +2360,12 @@
 /* Begin PBXProject section */
 		2A37F4A9FDCFA73011CA2CEA /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0410;
+			};
 			buildConfigurationList = 616BAEA908553EFB004CF172 /* Build configuration list for PBXProject "Pixen" */;
 			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				en,
@@ -2523,10 +2525,6 @@
 				EAB650860D108D9000274070 /* PXPaletteController.xib in Resources */,
 				61A22A070D20715100430CCD /* History.tiff in Resources */,
 				61A22A240D2073E500430CCD /* Frequency.tiff in Resources */,
-				314E725C10820C2200DAE4B3 /* Base.xcconfig in Resources */,
-				314E725D10820C2200DAE4B3 /* Debug.xcconfig in Resources */,
-				314E725E10820C2200DAE4B3 /* Release.xcconfig in Resources */,
-				314E725F10820C2200DAE4B3 /* Test.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3085,48 +3083,43 @@
 /* Begin XCBuildConfiguration section */
 		3156615F11E2726E00C623D1 /* Debug (64-bit) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 314E725910820C2200DAE4B3 /* Debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DEBUGGING_SYMBOLS = full;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_ENABLE_PASCAL_STRINGS = YES;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_ENABLE_SSE41_EXTENSIONS = YES;
 				GCC_ENABLE_SSE42_EXTENSIONS = YES;
 				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
-				GCC_ENABLE_TRIGRAPHS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_THUMB_SUPPORT = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				LINKER_DISPLAYS_MANGLED_NAMES = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Frameworks and Palettes\"/**",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx10.6;
 				STRIP_INSTALLED_PRODUCT = NO;
-				UNSTRIPPED_PRODUCT = "";
-				USER_HEADER_SEARCH_PATHS = ".//**";
 				VALID_ARCHS = "i386 x86_64";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-unused-parameter",
+					"-Wno-sign-compare",
+				);
 			};
 			name = "Debug (64-bit)";
 		};
 		3156616011E2726E00C623D1 /* Debug (64-bit) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 314E725910820C2200DAE4B3 /* Debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"\"$(SRCROOT)/Frameworks and Palettes\"",
 				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/Frameworks and Palettes\"";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3140,9 +3133,7 @@
 				LINKER_DISPLAYS_MANGLED_NAMES = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "";
 				PRODUCT_NAME = Pixen;
-				RUN_CLANG_STATIC_ANALYZER = YES;
 				VALID_ARCHS = "i386 x86_64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3150,34 +3141,34 @@
 		};
 		3156616111E2727B00C623D1 /* Test (64-bit) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 314E725B10820C2200DAE4B3 /* Test.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_ENABLE_PASCAL_STRINGS = YES;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_ENABLE_SSE41_EXTENSIONS = YES;
 				GCC_ENABLE_SSE42_EXTENSIONS = YES;
 				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_THUMB_SUPPORT = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				LINKER_DISPLAYS_MANGLED_NAMES = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Frameworks and Palettes\"/**",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx10.6;
-				SKIP_INSTALL = NO;
-				UNSTRIPPED_PRODUCT = "";
 				VALID_ARCHS = "i386 x86_64";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-unused-parameter",
+					"-Wno-sign-compare",
+				);
 			};
 			name = "Test (64-bit)";
 		};
 		3156616211E2727B00C623D1 /* Test (64-bit) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 314E725B10820C2200DAE4B3 /* Test.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COPY_PHASE_STRIP = YES;
@@ -3186,11 +3177,10 @@
 					"$(SRCROOT)",
 					/System/Library/Frameworks,
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"\"$(SRCROOT)/Frameworks and Palettes\"",
 				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks and Palettes\"";
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3202,11 +3192,9 @@
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = /Applications;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
-				LIBRARY_STYLE = STATIC;
 				LINKER_DISPLAYS_MANGLED_NAMES = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "-funroll-loops";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Pixen;
 				SECTORDER_FLAGS = "";
@@ -3217,34 +3205,34 @@
 		};
 		31DF299E1059F62300908047 /* Test */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 314E725B10820C2200DAE4B3 /* Test.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_ENABLE_PASCAL_STRINGS = YES;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_ENABLE_SSE41_EXTENSIONS = YES;
 				GCC_ENABLE_SSE42_EXTENSIONS = YES;
 				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_THUMB_SUPPORT = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				LINKER_DISPLAYS_MANGLED_NAMES = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Frameworks and Palettes\"/**",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx10.6;
-				SKIP_INSTALL = NO;
-				UNSTRIPPED_PRODUCT = "";
 				VALID_ARCHS = "i386 x86_64";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-unused-parameter",
+					"-Wno-sign-compare",
+				);
 			};
 			name = Test;
 		};
 		31DF299F1059F62300908047 /* Test */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 314E725B10820C2200DAE4B3 /* Test.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
@@ -3253,11 +3241,10 @@
 					"$(SRCROOT)",
 					/System/Library/Frameworks,
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"\"$(SRCROOT)/Frameworks and Palettes\"",
 				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks and Palettes\"";
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3269,11 +3256,9 @@
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = /Applications;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
-				LIBRARY_STYLE = STATIC;
 				LINKER_DISPLAYS_MANGLED_NAMES = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "-funroll-loops";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Pixen;
 				SECTORDER_FLAGS = "";
@@ -3284,15 +3269,13 @@
 		};
 		616BAEA608553EFB004CF172 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 314E725910820C2200DAE4B3 /* Debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
+					"\"$(SRCROOT)/Frameworks and Palettes\"",
 				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)\"";
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/Frameworks and Palettes\"";
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3306,9 +3289,7 @@
 				LINKER_DISPLAYS_MANGLED_NAMES = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "";
 				PRODUCT_NAME = Pixen;
-				RUN_CLANG_STATIC_ANALYZER = YES;
 				VALID_ARCHS = "i386 x86_64";
 				WRAPPER_EXTENSION = app;
 			};
@@ -3316,7 +3297,6 @@
 		};
 		616BAEA708553EFB004CF172 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 314E725A10820C2200DAE4B3 /* Release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
@@ -3325,11 +3305,10 @@
 					"$(SRCROOT)",
 					/System/Library/Frameworks,
 					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+					"\"$(SRCROOT)/Frameworks and Palettes\"",
 				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Frameworks and Palettes\"";
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_CPP_RTTI = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3341,11 +3320,9 @@
 				INFOPLIST_FILE = Resources/Info.plist;
 				INSTALL_PATH = /Applications;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
-				LIBRARY_STYLE = STATIC;
 				LINKER_DISPLAYS_MANGLED_NAMES = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "-funroll-loops";
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = Pixen;
 				SECTORDER_FLAGS = "";
@@ -3356,58 +3333,59 @@
 		};
 		616BAEAA08553EFB004CF172 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 314E725910820C2200DAE4B3 /* Debug.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DEBUGGING_SYMBOLS = full;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_ENABLE_PASCAL_STRINGS = YES;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_ENABLE_SSE41_EXTENSIONS = YES;
 				GCC_ENABLE_SSE42_EXTENSIONS = YES;
 				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
-				GCC_ENABLE_TRIGRAPHS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_THUMB_SUPPORT = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				LINKER_DISPLAYS_MANGLED_NAMES = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Frameworks and Palettes\"/**",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx10.6;
 				STRIP_INSTALLED_PRODUCT = NO;
-				UNSTRIPPED_PRODUCT = "";
-				USER_HEADER_SEARCH_PATHS = ".//**";
 				VALID_ARCHS = "i386 x86_64";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-unused-parameter",
+					"-Wno-sign-compare",
+				);
 			};
 			name = Debug;
 		};
 		616BAEAB08553EFB004CF172 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 314E725A10820C2200DAE4B3 /* Release.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_PASCAL_STRINGS = YES;
+				GCC_ENABLE_OBJC_GC = unsupported;
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_ENABLE_SSE41_EXTENSIONS = YES;
 				GCC_ENABLE_SSE42_EXTENSIONS = YES;
 				GCC_ENABLE_SUPPLEMENTAL_SSE3_INSTRUCTIONS = YES;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_THUMB_SUPPORT = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				LINKER_DISPLAYS_MANGLED_NAMES = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Frameworks and Palettes\"/**",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx10.6;
-				SKIP_INSTALL = NO;
-				UNSTRIPPED_PRODUCT = "";
 				VALID_ARCHS = "i386 x86_64";
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wno-unused-parameter",
+					"-Wno-sign-compare",
+				);
 			};
 			name = Release;
 		};
