@@ -1,24 +1,14 @@
 build
- 
+xcuserdata
 *.pbxuser
 *.perspectivev3
 *.perspective
-*.mode1v3
-*.mode2v3
+*.mode*
 ._*
-.svn/
-!default.pbxuser
-!default.perspectivev3
-!default.mode1v3
-!default.mode2v3
- 
+.svn 
 *~.nib
 *~.xib
  
 .DS_Store
 
 *.orig
-Pixen.xcodeproj/project.xcworkspace/contents.xcworkspacedata
-Pixen.xcodeproj/project.xcworkspace/xcuserdata/jshier.xcuserdatad/WorkspaceSettings.xcsettings
-Pixen.xcodeproj/project.xcworkspace/xcuserdata/jshier.xcuserdatad/WorkspaceState.xcuserstate
-Pixen.xcodeproj/xcuserdata/jshier.xcuserdatad/xcbreakpoints/Breakpoints.xcbkptlist
