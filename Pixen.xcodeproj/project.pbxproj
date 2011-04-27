@@ -535,10 +535,6 @@
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		3120A54B135A4BE3008ADC04 /* FlatButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FlatButton.framework; path = "Frameworks and Palettes/FlatButton.framework"; sourceTree = "<group>"; };
 		3120A54D135A4C46008ADC04 /* FlatButton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FlatButton.framework; path = "Frameworks and Palettes/FlatButton.framework"; sourceTree = "<group>"; };
-		314E725810820C2200DAE4B3 /* Base.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
-		314E725910820C2200DAE4B3 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
-		314E725A10820C2200DAE4B3 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
-		314E725B10820C2200DAE4B3 /* Test.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Test.xcconfig; sourceTree = "<group>"; };
 		31E907B1105757C700ADB171 /* CTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGradient.h; sourceTree = "<group>"; };
 		31E907B2105757C700ADB171 /* CTGradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTGradient.m; sourceTree = "<group>"; };
 		31E907B3105757C700ADB171 /* CTGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTGradientView.h; sourceTree = "<group>"; };
@@ -1079,6 +1075,7 @@
 		1058C7A6FEA54F5311CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3120A54D135A4C46008ADC04 /* FlatButton.framework */,
 				3120A54B135A4BE3008ADC04 /* FlatButton.framework */,
 				EAC917BA0CE7DD8400E519E1 /* Sparkle.framework */,
 				61BB8ED608FB58F9009C75A6 /* QTKit.framework */,
@@ -1110,7 +1107,6 @@
 		2A37F4AAFDCFA73011CA2CEA /* Pixen */ = {
 			isa = PBXGroup;
 			children = (
-				3120A54D135A4C46008ADC04 /* FlatButton.framework */,
 				EA68641E054C583900EE395F /* Release Notes.rtf */,
 				2A37F4ABFDCFA73011CA2CEA /* Pixen Application */,
 				EA31F7380CE7B79A00EC481B /* Pixel Art Core */,
@@ -1121,7 +1117,6 @@
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
 				EAF6951606A9AE0B0019D8D7 /* Info.plist */,
-				314E725710820C2200DAE4B3 /* Build Configurations */,
 			);
 			name = Pixen;
 			sourceTree = "<group>";
@@ -1154,17 +1149,6 @@
 				1058C7A8FEA54F5311CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		314E725710820C2200DAE4B3 /* Build Configurations */ = {
-			isa = PBXGroup;
-			children = (
-				314E725810820C2200DAE4B3 /* Base.xcconfig */,
-				314E725910820C2200DAE4B3 /* Debug.xcconfig */,
-				314E725A10820C2200DAE4B3 /* Release.xcconfig */,
-				314E725B10820C2200DAE4B3 /* Test.xcconfig */,
-			);
-			path = "Build Configurations";
 			sourceTree = "<group>";
 		};
 		615C3B090D14F40E00ACFA33 /* CTGradient */ = {
