@@ -23,7 +23,7 @@
 	NSTimer *updateTimer;
 	
 	NSPoint dragOrigin;
-	NSUInteger targetDraggingIndex;
+	NSInteger targetDraggingIndex;
 	
 	NSPoint mouseLocation;
 	

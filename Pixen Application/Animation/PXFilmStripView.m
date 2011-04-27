@@ -67,7 +67,7 @@ NSString *PXFilmStripSelectionDidChangeNotificationName = @"PXFilmStripSelection
 	[super dealloc];
 }
 
-- (NSRect)closeButtonRectForCelIndex:(NSUInteger)index
+- (NSRect)closeButtonRectForCelIndex:(NSInteger)index
 {
 	if (index >= celRectsCount || index < 0) { return NSZeroRect; }
 	NSRect celRect = celRects[index];
