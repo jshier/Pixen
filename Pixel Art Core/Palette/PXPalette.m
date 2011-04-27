@@ -745,8 +745,8 @@ void PXPalette_removeColorAtIndex(PXPalette *self, unsigned int index)
 		self->colors[i - 1] = self->colors[i];
 		PXPalette_bucketForColor(self, self->colors[i].color)->index--;
 	}
-	self->colors[self->colorCount].color = nil;
-	self->colors[self->colorCount].frequency = 0;
+	self->colors[self->colorCount - 1].color = nil;
+	self->colors[self->colorCount - 1].frequency = 0;
 	self->colorCount -= 1;
 	PXPalette_saveChanges(self);
 }

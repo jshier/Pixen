@@ -566,7 +566,14 @@ NSColor * PXImage_blendColors(PXImage * self, NSColor * bottomColor, NSColor * t
 
 NSImage *PXImage_NSImage(PXImage *self)
 {
+	if ((self->width <= 0) || (self->height <= 0))
+		return nil;
+
 	NSImage *nsimage = [[NSImage alloc] initWithSize:NSMakeSize(self->width, self->height)];
+
+	if (!nsimage)
+		return nil;
+
 	[nsimage lockFocus];
 	PXImage_drawRect(self, NSMakeRect(0, 0, self->width, self->height), 1);
 	[nsimage unlockFocus];

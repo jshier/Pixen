@@ -181,6 +181,8 @@
 	}	
 	else if ([anItem action] == @selector(setPatternToSelection:))
 		return [[self canvas] hasSelection] && [[[PXToolPaletteController sharedToolPaletteController] currentTool] supportsPatterns];
+	else if ([anItem action] == @selector(popDocumentPalette:))
+		return NO;  // currently no document palette, so disable the menu item
 	return YES;
 }
 
@@ -360,6 +362,7 @@ didFinishWithSize:(NSSize)aSize
 - (IBAction)popDocumentPalette:sender
 {
 	//FIXME: no palette, memory concerns, change this architecture some
+	// note: if this is implemented in the future, need to remove code in validateMenuItem: that disables the menu item
 	assert(0);
 //	[PXPalettePanel popWithPalette:[canvas palette] fromWindow:[NSColorPanel sharedColorPanel]];
 }
